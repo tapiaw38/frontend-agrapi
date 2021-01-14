@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+
+  productive-app-local-vue:
+    container_name: productive-app-local-vue
+    build:
+      context: .
+      dockerfile: ./compose/local/Dockerfile
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    ports:
+      - '8081:8080'
