@@ -16,6 +16,7 @@ import Logout from '@/components/user/Logout'
 import Profile from '@/components/user/Profile'
 import EditProfile from '@/components/user/EditProfile'
 import ListUser from '@/components/user/ListUser'
+import { store } from '../store/store'
 
 Vue.use(Router)
 

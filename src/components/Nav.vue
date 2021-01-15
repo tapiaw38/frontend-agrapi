@@ -1,6 +1,6 @@
 <template lang="html">
       <b-navbar toggleable="lg" type="dark" variant="dark" fixed="top" id="navbar">
-        <b-navbar-brand :to="{ name: 'Home' }" >
+        <b-navbar-brand>
           <img src="/static/img/sec-produ.png" alt="logo" width="52" height="auto" id="icon-produ">
           </b-navbar-brand>
           
@@ -23,7 +23,7 @@
             <b-nav-item 
             class="ml-4" 
             :to="{ name: 'ListUser'}" 
-            v-if="loggedIn != null && admin != false" 
+            v-if="$store.state.token != null" 
             >
               <b-icon icon="person" aria-label="Help"></b-icon>
               Encuestadores

@@ -36,10 +36,10 @@ router.beforeEach((to, from, next) => {
     } else {
       next()
     }
-  } else if (to.matched.some(record => record.meta.requiresVisitor)) {
-    if (store.getters.admin == false) {
+  }if (to.matched.some(record => record.meta.requiresVisitor)) {
+    if (!store.state.admin) {
       next({
-        name: 'ListProducer',
+        name: 'ListUser',
       })
     } else {
       next()

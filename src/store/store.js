@@ -9,7 +9,7 @@ axios.defaults.baseURL = 'http://www.agrapi.com.ar/api/v1.0'
 export const store = new Vuex.Store({
     state: {
         token: localStorage.getItem('access_token') || null,
-        admin: false, 
+        admin: localStorage.getItem('user_admin') || false, 
         search: [],
         production: [],
         producer: [],
@@ -118,7 +118,7 @@ export const store = new Vuex.Store({
               localStorage.removeItem('access_token')
               context.commit('destroyToken')
               //
-              localStorage.removeItem('admin')
+              localStorage.removeItem('user_admin')
               context.commit('destroyAdmin')
             }
         },
@@ -146,7 +146,7 @@ export const store = new Vuex.Store({
                   const phone_number = response.data.user.phone_number
                   const polls = response.data.user.profile.polls
                   
-                  localStorage.setItem('admin',admin)
+                  localStorage.setItem('user_admin',admin)
                   localStorage.setItem('email', email)
                   localStorage.setItem('first_name', first_name)
                   localStorage.setItem('last_name', last_name)
