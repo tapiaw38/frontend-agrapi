@@ -1,14 +1,17 @@
 <template lang="html">
     <div class="container-fluid content-app p-4">
-        <div class="row justify-content-center">
-            <div class="col-lg-8" v-for="(item,index_production) in producer.production" :key="'production'+index_production+1">
+        <div class="justify-content-center">
+            <div class="col-lg-8 col-md-10 mx-auto" v-for="(item,index_production) in producer.production" :key="'production'+index_production+1">
                 <b-card no-body>
                     <b-card-body>
                         <h4 class="mb-4">Producción</h4>
                         <b-card-text>
-                            <p>Reside en el lugar: <strong>{{item.is_resident}}</strong></p>
+                            <p>Reside en el lugar: 
+                                <strong v-if="item.is_resident">Sí</strong>
+                                <strong v-else>No</strong>
+                            </p>
                             <p>Distrito: <strong>{{item.district}}</strong></p>
-                            <p>Superficie de la producción: <strong>{{item.surface}} hectareas</strong></p>
+                            <p>Superficie de la producción: <strong>{{item.surface}} hectáreas</strong></p>
                             <p>Estado de los caminos: <strong>{{item.road_state}}</strong></p>
                             <p>Renspa: 
                                 <strong v-if="item.has_renspa">Sí</strong>
@@ -42,8 +45,8 @@
                                 </strong>
                                 <strong v-else>No</strong>
                             </p>
-                            <p>Matricula Catastral: <strong>{{item.production_property.cadastre_registration}}</strong></p>
-                            <p>Energia rural: <strong>{{item.production_property.starting_number}}</strong></p>
+                            <p>Matrícula catastral: <strong>{{item.production_property.cadastre_registration}}</strong></p>
+                            <p>Número de partida: <strong>{{item.production_property.starting_number}}</strong></p>
                         </b-card-text>
                     </b-card-body>
                 </b-card>
@@ -61,15 +64,15 @@
                                 <strong v-else>No</strong>
                             </p>
                             <p>Tipo de servicio de energia: <strong>{{item.production_service.type_service_energy}}</strong></p>
-                            <p>Energia rural: 
+                            <p>Red electrica rural: 
                                 <strong v-if="item.production_service.has_rural_energy">Sí</strong>
                                 <strong v-else>No</strong>
                             </p>
-                            <p>Generador: 
+                            <p>Grupo electrogeno: 
                                 <strong v-if="item.production_service.has_generator">Sí</strong>
                                 <strong v-else>No</strong>
                             </p>
-                            <p>Generador hidraulico: 
+                            <p>Generador hidráulico: 
                                 <strong v-if="item.production_service.has_hydraulic_generator">Sí</strong>
                                 <strong v-else>No</strong>
                             </p>
@@ -80,7 +83,7 @@
                         </b-card-text>
                     </b-card-body>
                 </b-card>
-                <b-card>
+                <b-card no-body>
                     <b-card-body>
                         <h4 class="mb-4">Instalaciones</h4>
                         <b-card-text>
@@ -100,7 +103,7 @@
                                 <strong v-if="item.production_installation.has_truck_scale">Sí</strong>
                                 <strong v-else>No</strong>
                             </p>
-                            <p>Picadas cotafiego: 
+                            <p>Picadas cortafuego: 
                                 <strong v-if="item.production_installation.has_fire_break">Sí</strong>
                                 <strong v-else>No</strong>
                             </p>
@@ -145,12 +148,12 @@
                     <b-card-body>
                         <h4 class="mb-4">Riego y Servicios</h4>
                         <b-card-text>
-                            <p>Servicio de agua: <strong>{{item.production_irrigation.type_irrigation}}</strong></p>
+                            <p>Tipo de riego: <strong>{{item.production_irrigation.type_irrigation}}</strong></p>
                             <p>Riego presurizado: <strong>{{item.production_irrigation.pressurized_irrigation}}</strong></p>
                             <p>Riego superficial: <strong>{{item.production_irrigation.surface_irrigation}}</strong></p>
                             <p>Toma o sección: <strong>{{item.production_irrigation.take_section}}</strong></p>
                             <p>Horas de agua: <strong>{{item.production_irrigation.watering_hours}}</strong></p>
-                            <p>Condicion de asequias y canales: <strong>{{item.production_irrigation.channel_conditions}}</strong></p>
+                            <p>Condición de acequias y canales: <strong>{{item.production_irrigation.channel_conditions}}</strong></p>
                             <p>Derecho: <strong>{{item.production_irrigation.right}}</strong></p>
                             <p>Turnos: <strong>{{item.production_irrigation.shifts}}</strong></p>
                         </b-card-text>
@@ -194,10 +197,10 @@
                         <div class="mt-2">
                             <b-card no-body>
                                 <b-card-body>
-                                    <h4 class="mb-4">Producción Agricola</h4>
+                                    <h4 class="mb-4">Producción Agrícola</h4>
                                     <b-card-text>
-                                        <p>Actividad agricola: <strong>{{agricultural.activity_name}}</strong></p>
-                                        <p>Superficie de actividad: <strong>{{agricultural.surface}} hectareas</strong></p>
+                                        <p>Actividad agrícola: <strong>{{agricultural.activity_name}}</strong></p>
+                                        <p>Superficie de actividad: <strong>{{agricultural.surface}} hectáreas</strong></p>
                                         <p>Destino de actividad: <strong>{{agricultural.destination}}</strong></p>
                                         <p>Tipo de siembra: <strong>{{agricultural.sowing}}</strong></p>
                                         <p>Tipo de siembra: <strong>{{agricultural.type_sowing}}</strong></p>
@@ -219,7 +222,7 @@
                                             </strong>
                                             <strong v-else>No</strong>
                                         </p>
-                                        <p>Abono organico: 
+                                        <p>Abono orgánico: 
                                             <strong v-if="agricultural.agricultural_attendance.use_food_organic">
                                                 Sí
                                             </strong>
@@ -249,7 +252,7 @@
                         <div class="mt-2">
                             <b-card no-body>
                                 <b-card-body>
-                                    <h4 class="mb-4">Factores Climaticos</h4>
+                                    <h4 class="mb-4">Factores Climáticos</h4>
                                     <b-card-text
                                     v-for="(climatic,index_climatic) in agricultural.agricultural_climatic" 
                                     :key="index_climatic+1" 
@@ -261,7 +264,7 @@
                                                 {{climatic.factor}}
                                             </strong>
                                         </p>
-                                        <p>Abono organico: 
+                                        <p>Abono orgánico: 
                                             <strong>
                                                 {{climatic.risk}}
                                             </strong>
@@ -328,7 +331,7 @@
                                     <b-card-text>
                                         <p>Superfiie de cosecha cosecha: 
                                             <strong>
-                                                {{agricultural.agricultural_harvest.harvest_surface}} hectareas
+                                                {{agricultural.agricultural_harvest.harvest_surface}} hectáreas
                                             </strong>
                                         </p>
                                         <p>Rendimiento: 
@@ -336,12 +339,7 @@
                                                 {{agricultural.agricultural_harvest.tons_production}} toneladas
                                             </strong>
                                         </p>
-                                        <p>Utilización de feromonas: 
-                                            <strong>
-                                                {{agricultural.agricultural_harvest.damange_level}}
-                                            </strong>
-                                        </p>
-                                        <p>Cortinas y ahiladas: 
+                                        <p>Cortinas y aisladas: 
                                             <strong v-if="agricultural.agricultural_harvest.has_curtains_insulated">
                                                 Sí
                                             </strong>
@@ -349,6 +347,12 @@
                                         </p>
                                         <p>Longitud de las plantas usadas como cortinas:
                                             <strong>{{agricultural.agricultural_harvest.plant_length_curtains}} metros</strong>
+                                        </p>
+                                        <p>Especies de plantas:
+                                            <strong>{{agricultural.agricultural_harvest.plant_species_curtains}}</strong>
+                                        </p>
+                                        <p>Epoca de cosecha:
+                                            <strong>{{agricultural.agricultural_harvest.harvest_time}}</strong>
                                         </p>
                                     </b-card-text>
                                 </b-card-body>
@@ -389,7 +393,7 @@
                                             </strong>
                                             <strong v-else>No</strong>
                                         </p>
-                                        <p>Frigorificos: 
+                                        <p>Frigoríficos: 
                                             <strong v-if="agricultural.agricultural_sales_channel.use_fridge">
                                                 Sí
                                             </strong>
@@ -422,9 +426,9 @@
                                     <h4 class="mb-4">Producción Ganadera</h4>
                                     <b-card-text>
                                         <p>Actividad Ganadera: <strong>{{livestock.type_activity}}</strong></p>
-                                        <p>Superficie de actividad: <strong>{{livestock.surface}} hectareas</strong></p>
+                                        <p>Superficie de actividad: <strong>{{livestock.surface}} hectáreas</strong></p>
                                         <p>Destino de actividad: <strong>{{livestock.destination}}</strong></p>
-                                        <p>Aisitecia Tecnica: 
+                                        <p>Asistencia técnica: 
                                             <strong v-if="livestock.make_technical_assistance">
                                                 Sí
                                             </strong>
@@ -500,7 +504,7 @@
                                             </strong>
                                             <strong v-else>No</strong>
                                         </p>
-                                        <p>Otras practicas 
+                                        <p>Otras prácticas 
                                             <strong>
                                                 {{livestock.livestock_reproduction.other_practices}}
                                             </strong>
@@ -532,7 +536,7 @@
                                         <strong>{{pens.foor_material}}</strong>
                                     </p>
                                     <p>Superficie: 
-                                        <strong>{{pens.surface}}</strong>
+                                        <strong>{{pens.surface}} metros cuadrados</strong>
                                     </p>
                                     <p>Cantidad de animales: 
                                         <strong>{{pens.num_animals}}</strong>
@@ -648,7 +652,7 @@
                                 </b-card-body>
                             </b-card>
                         </div>
-                        <div class="mt-2" v-if="livestock.type_activity=='Bovinos'">
+                        <div class="mt-2" v-if="livestock.type_activity=='bovino'">
                             <b-card no-body>
                                 <b-card-body>
                                     <h4 class="mb-2">Ciclo bobino</h4>
@@ -702,7 +706,7 @@
                                 </b-card-body>
                             </b-card>
                         </div>
-                        <div class="mt-2" v-if="livestock.type_activity=='Ovinos'">
+                        <div class="mt-2" v-if="livestock.type_activity=='ovino'">
                             <b-card no-body>
                                 <b-card-body>
                                     <h4 class="mb-2">Ciclo ovino</h4>
@@ -729,7 +733,7 @@
                                 </b-card-body>
                             </b-card>
                         </div>
-                        <div class="mt-2" v-if="livestock.type_activity=='Caprinos'">
+                        <div class="mt-2" v-if="livestock.type_activity=='caprino'">
                             <b-card no-body>
                                 <b-card-body>
                                     <h4 class="mb-2">Ciclo Caprino</h4>
@@ -753,7 +757,7 @@
                                 </b-card-body>
                             </b-card>
                         </div>
-                        <div class="mt-2" v-if="livestock.type_activity=='Porcinos'">
+                        <div class="mt-2" v-if="livestock.type_activity=='porcino'">
                             <b-card no-body>
                                 <b-card-body>
                                     <h4 class="mb-2">Ciclo Porcino</h4>
@@ -780,7 +784,7 @@
                                 </b-card-body>
                             </b-card>
                         </div>
-                        <div class="mt-2" v-if="livestock.type_activity=='LLamas'">
+                        <div class="mt-2" v-if="livestock.type_activity=='llamas'">
                             <b-card no-body>
                                 <b-card-body>
                                     <h4 class="mb-2">Ciclo de Llamas</h4>
@@ -802,7 +806,7 @@
                                 </b-card-body>
                             </b-card>
                         </div>
-                        <div class="mt-2" v-if="livestock.type_activity=='Avicultura'">
+                        <div class="mt-2" v-if="livestock.type_activity=='avicultura'">
                             <b-card no-body>
                                 <b-card-body>
                                     <h4 class="mb-2">Ciclo avicultura</h4>
@@ -841,7 +845,7 @@
                                 </b-card-body>
                             </b-card>
                         </div>
-                        <div class="mt-2" v-if="livestock.type_activity=='Cunicultura'">
+                        <div class="mt-2" v-if="livestock.type_activity=='cunicultura'">
                             <b-card no-body>
                                 <b-card-body>
                                     <h4 class="mb-2">Ciclo cunicultura</h4>
@@ -862,7 +866,7 @@
                                 </b-card-body>
                             </b-card>
                         </div>
-                        <div class="mt-2" v-if="livestock.type_activity=='Apicultura'">
+                        <div class="mt-2" v-if="livestock.type_activity=='apicultura'">
                             <b-card no-body>
                                 <b-card-body>
                                     <h4 class="mb-2">Ciclo apicultura</h4>
@@ -907,7 +911,7 @@
                                 </b-card-body>
                             </b-card>
                         </div>
-                        <div class="mt-2" v-if="livestock.type_activity=='Acuicultura'">
+                        <div class="mt-2" v-if="livestock.type_activity=='acuicultura'">
                             <b-card no-body>
                                 <b-card-body>
                                     <h4 class="mb-2">Ciclo acuicultura</h4>
@@ -943,14 +947,15 @@
                                 <b-card-body>
                                     <h4 class="mb-2">Producción Agro Industrial</h4>
                                     <b-card-text>
-                                        <p>
+                                        <p>Tipo: 
                                             <strong>{{agroindustrial.description}}</strong>
                                         </p>
                                         <p>Materia Prima: 
-                                            <strong>{{agroindustrial.raw_marial}}</strong>
+                                            <strong>{{agroindustrial.raw_material}}</strong>
                                         </p>
                                         <p>Mecanizada: 
-                                            <strong>{{agroindustrial.is_mechanized}}</strong>
+                                            <strong v-if="agroindustrial.is_mechanized">Sí</strong>
+                                            <strong v-else>No</strong>
                                         </p>
                                         <p>Conocimiento: 
                                             {{agroindustrial.knowledge}}
@@ -1003,6 +1008,29 @@
                                         </p>
                                         <p>Precio: 
                                             <strong>${{handmande.price}}</strong>
+                                        </p>
+                                    </b-card-text>
+                                </b-card-body>
+                            </b-card>
+                        </div>
+                        <div class="mt-2">
+                            <b-card no-body>
+                                <b-card-body>
+                                    <h4 class="mb-2">Herramientas</h4>
+                                    <b-card-text
+                                    v-for="(tools,index_tools) in agroindustrial.agroindustrial_tools" 
+                                    :key="'tools'+index_tools+1" 
+                                    class="mb-2 second"
+                                    style="padding:15px; border-radius:20px; "
+                                    >
+                                        <p>Herramienta: 
+                                            <strong>{{tools.name_tool}}</strong>
+                                        </p>
+                                        <p>Tipo de herramienta: 
+                                            <strong>{{tools.type_tool}}</strong>
+                                        </p>
+                                        <p>Cantidad: 
+                                            <strong>{{tools.number_tools}}</strong>
                                         </p>
                                     </b-card-text>
                                 </b-card-body>

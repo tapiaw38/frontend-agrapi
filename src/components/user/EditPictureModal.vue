@@ -172,8 +172,7 @@ export default {
 </script>
 
 <style>
-#canvas
-{
+#canvas {
     border-style: solid;
     margin-left: auto;
     margin-right: auto;
@@ -183,13 +182,11 @@ export default {
     background-color: rgb(189, 188, 179);
     cursor: move;
 }
-#archivo
-{
+#archivo {
     visibility: hidden;
 }
 
-#archivoFile
-{
+#archivoFile {
     cursor: pointer;
     width: 140px;
     margin-left: auto;
@@ -199,12 +196,11 @@ export default {
     font-family: 'Roboto', sans-serif;
     transition: all, 0.2s;
 }
-#archivoFile:hover{
+#archivoFile:hover {
     transform: translateY(-3px)
 }
 
-#mostrar
-{
+#mostrar {
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -218,25 +214,23 @@ export default {
     transition: all, 0.2s;
 }
 
-#mostrar:hover
-{
+#mostrar:hover{
     transform: translateY(-3px)
 }
 
 .btn-circle{
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
 }
 
 .content-btn {
-  position: fixed;
-  margin-left: 250px;
+    position: fixed;
+    margin-left: 250px;
 }
 
 
-#imagenMostrada
-{
+#imagenMostrada {
     height: 300px;
     width: 300px;
     border-radius: 100%;

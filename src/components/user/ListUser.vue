@@ -122,6 +122,7 @@ export default {
 </script>
 
 <style>
+/*
 .div-card {
     height: 100%;
     padding: 0;
@@ -138,4 +139,5 @@ export default {
     box-shadow: 1px 6px 24px #8b8585;
     
 }
+*/
 </style>

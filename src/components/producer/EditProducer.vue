@@ -34,13 +34,13 @@
                             <div class="form-group row">
                                 <label for="first_name" class="col-sm-2 col-form-label">Nombre</label>
                                 <div class="col-sm-6">
-                                    <input type="text" placeholder="Nombre" name="first_name" class="form-control" v-model.trim='form.producer.first_name'>
+                                    <input type="text" required placeholder="Nombre" name="first_name" class="form-control" v-model.trim='form.producer.first_name'>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="last_name" class="col-sm-2 col-form-label">Apellido</label>
                                 <div class="col-sm-6">
-                                    <input type="text" placeholder="Apellido" name="last_name" class="form-control" v-model.trim='form.producer.last_name'>
+                                    <input type="text" required placeholder="Apellido" name="last_name" class="form-control" v-model.trim='form.producer.last_name'>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -62,7 +62,7 @@
                             <div class="form-group row">
                                 <label for="document" class="col-sm-2 col-form-label">DNI</label>
                                 <div class="col-sm-6">
-                                    <input type="number" placeholder="Número de DNI" name="document" class="form-control" v-model.trim='form.producer.document'>
+                                    <input type="number" required placeholder="Número de DNI" name="document" class="form-control" v-model.trim='form.producer.document'>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -80,25 +80,25 @@
                             <div class="form-group row">
                                 <label for="district" class="col-sm-2 col-form-label">Distrito</label>
                                 <div class="col-sm-6">
-                                    <input type="text" placeholder="Distrito" name="district" class="form-control" v-model.trim='form.producer.producer_home.district'>
+                                    <input type="text" required placeholder="Distrito" name="district" class="form-control" v-model.trim='form.producer.producer_home.district'>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="address" class="col-sm-2 col-form-label">Dirección</label>
                                 <div class="col-sm-6">
-                                    <input type="text" placeholder="Dirección" name="address" class="form-control" v-model.trim='form.producer.producer_home.address'>
+                                    <input type="text" required placeholder="Dirección" name="address" class="form-control" v-model.trim='form.producer.producer_home.address'>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="type_recidence" class="col-sm-2 col-form-label">Tipo de residencia</label>
                                 <div class="col-sm-6">
-                                    <input type="text" placeholder="Tipo de residencia" name="type_recidence" class="form-control" v-model.trim='form.producer.producer_home.type_recidence'>
+                                    <input type="text" required placeholder="Tipo de residencia" name="type_recidence" class="form-control" v-model.trim='form.producer.producer_home.type_recidence'>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="state_recidence" class="col-sm-2 col-form-label">Estado de residencia</label>
                                 <div class="col-sm-6">
-                                    <input type="text" placeholder="Estado de residencia" name="state_recidence" class="form-control" v-model.trim='form.producer.producer_home.state_recidence'>
+                                    <input type="text" required placeholder="Estado de residencia" name="state_recidence" class="form-control" v-model.trim='form.producer.producer_home.state_recidence'>
                                 </div>
                             </div>
                         </div>
@@ -109,27 +109,28 @@
                             <b-button 
                             variant="info" 
                             class="btn-add"
+                            size="sm"
                             v-on:click = "onDataPerson"
                             id="btnPerson"
                             >
-                                <b-icon font-scale="1.3" icon="plus"></b-icon>
+                                <b-icon font-scale="1" icon="plus"></b-icon>
                             </b-button>
                             <div
                             class="ml-5 mr-5 mb-2" 
-                            v-for="(items, index) in form.producer.producer_person" 
+                            v-for="(items, index_person) in form.producer.producer_person" 
                             :key="items.id"
                             >
-                            <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#person'+index">
+                            <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#person'+index_person+'p'">
                                 <b-icon icon="person"></b-icon> {{items.family_relation}}
                             </b-button>
-                                <b-collapse :id="'person'+index">
+                                <b-collapse :id="'person'+index_person+'p'">
                                     <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
                                         <div class="text-right">
                                             <b-button
-                                            class="btn-delete"
+                                            class="btn-delete "
                                             variant="warning"
-                                            size="md"
-                                            v-on:click="deletePerson(index)"
+                                            size="sm"
+                                            v-on:click="deletePerson(index_person)"
                                             >
                                                 <b-icon icon="trash"></b-icon>
                                             </b-button>
@@ -226,39 +227,40 @@
                     </div>
                     <!--Producer Vehicle-->
                     <div class="card">
-                        <h4 class="m-4">Vehiculos del productor <b-badge variant="info">{{form.producer.producer_vehicle.length}}</b-badge></h4>
+                        <h4 class="m-4">Vehículos del productor <b-badge variant="info">{{form.producer.producer_vehicle.length}}</b-badge></h4>
                         <b-button 
                         variant="info" 
-                        class="btn-add" 
+                        class="btn-add"
+                        size="sm" 
                         id = "btnVehicle"
                         v-on:click="onDataVehicle"
                         >
-                            <b-icon font-scale="1.3" icon="plus"></b-icon>
+                            <b-icon font-scale="1" icon="plus"></b-icon>
                         </b-button>
                         <div
                         class="mb-2 ml-5 mr-5" 
-                        v-for="(vehicle, index) in form.producer.producer_vehicle" 
+                        v-for="(vehicle, index_vehicle) in form.producer.producer_vehicle" 
                         :key="vehicle.id"
                         >
-                            <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#vehicle'+index">
+                            <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#vehicle'+index_vehicle+'v'">
                                 <b-icon icon="truck"></b-icon> {{vehicle.name_vehicle}}
                             </b-button>
-                            <b-collapse :id="'vehicle'+index">
+                            <b-collapse :id="'vehicle'+index_vehicle+'v'">
                                 <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
                                     <div class="text-right">
                                         <b-button
-                                        class="btn-delete"
+                                        class="btn-delete "
                                         variant="warning"
-                                        size="md"
-                                        v-on:click="deleteVehicle(index)"
+                                        size="sm"
+                                        v-on:click="deleteVehicle(index_vehicle)"
                                         >
                                             <b-icon icon="trash"></b-icon>
                                         </b-button>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="name_vehicle" class="col-sm-2 col-form-label">Vehiculo</label>
+                                        <label for="name_vehicle" class="col-sm-2 col-form-label">Vehículo</label>
                                         <div class="col-sm-6">
-                                            <input type="text" placeholder="Vehiculo" name="name_vehicle" class="form-control" v-model.trim='vehicle.name_vehicle'>
+                                            <input type="text" placeholder="Vehículo" name="name_vehicle" class="form-control" v-model.trim='vehicle.name_vehicle'>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -339,27 +341,28 @@
                         <b-button 
                         variant="info" 
                         class="btn-add"
+                        size="sm"
                         v-on:click="onDataWorker"
                         id="btnWorker"
                         >
-                            <b-icon font-scale="1.3" icon="plus"></b-icon>
+                            <b-icon font-scale="1" icon="plus"></b-icon>
                         </b-button>
                         <div
                         class="mb-2 ml-5 mr-5" 
-                        v-for="(worker, index) in form.producer.producer_activity.activity_worker" 
+                        v-for="(worker, index_worker) in form.producer.producer_activity.activity_worker" 
                         :key="worker.id"
                         >
-                            <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#worker'+index">
+                            <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#worker'+index_worker+'w'">
                                 <b-icon icon="person"></b-icon> {{worker.type_person}}
                             </b-button>
-                            <b-collapse :id="'worker'+index">
+                            <b-collapse :id="'worker'+index_worker+'w'">
                                 <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
                                     <div class="text-right">
                                         <b-button
-                                        class="btn-delete"
+                                        class="btn-delete "
                                         variant="warning"
-                                        size="md"
-                                        v-on:click="deleteWorker(index)"
+                                        size="sm"
+                                        v-on:click="deleteWorker(index_worker)"
                                         >
                                             <b-icon icon="trash"></b-icon>
                                         </b-button>
@@ -391,13 +394,13 @@
                                         </b-form-checkbox>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="gender" class="col-sm-2 col-form-label">Genero</label>
+                                        <label for="gender" class="col-sm-2 col-form-label">Género</label>
                                         <div class="col-sm-6">
-                                            <input type="text" placeholder="Genero" name="gender" class="form-control" v-model.trim='worker.gender'>
+                                            <input type="text" placeholder="Género" name="gender" class="form-control" v-model.trim='worker.gender'>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="receive_remuneration" class="col-sm-2 col-form-label">Remuneracón</label>
+                                        <label for="receive_remuneration" class="col-sm-2 col-form-label">Remuneración</label>
                                         <b-form-checkbox
                                         v-model.trim="worker.receive_remuneration"
                                         value="true"
@@ -428,11 +431,12 @@
                             <h4 class="m-4">Producciones <b-badge variant="info">{{form.producer.production.length}}</b-badge></h4>
                             <b-button
                             id="btnProduction" 
-                            variant="info" 
+                            variant="info"
+                            size="sm" 
                             class="btn-add" 
                             v-on:click="onDataProduction"
                             >
-                                <b-icon font-scale="1.3" icon="plus"></b-icon>
+                                <b-icon font-scale="1" icon="plus"></b-icon>
                             </b-button>
                             <div 
                             class="pb-2 producer-production mr-5 ml-5"
@@ -440,16 +444,16 @@
                             :key="production.id"
                             >
                             <b-button class="btn-block" variant="info" v-b-toggle :href="'#produ'+index_production">
-                                <b-icon font-scale="1.3" icon="graph-up"></b-icon>
+                                <b-icon font-scale="1" icon="graph-up"></b-icon>
                                  Producción {{production.district}}
                             </b-button>
                                 <b-collapse :id="'produ'+index_production">
                                     <div class="card no-border">
                                         <div class="text-right">
                                             <b-button
-                                            class="btn-delete mt-1"
+                                            class="btn-delete  mt-1"
                                             variant="warning"
-                                            size="md"
+                                            size="sm"
                                             v-on:click="deleteProduction(index_production)"
                                             >
                                                 <b-icon icon="trash"></b-icon>
@@ -470,31 +474,31 @@
                                             <div class="form-group row">
                                                 <label for="district" class="col-sm-2 col-form-label">Distrito</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" required placeholder="Distrito" name="district" class="form-control" v-model.trim='production.district'>
+                                                    <input type="text" placeholder="Distrito" name="district" class="form-control" v-model.trim='production.district'>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="surface" class="col-sm-2 col-form-label">Superficie</label>
                                                 <div class="col-sm-6">
-                                                    <input type="number" placeholder="Surface" name="surface" class="form-control" v-model.trim='production.surface'>
+                                                    <input type="text" placeholder="Surface" name="surface" class="form-control" v-model.trim='production.surface'>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="lat" class="col-sm-2 col-form-label">Latiud</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" required placeholder="Latitud" name="lat" class="form-control" v-model.trim='production.lat'>
+                                                    <input type="text" placeholder="Latitud" name="lat" class="form-control" v-model.trim='production.lat'>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="lng" class="col-sm-2 col-form-label">Longitud</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" required placeholder="Longitud" name="lng" class="form-control" v-model.trim='production.lng'>
+                                                    <input type="text" placeholder="Longitud" name="lng" class="form-control" v-model.trim='production.lng'>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="road_state" class="col-sm-2 col-form-label">Estado de los caminos</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" required placeholder="Estado de los caminos" name="road_state" class="form-control" v-model.trim='production.road_state'>
+                                                    <input type="text" placeholder="Estado de los caminos" name="road_state" class="form-control" v-model.trim='production.road_state'>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -516,7 +520,7 @@
                                             <div class="form-group row">
                                                 <label for="land_tenure" class="col-sm-2 col-form-label">Tenencia de la tierra</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" required placeholder="Tenencia de la tierra" name="land_tenure" class="form-control" v-model.trim='production.production_property.land_tenure'>
+                                                    <input type="text" placeholder="Tenencia de la tierra" name="land_tenure" class="form-control" v-model.trim='production.production_property.land_tenure'>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -560,7 +564,7 @@
                                             <div class="form-group row">
                                                 <label for="type_service_aqua" class="col-sm-2 col-form-label">Tipo de servicio de agua</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" required placeholder="Tipo de servicio de agua" name="type_service_aqua" class="form-control" v-model.trim='production.production_service.type_service_aqua'>
+                                                    <input type="text" placeholder="Tipo de servicio de agua" name="type_service_aqua" class="form-control" v-model.trim='production.production_service.type_service_aqua'>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -576,7 +580,7 @@
                                             <div class="form-group row">
                                                 <label for="type_service_energy" class="col-sm-2 col-form-label">Tipo de servicio electrico</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" required placeholder="Tipo de servicio electrico" name="type_service_energy" class="form-control" v-model.trim='production.production_service.type_service_energy'>
+                                                    <input type="text" placeholder="Tipo de servicio electrico" name="type_service_energy" class="form-control" v-model.trim='production.production_service.type_service_energy'>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -699,28 +703,29 @@
                                     <div class="card no-border">
                                         <h4 class="m-4">Galpones de la producción <b-badge variant="info">{{production.production_installation.installation_barn.length}}</b-badge></h4>
                                         <b-button 
-                                        variant="info" 
+                                        variant="info"
+                                        size="sm" 
                                         class="btn-add" 
                                         v-on:click="onDataBarn(index_production)"
                                         :id="'btnBarn'+index_production"
                                         >
-                                            <b-icon font-scale="1.3" icon="plus"></b-icon>
+                                            <b-icon font-scale="1" icon="plus"></b-icon>
                                         </b-button>
                                         <div
                                         class="mb-2 ml-5 mr-5" 
                                         v-for="(barn, index_barn) in production.production_installation.installation_barn" 
                                         :key="barn.id"
                                         >
-                                            <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#barn'+index_production+index_barn">
+                                            <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#barn'+index_production+index_barn+'b'">
                                                 <b-icon icon="layout-wtf"></b-icon>
                                             </b-button>
-                                            <b-collapse :id="'barn'+index_production+index_barn">
+                                            <b-collapse :id="'barn'+index_production+index_barn+'b'">
                                                 <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
                                                     <div class="text-right">
                                                         <b-button
-                                                        class="btn-delete mt-1"
+                                                        class="btn-delete  mt-1"
                                                         variant="warning"
-                                                        size="md"
+                                                        size="sm"
                                                         v-on:click="deleteBarn(index_barn,index_production)"
                                                         >
                                                             <b-icon icon="trash"></b-icon>
@@ -752,28 +757,28 @@
                                         <h4 class="m-4">Pozos de la producción <b-badge variant="info">{{production.production_installation.installation_well.length}}</b-badge></h4>
                                         <b-button 
                                         variant="info" 
-                                        class="btn-add" 
-                                        v-b-modal="'bv-modal-addWell'"
+                                        class="btn-add"
+                                        size="sm"
                                         v-on:click="onDataWell(index_production)"
                                         :id="'btnWell'+index_production"
                                         >
-                                            <b-icon font-scale="1.3" icon="plus"></b-icon>
+                                            <b-icon font-scale="1" icon="plus"></b-icon>
                                         </b-button>
                                         <div
                                         class="mb-2 ml-5 mr-5" 
                                         v-for="(well, index_well) in production.production_installation.installation_well" 
                                         :key="index_well+1"
                                         >
-                                            <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#well'+index_production+index_well">
+                                            <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#well'+index_production+index_well+'w'">
                                                 <b-icon icon="layout-wtf"></b-icon>
                                             </b-button>
-                                            <b-collapse :id="'well'+index_production+index_well">
+                                            <b-collapse :id="'well'+index_production+index_well+'w'">
                                                 <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
                                                     <div class="text-right">
                                                         <b-button
-                                                        class="btn-delete mt-1"
+                                                        class="btn-delete  mt-1"
                                                         variant="warning"
-                                                        size="md"
+                                                        size="sm"
                                                         v-on:click="deleteWell(index_well,index_production)"
                                                         >
                                                             <b-icon icon="trash"></b-icon>
@@ -811,26 +816,27 @@
                                         <b-button
                                         variant="info" 
                                         class="btn-add"
+                                        size="sm"
                                         v-on:click="onDataMachine(index_production)"
                                         :id="'btnMachine'+index_production"
                                         >
-                                            <b-icon font-scale="1.3" icon="plus"></b-icon>
+                                            <b-icon font-scale="1" icon="plus"></b-icon>
                                         </b-button>
                                         <div
                                         class="mb-2 ml-5 mr-5" 
                                         v-for="(machine, index_machine) in production.production_machine" 
                                         :key="index_machine+1"
                                         >
-                                            <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#machine'+index_production+index_machine">
+                                            <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#machine'+index_production+index_machine+'m'">
                                                 <b-icon icon="truck-flatbed"></b-icon>
                                             </b-button>
-                                            <b-collapse :id="'machine'+index_production+index_machine">
+                                            <b-collapse :id="'machine'+index_production+index_machine+'m'">
                                                 <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
                                                     <div class="text-right">
                                                         <b-button
-                                                        class="btn-delete mt-1"
+                                                        class="btn-delete  mt-1"
                                                         variant="warning"
-                                                        size="md"
+                                                        size="sm"
                                                         v-on:click="deleteMachine(index_machine,index_production)"
                                                         >
                                                             <b-icon icon="trash"></b-icon>
@@ -940,11 +946,12 @@
                                         <h4 class="m-4">Producción Agricola <b-badge variant="success">{{production.production_agricultural.length}}</b-badge></h4>
                                         <b-button 
                                         variant="info" 
-                                        class="btn-add" 
+                                        class="btn-add"
+                                        size="sm" 
                                         v-on:click="onDataAgricultural(index_production)"
                                         :id="'btnAgricultural'+index_production"
                                         >
-                                            <b-icon font-scale="1.3" icon="plus"></b-icon>
+                                            <b-icon font-scale="1" icon="plus"></b-icon>
                                         </b-button>
                                         <div
                                         class="mb-2 ml-5 mr-5" 
@@ -958,9 +965,9 @@
                                                 <div class="card no-border second">
                                                     <div class="text-right">
                                                         <b-button
-                                                        class="btn-delete mt-1"
+                                                        class="btn-delete  mt-1"
                                                         variant="warning"
-                                                        size="md"
+                                                        size="sm"
                                                         v-on:click="deleteAgricultural(index_agricultural,index_production)"
                                                         >
                                                             <b-icon icon="trash"></b-icon>
@@ -1032,9 +1039,9 @@
                                                             </b-form-checkbox>
                                                         </div>
                                                         <div class="form-group row">
-                                                            <label for="user_food_organic" class="col-sm-2 col-form-label">Abono organico</label>
+                                                            <label for="use_food_organic" class="col-sm-2 col-form-label">Abono organico</label>
                                                             <b-form-checkbox
-                                                            v-model.trim="agricultural.agricultural_attendance.user_food_organic"
+                                                            v-model.trim="agricultural.agricultural_attendance.use_food_organic"
                                                             value="true"
                                                             unchecked-value="false"
                                                             >
@@ -1207,10 +1214,11 @@
                                                     <b-button
                                                     variant="info" 
                                                     class="btn-add"
+                                                    size="sm"
                                                     v-on:click="onDataPests(index_production,index_agricultural)"
                                                     :id="'btnPests'+index_production+index_agricultural"
                                                     >
-                                                        <b-icon font-scale="1.3" icon="plus"></b-icon>
+                                                        <b-icon font-scale="1" icon="plus"></b-icon>
                                                     </b-button>
                                                     <div
                                                     class="mb-2 ml-5 mr-5" 
@@ -1224,9 +1232,9 @@
                                                             <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
                                                                 <div class="text-right">
                                                                     <b-button
-                                                                    class="btn-delete mt-1"
+                                                                    class="btn-delete  mt-1"
                                                                     variant="warning"
-                                                                    size="md"
+                                                                    size="sm"
                                                                     v-on:click="deletePests(index_production,index_agricultural,index_pests)"
                                                                     >
                                                                         <b-icon icon="trash"></b-icon>
@@ -1286,10 +1294,11 @@
                                                     <b-button
                                                     variant="info" 
                                                     class="btn-add"
+                                                    size="sm"
                                                     v-on:click="onDataClimatic(index_production,index_agricultural)"
                                                     :id="'btnClimatic'+index_production+index_agricultural"
                                                     >
-                                                        <b-icon font-scale="1.3" icon="plus"></b-icon>
+                                                        <b-icon font-scale="1" icon="plus"></b-icon>
                                                     </b-button>
                                                     <div
                                                     class="mb-2 ml-5 mr-5" 
@@ -1303,9 +1312,9 @@
                                                             <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
                                                                 <div class="text-right">
                                                                     <b-button
-                                                                    class="btn-delete mt-1"
+                                                                    class="btn-delete  mt-1"
                                                                     variant="warning"
-                                                                    size="md"
+                                                                    size="sm"
                                                                     v-on:click="deleteClimatic(index_production,index_agricultural,index_climatic)"
                                                                     >
                                                                         <b-icon icon="trash"></b-icon>
@@ -1342,11 +1351,12 @@
                                         <h4 class="m-4">Producción Ganadera <b-badge variant="warning">{{production.production_livestock.length}}</b-badge></h4>
                                         <b-button 
                                         variant="info" 
-                                        class="btn-add" 
+                                        class="btn-add"
+                                        size="sm" 
                                         v-on:click="onDataLivestock(index_production)"
                                         :id="'btnLivestock'+index_production"
                                         >
-                                            <b-icon font-scale="1.3" icon="plus"></b-icon>
+                                            <b-icon font-scale="1" icon="plus"></b-icon>
                                         </b-button>
                                         <div
                                         class="mb-2 ml-5 mr-5" 
@@ -1360,9 +1370,9 @@
                                                 <div class="card no-border second">
                                                     <div class="text-right">
                                                         <b-button
-                                                        class="btn-delete mt-1"
+                                                        class="btn-delete  mt-1"
                                                         variant="warning"
-                                                        size="md"
+                                                        size="sm"
                                                         v-on:click="deleteLivestock(index_livestock,index_production)"
                                                         >
                                                             <b-icon icon="trash"></b-icon>
@@ -1372,7 +1382,11 @@
                                                         <div class="form-group row">
                                                             <label for="type_activity" class="col-sm-2 col-form-label">Actividad</label>
                                                             <div class="col-sm-6">
-                                                                <input type="text" placeholder="Actividad" name="type_activity" class="form-control" v-model.trim='livestock.type_activity'>
+                                                                <label v-if="livestock.type_activity != ''" for="type_activity" class="col-form-label"><strong>{{livestock.type_activity}}</strong></label>
+                                                                <b-form-select v-else v-model="livestock.type_activity" :options="options"></b-form-select>
+                                                                <!--
+                                                                <input type="hidden" placeholder="Actividad" name="type_activity" class="form-control" v-model.trim='livestock.type_activity'>
+                                                                -->
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
@@ -1388,11 +1402,15 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
-                                                            <label for="make_technical_assistance" class="col-sm-2 col-form-label">Asistencia técnica</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Asistencia técnica" name="make_technical_assistance" class="form-control" v-model.trim='livestock.make_technical_assistance'>
-                                                            </div>
-                                                        </div>
+                                                                    <label for="make_technical_assistance" class="col-sm-2 col-form-label">Asistencia técnica</label>
+                                                                    <b-form-checkbox
+                                                                    v-model.trim="livestock.make_technical_assistance"
+                                                                    value="true"
+                                                                    unchecked-value="false"
+                                                                    >
+                                                                    Sí.
+                                                                    </b-form-checkbox>
+                                                                </div>
                                                         <div class="form-group row">
                                                             <label for="problems" class="col-sm-2 col-form-label">Problemas</label>
                                                             <div class="col-sm-6">
@@ -1413,10 +1431,11 @@
                                                     <b-button
                                                     variant="info" 
                                                     class="btn-add"
+                                                    size="sm"
                                                     v-on:click="onDataFeeding(index_production,index_livestock)"
                                                     :id="'btnFeeding'+index_production+index_livestock"
                                                     >
-                                                        <b-icon font-scale="1.3" icon="plus"></b-icon>
+                                                        <b-icon font-scale="1" icon="plus"></b-icon>
                                                     </b-button>
                                                     <div
                                                     class="mb-2 ml-5 mr-5" 
@@ -1432,7 +1451,7 @@
                                                                     <b-button
                                                                     class="btn-delete mt-1"
                                                                     variant="warning"
-                                                                    size="md"
+                                                                    size="sm"
                                                                     v-on:click="deleteFeeding(index_production,index_livestock,index_feeding)"
                                                                     >
                                                                         <b-icon icon="trash"></b-icon>
@@ -1451,9 +1470,9 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
-                                                                    <label for="daily_rations" class="col-sm-2 col-form-label">Descripción</label>
+                                                                    <label for="daily_rations" class="col-sm-2 col-form-label">Raciones diarias</label>
                                                                     <div class="col-sm-6">
-                                                                        <input type="text" placeholder="Descripción" name="daily_rations" class="form-control" v-model.trim='feeding.daily_rations'>
+                                                                        <input type="text" placeholder="Raciones diarias" name="daily_rations" class="form-control" v-model.trim='feeding.daily_rations'>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1462,10 +1481,10 @@
                                                 </div>
                                                 <!--Livestock reproduction-->
                                                 <div class="card no-border second">
-                                                    <h4 class="m-4">Manejo reproductivo</h4>
+                                                    <h4 class="m-4">Reproducción</h4>
                                                     <div class="card-body">
                                                         <div class="form-group row">
-                                                            <label for="make_reproductive_management" class="col-sm-2 col-form-label"></label>
+                                                            <label for="make_reproductive_management" class="col-sm-2 col-form-label">Manejo reproductivo</label>
                                                             <b-form-checkbox
                                                             v-model.trim="livestock.livestock_reproduction.make_reproductive_management"
                                                             value="true"
@@ -1528,10 +1547,11 @@
                                                     <b-button
                                                     variant="info" 
                                                     class="btn-add"
+                                                    size="sm"
                                                     v-on:click="onDataPens(index_production,index_livestock)"
                                                     :id="'btnPens'+index_production+index_livestock"
                                                     >
-                                                        <b-icon font-scale="1.3" icon="plus"></b-icon>
+                                                        <b-icon font-scale="1" icon="plus"></b-icon>
                                                     </b-button>
                                                     <div
                                                     class="mb-2 ml-5 mr-5" 
@@ -1547,7 +1567,7 @@
                                                                     <b-button
                                                                     class="btn-delete mt-1"
                                                                     variant="warning"
-                                                                    size="md"
+                                                                    size="sm"
                                                                     v-on:click="deletePens(index_production,index_livestock,index_pens)"
                                                                     >
                                                                         <b-icon icon="trash"></b-icon>
@@ -1811,7 +1831,7 @@
                                                     </div>
                                                 </div>
                                                 <!--Livestock bovine cycle-->
-                                                <div class="card no-border second">
+                                                <div class="card no-border second" v-if="livestock.type_activity == 'bovino'">
                                                     <h4 class="m-4">Ciclo bovino</h4>
                                                     <div class="card-body">
                                                         <div class="form-group row">
@@ -1871,7 +1891,7 @@
                                                     </div>
                                                 </div>
                                                 <!--Livestock sheep cycle-->
-                                                <div class="card no-border second">
+                                                <div class="card no-border second" v-if="livestock.type_activity == 'ovino'">
                                                     <h4 class="m-4">Ciclo ovino</h4>
                                                     <div class="card-body">
                                                         <div class="form-group row">
@@ -1913,7 +1933,7 @@
                                                     </div>
                                                 </div>
                                                 <!--Livestock goat cycle-->
-                                                <div class="card no-border second">
+                                                <div class="card no-border second" v-if="livestock.type_activity == 'caprino'">
                                                     <h4 class="m-4">Ciclo caprino</h4>
                                                     <div class="card-body">
                                                         <div class="form-group row">
@@ -1949,8 +1969,8 @@
                                                     </div>
                                                 </div>
                                                 <!--Livestock pig cycle-->
-                                                <div class="card no-border second">
-                                                    <h4 class="m-4">Ciclo caprino</h4>
+                                                <div class="card no-border second" v-if="livestock.type_activity == 'porcino'">
+                                                    <h4 class="m-4">Ciclo porcino</h4>
                                                     <div class="card-body">
                                                         <div class="form-group row">
                                                             <label for="up_two_months" class="col-sm-2 col-form-label">Lechones hasta dos meses</label>
@@ -1991,7 +2011,7 @@
                                                     </div>
                                                 </div>
                                                  <!--Livestock llama cycle-->
-                                                 <div class="card no-border second">
+                                                 <div class="card no-border second" v-if="livestock.type_activity == 'llamas'">
                                                     <h4 class="m-4">Ciclo Llamas</h4>
                                                     <div class="card-body">
                                                         <div class="form-group row">
@@ -2027,7 +2047,7 @@
                                                     </div>
                                                 </div>
                                                 <!--Livestock poulty cycle-->
-                                                <div class="card no-border second">
+                                                <div class="card no-border second" v-if="livestock.type_activity == 'avicultura'">
                                                     <h4 class="m-4">Ciclo Avicola</h4>
                                                     <div class="card-body">
                                                         <div class="form-group row">
@@ -2085,7 +2105,7 @@
                                                     </div>
                                                 </div>
                                                 <!--Livestock rabbit cycle-->
-                                                <div class="card no-border second">
+                                                <div class="card no-border second" v-if="livestock.type_activity == 'cunicultura'">
                                                     <h4 class="m-4">Ciclo cunicultura</h4>
                                                     <div class="card-body">
                                                         <div class="form-group row">
@@ -2115,7 +2135,7 @@
                                                     </div>
                                                 </div>
                                                 <!--Livestock beekeeping cycle-->
-                                                <div class="card no-border second">
+                                                <div class="card no-border second" v-if="livestock.type_activity == 'apicultura'">
                                                     <h4 class="m-4">Ciclo apicultura</h4>
                                                     <div class="card-body">
                                                         <div class="form-group row">
@@ -2189,7 +2209,7 @@
                                                     </div>
                                                 </div>
                                                 <!--Livestock aquaculture cycle-->
-                                                <div class="card no-border second">
+                                                <div class="card no-border second" v-if="livestock.type_activity == 'acuicultura'">
                                                     <h4 class="m-4">Ciclo acuicultura</h4>
                                                     <div class="card-body">
                                                         <div class="form-group row">
@@ -2214,11 +2234,12 @@
                                         <h4 class="m-4">Producción Agroindustrial <b-badge variant="primary">{{production.production_agroindustrial.length}}</b-badge></h4>
                                         <b-button 
                                         variant="info" 
-                                        class="btn-add" 
+                                        class="btn-add"
+                                        size="sm" 
                                         v-on:click="onDataAgroindustrial(index_production)"
                                         :id="'btnAgroindustrial'+index_production"
                                         >
-                                            <b-icon font-scale="1.3" icon="plus"></b-icon>
+                                            <b-icon font-scale="1" icon="plus"></b-icon>
                                         </b-button>
                                         <div
                                         class="mb-2 ml-5 mr-5" 
@@ -2234,7 +2255,7 @@
                                                         <b-button
                                                         class="btn-delete mt-1"
                                                         variant="warning"
-                                                        size="md"
+                                                        size="sm"
                                                         v-on:click="deleteAgroindustrial(index_agroindustrial,index_production)"
                                                         >
                                                             <b-icon icon="trash"></b-icon>
@@ -2268,10 +2289,11 @@
                                                     <b-button
                                                     variant="info" 
                                                     class="btn-add"
+                                                    size="sm"
                                                     v-on:click="onDataHand(index_production,index_agroindustrial)"
                                                     :id="'btnHand'+index_production+index_agroindustrial"
                                                     >
-                                                        <b-icon font-scale="1.3" icon="plus"></b-icon>
+                                                        <b-icon font-scale="1" icon="plus"></b-icon>
                                                     </b-button>
                                                     <div
                                                     class="mb-2 ml-5 mr-5" 
@@ -2287,7 +2309,7 @@
                                                                     <b-button
                                                                     class="btn-delete mt-1"
                                                                     variant="warning"
-                                                                    size="md"
+                                                                    size="sm"
                                                                     v-on:click="deleteHand(index_production,index_agroindustrial,index_hand)"
                                                                     >
                                                                         <b-icon icon="trash"></b-icon>
@@ -2321,10 +2343,11 @@
                                                     <b-button
                                                     variant="info" 
                                                     class="btn-add"
+                                                    size="sm"
                                                     v-on:click="onDataFood(index_production,index_agroindustrial)"
                                                     :id="'btnFood'+index_production+index_agroindustrial"
                                                     >
-                                                        <b-icon font-scale="1.3" icon="plus"></b-icon>
+                                                        <b-icon font-scale="1" icon="plus"></b-icon>
                                                     </b-button>
                                                     <div
                                                     class="mb-2 ml-5 mr-5" 
@@ -2340,7 +2363,7 @@
                                                                     <b-button
                                                                     class="btn-delete mt-1"
                                                                     variant="warning"
-                                                                    size="md"
+                                                                    size="sm"
                                                                     v-on:click="deleteFood(index_production,index_agroindustrial,index_food)"
                                                                     >
                                                                         <b-icon icon="trash"></b-icon>
@@ -2386,10 +2409,11 @@
                                                     <b-button
                                                     variant="info" 
                                                     class="btn-add"
+                                                    size="sm"
                                                     v-on:click="onDataTools(index_production,index_agroindustrial)"
                                                     :id="'btnTools'+index_production+index_agroindustrial"
                                                     >
-                                                        <b-icon font-scale="1.3" icon="plus"></b-icon>
+                                                        <b-icon font-scale="1" icon="plus"></b-icon>
                                                     </b-button>
                                                     <div
                                                     class="mb-2 ml-5 mr-5" 
@@ -2403,9 +2427,9 @@
                                                             <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
                                                                 <div class="text-right">
                                                                     <b-button
-                                                                    class="btn-delete mt-1"
+                                                                    class="btn-delete  mt-1"
                                                                     variant="warning"
-                                                                    size="md"
+                                                                    size="sm"
                                                                     v-on:click="deleteTools(index_production,index_agroindustrial,index_tools)"
                                                                     >
                                                                         <b-icon icon="trash"></b-icon>
@@ -2444,7 +2468,7 @@
                     </div>
                     <!--END-->
                     <div class="row justify-content-center">
-                        <div class="col content-btn text-center">
+                        <div class="col content-btn text-center position-fixed">
                             <b-button id="btn-save" type="submit" variant="success" class="expand-btn">
                                 <b-icon icon="check" font-scale="2"></b-icon>
                             </b-button>
@@ -2457,23 +2481,35 @@
                 </form>
             </div>
         </div>
-        <AddAgriculturalModal v-on:dataAgricultural="onDataAgricultural"/>
     </div>
 </template>
 
 <script>
-import AddAgriculturalModal from '@/components/producer/edit/AddAgriculturalModal';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 export default {
     components: {
-        AddAgriculturalModal,
+      
     },
     data() {
         return {
             producerId: this.$route.params.producerId,
             // Btn Add
             show: false,
+            //Selected Livestock
+            selected: null,
+            options: [
+            { value: null, text: 'Please select an option' },
+            { value: 'bovino', text: 'bovino' },
+            { value: 'ovino', text: 'ovino' },
+            { value: 'caprino', text: 'caprino' },
+            { value: 'porcino', text: 'porcino' },
+            { value: 'llamas', text: 'llamas' },
+            { value: 'avicultura', text: 'avicultura' },
+            { value: 'cunicultura', text: 'cunicultura' },
+            { value: 'apicultura', text: 'apicultura' },
+            { value: 'acuicultura', text: 'acuicultura' },
+            ],
         
             form: {
                 producer: {
@@ -2507,12 +2543,12 @@ export default {
                 district: "",
                 surface: 0,
                 road_state: "",
-                lat: "",
-                lng: "",
+                lat: 0,
+                lng: 0,
                 has_renspa: false,
                 production_property: {
                     land_tenure: "",
-                    has_land_title: true,
+                    has_land_title: false,
                     cadastre_registration: "",
                     starting_number: ""
                 },
@@ -2717,6 +2753,823 @@ export default {
                     bulls_older_two_years: 0,
                     number_oxen_torunos: 0
                 },
+                livestock_sheep_cycle: {
+                    sheep_under_six_months: 0,
+                    sheep_older_six_months_to_calving: 0,
+                    sheep_older_six_months_one_year: 0,
+                    number_sheep: 0,
+                    number_capons: 0,
+                    number_rams: 0
+                },
+                livestock_goat_cycle: {
+                    goats_under_six_months: 0,
+                    goats_six_months_to_first_calving: 0,
+                    number_goats: 0,
+                    number_capons: 0,
+                    number_stallions: 0
+                },
+                livestock_pig_cycle: {
+                    up_two_months: 0,
+                    older_two_months: 0,
+                    less_four_months: 0,
+                    older_four_months: 0,
+                    number_pigs: 0,
+                    number_stallions: 0
+                },
+                livestock_llama_cycle: {
+                    number_chitas_teques: 0,
+                    number_maltones: 0,
+                    number_janachos: 0,
+                    number_llamas_mothers: 0,
+                    number_capons: 0
+                },
+                livestock_poultry_cycle: {
+                    is_intensive_poultry: false,
+                    number_broilers_incubated: 0,
+                    breeding_males: 0,
+                    number_eggs_chickens_babies: 0,
+                    number_incubators: 0,
+                    number_broilers_fattening: 0,
+                    number_breeding_layers: 0,
+                    existence: ""
+                },
+                livestock_rabbit_cycle: {
+                    orientation: "",
+                    number_breeding_males: 0,
+                    number_breeding_females: 0,
+                    number_rabbit: 0
+                },
+                livestock_beekeeping_cycle: {
+                    kind_bee: "",
+                    has_bee_hives: false,
+                    type_bee_hives: "",
+                    number_drawers: 0,
+                    alsas_drawer: 0,
+                    type_drawer: "",
+                    honey_stones: 0,
+                    pollination_period: "",
+                    pollinated_flower: "",
+                    has_renapa: true
+                },
+                livestock_aquaculture_cycle: {
+                    orientation: "",
+                    existence: ""
+                }
+            },
+
+            itemsFeeding: {
+                feeding: "",
+                type_feeding: "",
+                daily_rations: 0
+            },
+
+            itemsPens: {
+                orientation: "",
+                building_material: "",
+                roof_material: "",
+                foor_material: "",
+                surface: 0,
+                num_animals: 0,
+                lat: 0,
+                lng: 0
+            },
+            
+            itemsAgroindustrial: {
+                description: "",
+                raw_material: "",
+                is_mechanized: false,
+                knowledge: "",
+                agroindustrial_food_product: [],
+                agroindustrial_handmande_product: [],
+                agroindustrial_tools: []
+            },
+        
+            itemsFood: {
+                name_product: "",
+                validity: "",
+                origin: "",
+                quantity: 0,
+                price: 0
+            },
+        
+            itemsHand: {
+                name_product: "",
+                quantity: 0,
+                price: 0
+            },
+
+            itemsTools: {
+                name_tool: "",
+                type_tool: "",
+                number_tools: 0
+            },
+        }
+    },
+    methods: {
+        onSubmit () {
+            this.showToggle();
+            event.preventDefault()
+            return new Promise((resolve, reject) => {
+                const path = `http://www.agrapi.com.ar/api/v1.0/producers/${this.producerId}/`
+                axios.patch(path,this.form).then((response) => {
+
+                    Swal.fire("Productor actualizado correctamente!","","success").then(response => {
+                        console.log(response)
+                        if (response.value == true){
+                            setTimeout(() => {
+                                console.log("esperando 3 segundos")
+                                this.getProducer()
+                                
+                            }, 3000);
+                        }
+                    })
+                    this.show = false
+
+                    resolve(response)
+
+                })
+                .catch((error) => {
+                    console.log(error)
+                    let msj = error.response.data.non_field_errors[0]
+                    Swal.fire('Oops...',msj,'error')
+                    this.show = false
+
+                    resolve(reject)
+                })
+            })
+        },
+        getProducer () {
+            const path = `http://www.agrapi.com.ar/api/v1.0/producers/${this.producerId}/`
+            axios.get(path).then(response => {
+                //this.form.producer.modified = response.data.modified
+                this.form.producer.first_name = response.data.producer.first_name
+                this.form.producer.last_name = response.data.producer.last_name
+                this.form.producer.date_birth = response.data.producer.date_birth
+                this.form.producer.document = response.data.producer.document
+                this.form.producer.gender = response.data.producer.gender
+                this.form.producer.phone_number = response.data.producer.phone_number
+                //Producer Home
+                this.form.producer.producer_home.district = response.data.producer.producer_home.district
+                this.form.producer.producer_home.address = response.data.producer.producer_home.address
+                this.form.producer.producer_home.type_recidence = response.data.producer.producer_home.type_recidence
+                this.form.producer.producer_home.state_recidence = response.data.producer.producer_home.state_recidence
+                // Producer Person
+                this.form.producer.producer_person = response.data.producer.producer_person
+                // Producer Vehicle
+                this.form.producer.producer_vehicle = response.data.producer.producer_vehicle
+                //Producer Activity
+                this.form.producer.producer_activity.works_under_dependency = response.data.producer.producer_activity.works_under_dependency
+                this.form.producer.producer_activity.is_monotributista = response.data.producer.producer_activity.is_monotributista
+                this.form.producer.producer_activity.category = response.data.producer.producer_activity.category
+                this.form.producer.producer_activity.use_external_labor = response.data.producer.producer_activity.use_external_labor
+                this.form.producer.producer_activity.activity_worker = response.data.producer.producer_activity.activity_worker
+                this.form.producer.production = response.data.producer.production
+
+            })
+        },
+        showToggle() {
+            setTimeout(() => {
+                this.show = true;
+            }, 700);
+        },
+        //Add data
+        onDataPerson () {
+
+            const objPerson = {
+                family_relation: "",
+                first_name: "",
+                last_name: "",
+                age: 0,
+                has_primary_studies: false,
+                has_secondary_studies: false,
+                has_tertiary_studies: false,
+                has_university_studies: false,
+                perform_work_activity: false,
+                description: "" 
+            }
+
+            class Person {
+                constructor(
+                    family_relation, 
+                    first_name, 
+                    last_name, 
+                    age, 
+                    has_primary_studies, 
+                    has_secondary_studies,
+                    has_tertiary_studies,
+                    has_university_studies,
+                    perform_work_activity,
+                    description
+                    
+                    ) {
+                    this.family_relation = family_relation
+                    this.first_name = first_name
+                    this.last_name = last_name
+                    this.age = age
+                    this.has_primary_studies = has_primary_studies
+                    this.has_secondary_studies = has_secondary_studies
+                    this.has_tertiary_studies = has_tertiary_studies
+                    this.has_university_studies = has_university_studies
+                    this.perform_work_activity = perform_work_activity
+                    this.description = description
+                }
+            }
+
+            const obj = new Person (
+                this.itemsPerson.family_relation,
+                this.itemsPerson.first_name,
+                this.itemsPerson.last_name,
+                this.itemsPerson.age,
+                this.itemsPerson.has_primary_studies,
+                this.itemsPerson.has_secondary_studies,
+                this.itemsPerson.has_tertiary_studies,
+                this.itemsPerson.has_university_studies,
+                this.itemsPerson.perform_work_activity,
+                this.itemsPerson.description
+                )
+
+            let newArray = [] 
+            let array = this.form.producer.producer_person
+            if (array.length != 0) {
+                newArray.push(obj)
+                this.form.producer.producer_person = array.concat(newArray)
+        
+                //document.getElementById('btnPerson').style.display='none'
+            }else{
+                array.push(obj)
+        
+                //document.getElementById('btnPerson').style.display='none'
+            }
+            //this.form.producer.producer_person.push(data)
+        },
+        onDataVehicle () {
+
+            const objVehicle = {
+                name_vehicle: "",
+                use_trailer: false,
+                type_trailer: "",
+                use_semitrailer: false, 
+            }
+
+            class Vehicle {
+                constructor(name_vehicle, use_trailer, type_trailer, use_semitrailer) {
+                    this.name_vehicle = name_vehicle
+                    this.use_trailer = use_trailer
+                    this.type_trailer = type_trailer
+                    this.use_semitrailer = use_semitrailer
+                }
+            }
+
+            const obj = new Vehicle (
+                this.itemsVehicle.name_vehicle,
+                this.itemsVehicle.use_trailer,
+                this.itemsVehicle.type_trailer,
+                this.itemsVehicle.use_semitrailer
+                )
+
+            let newArray = [] 
+            let array = this.form.producer.producer_vehicle
+            if (array.length != 0) {
+                newArray.push(obj)
+                this.form.producer.producer_vehicle = array.concat(newArray)
+                
+                //document.getElementById('btnVehicle').style.display='none'
+            }else{
+                array.push(obj)
+                
+                //document.getElementById('btnVehicle').style.display='none'
+            }
+        },
+        onDataWorker () {
+
+
+            const objWorker = {
+                is_formal_worker: false,
+                type_person: '',
+                is_resident: false,
+                gender: '',
+                receive_remuneration: false,
+                work_position: '',
+                type_job: ''
+            }
+
+            class Worker {
+                constructor(is_formal_worker, type_person, is_resident, gender, receive_remuneration, work_position, type_job) {
+                    this.is_formal_worker = is_formal_worker
+                    this.type_person = type_person
+                    this.is_resident = is_resident
+                    this.gender = gender
+                    this.receive_remuneration = receive_remuneration
+                    this.work_position = work_position
+                    this.type_job = type_job
+                }
+            }
+
+            const obj = new Worker (
+                this.itemsWorker.is_formal_worker,
+                this.itemsWorker.type_person,
+                this.itemsWorker.is_resident,
+                this.itemsWorker.gender,
+                this.itemsWorker.receive_remuneration,
+                this.itemsWorker.work_position,
+                this.itemsWorker.type_job,
+                )
+
+            let newArray = [] 
+            let array = this.form.producer.producer_activity.activity_worker
+            if (array.length != 0) {
+                newArray.push(obj)
+                this.form.producer.producer_activity.activity_worker = array.concat(newArray)
+                
+                //document.getElementById('btnWorker').style.display='none'
+            }else{
+                array.push(obj)
+                
+                //document.getElementById('btnWorker').style.display='none'
+            }
+        }, 
+        onDataProduction () {
+
+            const objProduction = {
+                is_resident: false,
+                district: "",
+                surface: 0,
+                road_state: "",
+                lat: "",
+                lng: "",
+                has_renspa: false,
+                production_property: {
+                    land_tenure: "",
+                    has_land_title: true,
+                    cadastre_registration: "",
+                    starting_number: ""
+                },
+                production_service: {
+                    has_service_aqua: false,
+                    type_service_aqua: "",
+                    has_service_energy: false,
+                    type_service_energy: "",
+                    has_rural_energy: false,
+                    has_generator: false,
+                    has_hydraulic_generator: false,
+                    has_solar_panels: false
+                },
+                production_installation: {
+                    has_windmills: false,
+                    has_australian_tanks: false,
+                    has_dams: false,
+                    has_truck_scale: false,
+                    has_fire_break: false,
+                    has_minced_steel: false,
+                    has_pools: false,
+                    installation_barn: [],
+                    installation_well: []
+                },
+                production_machine: [],
+                production_irrigation: {
+                    type_irrigation: "",
+                    pressurized_irrigation: "",
+                    surface_irrigation: "",
+                    take_section: "",
+                    watering_hours: 0,
+                    channel_conditions: "",
+                    right: "",
+                    shifts: ""
+                },
+                production_agricultural: [],
+                production_livestock: [],
+                production_agroindustrial: []
+            }
+
+            class Production {
+                constructor(
+                    is_resident, 
+                    district, 
+                    surface, 
+                    road_state, 
+                    lat, 
+                    lng, 
+                    has_renapa, 
+                    production_property,
+                    production_service,
+                    production_installation,
+                    production_machine,
+                    production_irrigation,
+                    production_agricultural,
+                    production_livestock,
+                    production_agroindustrial
+                ) {
+                    this.is_resident = is_resident
+                    this.district = district
+                    this.surface = surface
+                    this.road_state = road_state
+                    this.lat = lat
+                    this.lng = lng
+                    this.has_renapa = has_renapa
+                    this.production_property = production_property
+                    this.production_service = production_service
+                    this.production_installation = production_installation
+                    this.production_machine = production_machine
+                    this.production_irrigation = production_irrigation
+                    this.production_agricultural = production_agricultural
+                    this.production_livestock = production_livestock
+                    this.production_agroindustrial = production_agroindustrial
+                }
+            }
+
+            const obj = new Production (
+                this.itemsProduction.is_resident,
+                this.itemsProduction.district,
+                this.itemsProduction.surface,
+                this.itemsProduction.road_state,
+                this.itemsProduction.lat,
+                this.itemsProduction.lng,
+                this.itemsProduction.has_renapa,
+                this.itemsProduction.production_property,
+                this.itemsProduction.production_service,
+                this.itemsProduction.production_installation,
+                this.itemsProduction.production_machine,
+                this.itemsProduction.production_irrigation,
+                this.itemsProduction.production_agricultural,
+                this.itemsProduction.production_livestock,
+                this.itemsProduction.production_agroindustrial,
+                )
+
+            let newArray = [] 
+            let array = this.form.producer.production
+            if (array.length != 0) {
+                newArray.push(obj)
+                this.form.producer.production = array.concat(newArray)
+                //document.getElementById('btnProduction').style.display='none'
+            }else{
+                array.push(obj)
+                //document.getElementById('btnProduction').style.display='none'
+            }
+
+            //this.form.producer.production.push(this.itemsProduction)
+        },
+        onDataBarn (index) {
+
+            const objBarn = {
+                surface: "",
+                lat: "",
+                lng: "",
+            }
+
+            class Barn {
+                constructor(surface, lat, lng) {
+                    this.surface = surface
+                    this.lat = lat
+                    this.lng = lng
+                }
+            }
+
+            const obj = new Barn (
+                this.itemsBarn.surface,
+                this.itemsBarn.lat,
+                this.itemsBarn.lng,
+                )
+            
+            let newArray = [] 
+            let array = this.form.producer.production[index].production_installation.installation_barn
+
+            if (array.length != 0) {
+                newArray.push(obj)
+                this.form.producer.production[index].production_installation.installation_barn = array.concat(newArray)
+                //document.getElementById('btnBarn'+index).style.display='none'
+                
+            }else{
+                array.push(obj)
+                //document.getElementById('btnBarn'+index).style.display='none'
+            }
+            //this.form.producer.production[this.indexProduction].production_installation.installation_barn.push(data)
+        },
+        onDataWell (index) {
+
+            const objWell = {
+                is_active: false,
+                lat: "",
+                lng: "", 
+            }
+
+            class Well {
+                constructor(is_active, lat, lng) {
+                    this.is_active = is_active
+                    this.lat = lat
+                    this.lng = lng
+                }
+            }
+
+            const obj = new Well (
+                this.itemsWell.is_active,
+                this.itemsWell.lat,
+                this.itemsWell.lng,
+                )
+
+            let newArray = [] 
+            let array = this.form.producer.production[index].production_installation.installation_well
+
+            if (array.length != 0) {
+                newArray.push(obj)
+                this.form.producer.production[index].production_installation.installation_well = array.concat(newArray)
+                //document.getElementById('btnWell'+index).style.display='none'
+                
+            }else{
+                array.push(obj)
+                //document.getElementById('btnWell'+index).style.display='none'   
+            }
+            //this.form.producer.production[this.indexProduction].production_installation.installation_well.push(data)
+        },
+        onDataMachine (index) {
+
+            const objMachine = {
+                destination: "",
+                name_machine: "",
+                type_maquinary: "",
+                model: "",
+                state_machine: "",
+                age: "",
+                observation: ""  
+            }
+
+            class Machine {
+                constructor(destination, name_machine, type_maquinary, model, state_machine, age, observation) {
+                    this.destination = destination
+                    this.name_machine = name_machine
+                    this.type_maquinary = type_maquinary
+                    this.model = model
+                    this.state_machine = state_machine
+                    this.age = age
+                    this.observation = observation
+                }
+            }
+
+            const obj = new Machine (
+                this.itemsMachine.destination,
+                this.itemsMachine.name_machine,
+                this.itemsMachine.type_maquinary,
+                this.itemsMachine.model,
+                this.itemsMachine.state_machine,
+                this.itemsMachine.age,
+                this.itemsMachine.observation,
+                )
+
+            let newArray = [] 
+            let array = this.form.producer.production[index].production_machine
+
+            if (array.length != 0) {
+                newArray.push(obj)
+                this.form.producer.production[index].production_machine = array.concat(newArray)
+                //document.getElementById('btnMachine'+index).style.display='none'
+                
+            }else{
+                array.push(obj)
+                //document.getElementById('btnMachine'+index).style.display='none'
+                
+            }
+            //this.form.producer.production[index].production_machine.push(this.itemsMachine)
+        },
+        onDataAgricultural (index) {
+
+            const objAgricultural = {
+                activity_name: "",
+                surface: 0,
+                destination: "",
+                sowing: "",
+                type_sowing: "",
+                age: 0,
+                problems: "",
+                suggestion: "",
+                agricultural_attendance: {
+                    use_fertilizers: false,
+                    use_food_organic: false,
+                    use_pheromones: false,
+                    use_hail_mesh: false,
+                    make_frost_control: false,
+                    other_practices: ""
+                },
+                agricultural_climatic: [],
+                agricultural_pests: [],
+                agricultural_harvest: {
+                  harvest_surface: 0,
+                  tons_production: 0,
+                  has_curtains_insulated: false,
+                  plant_length_curtains: 0,
+                  plant_species_curtains: "",
+                  harvest_time: ""
+                },
+                agricultural_sales_channel: {
+                  is_collector: false,
+                  is_cooperative: false,
+                  is_exporter: false,
+                  use_baler: false,
+                  use_fair: false,
+                  use_industry: false,
+                  use_fridge: false
+                }
+            }
+
+            class Agricultural {
+                constructor(
+                    activity_name,
+                    surface,
+                    destination,
+                    sowing,
+                    type_sowing, 
+                    age,
+                    problems,
+                    suggestion,
+                    agricultural_attendance,
+                    agricultural_climatic,
+                    agricultural_pests,
+                    agricultural_harvest,
+                    agricultural_sales_channel
+                    ) {
+                    this.activity_name = activity_name
+                    this.surface = surface
+                    this.destination = destination
+                    this.sowing = sowing
+                    this.type_sowing = type_sowing
+                    this.age = age
+                    this.problems = problems
+                    this.suggestion = suggestion
+                    this.agricultural_attendance = agricultural_attendance
+                    this.agricultural_climatic = agricultural_climatic
+                    this.agricultural_pests = agricultural_pests
+                    this.agricultural_harvest = agricultural_harvest
+                    this.agricultural_sales_channel = agricultural_sales_channel
+                }
+            }
+
+            const obj = new Agricultural (
+                this.itemsAgricultural.activity_name,
+                this.itemsAgricultural.surface,
+                this.itemsAgricultural.destination,
+                this.itemsAgricultural.sowing,
+                this.itemsAgricultural.type_sowing,
+                this.itemsAgricultural.age,
+                this.itemsAgricultural.problems,
+                this.itemsAgricultural.suggestion,
+                this.itemsAgricultural.agricultural_attendance,
+                this.itemsAgricultural.agricultural_climatic,
+                this.itemsAgricultural.agricultural_pests,
+                this.itemsAgricultural.agricultural_harvest,
+                this.itemsAgricultural.agricultural_sales_channel,
+                )
+
+            let newArray = [] 
+            let array = this.form.producer.production[index].production_agricultural
+
+            if (array.length != 0) {
+                newArray.push(objAgricultural)
+                this.form.producer.production[index].production_agricultural = array.concat(newArray)
+                //document.getElementById('btnAgricultural'+index).style.display='none'
+            }else{
+                array.push(objAgricultural)
+                //document.getElementById('btnAgricultural'+index).style.display='none'
+            }
+        },
+        onDataPests (index_production,index_agricultural) {
+
+            const objPests = {
+                type_pests: "",
+                pests_description: "",
+                make_pests_control: false,
+                make_pesticide: false,
+                type_pesticide: "",
+                other_practices: ""
+            }
+
+            class Pests {
+                constructor(type_pests, pests_description, make_pests_control, make_pesticide, type_pesticide, other_practices) {
+                    this.type_pests = type_pests
+                    this.pests_description = pests_description
+                    this.make_pests_control = make_pests_control
+                    this.make_pesticide = make_pesticide
+                    this.type_pesticide = type_pesticide
+                    this.other_practices = other_practices 
+
+                }
+            }
+
+            const obj = new Pests (
+                this.itemsPests.type_pests,
+                this.itemsPests.pests_description,
+                this.itemsPests.make_pests_control,
+                this.itemsPests.make_pesticide,
+                this.itemsPests.type_pesticide,
+                this.itemsPests.other_practices,
+                )
+
+            let newArray = [] 
+            let array = this.form.producer.production[index_production].production_agricultural[index_agricultural].agricultural_pests
+            console.log(array)
+
+            if (array.length != 0) {
+                newArray.push(obj)
+                this.form.producer.production[index_production].production_agricultural[index_agricultural].agricultural_pests = array.concat(newArray)
+                //document.getElementById('btnPests'+index_production+index_agricultural).style.display='none'
+            }else{
+                array.push(obj)
+                //document.getElementById('btnPests'+index_production+index_agricultural).style.display='none'
+            }
+        },
+        onDataClimatic (index_production,index_agricultural) {
+
+            const objClimatic = {
+                factor: "",
+                risk: "",
+                damange_level: ""
+            }
+
+            class Climatic {
+                constructor(factor, risk, damange_level) {
+                    this.factor = factor
+                    this.risk = risk
+                    this.damange_level = damange_level
+                }
+            }
+
+            const obj = new Climatic (
+                this.itemsClimatic.factor,
+                this.itemsClimatic.risk,
+                this.itemsClimatic.damange_level,
+                )
+
+            let newArray = [] 
+            let array = this.form.producer.production[index_production].production_agricultural[index_agricultural].agricultural_climatic
+            console.log(array)
+
+            if (array.length != 0) {
+                newArray.push(obj)
+                this.form.producer.production[index_production].production_agricultural[index_agricultural].agricultural_climatic = array.concat(newArray)
+                //document.getElementById('btnClimatic'+index_production+index_agricultural).style.display='none'
+            }else{
+                array.push(obj)
+                //document.getElementById('btnClimatic'+index_production+index_agricultural).style.display='none'
+            }
+        },
+        onDataLivestock (index) {
+
+            const objLivestock = {
+                type_activity: "",
+                surface: 0,
+                destination: "",
+                make_technical_assistance: false,
+                problems: "",
+                suggestion: "",
+                livestock_animal_feeding: [],
+                livestock_reproduction: {
+                    make_reproductive_management: false,
+                    make_continuous_service: false,
+                    make_corral_service: false,
+                    make_artificial_insemination: false,
+                    make_embryo_transplant: false,
+                    other_practices: ""
+                },
+                livestock_animal_pens: [],
+                livestock_health: {
+                    type_technical_assistance: "",
+                    vitamin_complex: "",
+                    make_internal_deworming: false,
+                    make_external_deworming: false,
+                    type_antiparasitic: "",
+                    make_vaccination: false,
+                    type_vaccination: "",
+                    type_disease: "",
+                    other_practices: ""
+                },
+                livestock_marketing: {
+                    number_slaughtered: 0,
+                    number_shorn: 0,
+                    amount_wool_hair: 0,
+                    amount_leather: 0,
+                    liters_milk: 0,
+                    milk_destination: "",
+                    wool_hair_destination: "",
+                    leather_destination: "",
+                    slaughter_destination: ""
+                },
+                livestock_sales_channel: {
+                    is_collector: false,
+                    is_cooperative: false,
+                    is_exporter: false,
+                    use_baler: false,
+                    use_fair: false,
+                    use_industry: false,
+                    use_fridge: false
+                },
+                livestock_bovine_cycle: {
+                    calves_under_one_year: 0,
+                    heifers_one_to_two_years: 0,
+                    heifers_over_two_years: 0,
+                    number_cows: 0,
+                    steers_one_to_two_years: 0,
+                    steers_older_two_years: 0,
+                    bulls_one_to_two_years: 0,
+                    bulls_older_two_years: 0,
+                    number_oxen_torunos: 0
+                },
                     livestock_sheep_cycle: {
                     sheep_under_six_months: 0,
                     sheep_older_six_months_to_calving: 0,
@@ -2779,15 +3632,130 @@ export default {
                     orientation: "",
                     existence: ""
                 }
-            },
+            }
 
-            itemsFeeding: {
+            class Livestock {
+                constructor(
+                    type_activity,
+                    surface,
+                    destination,
+                    make_technical_assistance,
+                    problems,
+                    suggestion,
+                    livestock_animal_feeding,
+                    livestock_reproduction,
+                    livestock_animal_pens,
+                    livestock_health,
+                    livestock_marketing,
+                    livestock_sales_channel,
+                    livestock_bovine_cycle,
+                    livestock_sheep_cycle,
+                    livestock_goat_cycle,
+                    livestock_pig_cycle,
+                    livestock_llama_cycle,
+                    livestock_poultry_cycle,
+                    livestock_rabbit_cycle,
+                    livestock_beekeeping_cycle,
+                    livestock_aquaculture_cycle,
+                    ) {
+                    this.type_activity = type_activity
+                    this.surface = surface
+                    this.destination = destination
+                    this.make_technical_assistance = make_technical_assistance
+                    this.problems = problems
+                    this.suggestion = suggestion
+                    this.livestock_animal_feeding = livestock_animal_feeding
+                    this.livestock_reproduction = livestock_reproduction
+                    this.livestock_animal_pens = livestock_animal_pens
+                    this.livestock_health = livestock_health
+                    this.livestock_marketing = livestock_marketing
+                    this.livestock_sales_channel = livestock_sales_channel
+                    this.livestock_bovine_cycle = livestock_bovine_cycle
+                    this.livestock_sheep_cycle = livestock_sheep_cycle
+                    this.livestock_goat_cycle = livestock_goat_cycle
+                    this.livestock_pig_cycle = livestock_pig_cycle
+                    this.livestock_llama_cycle = livestock_llama_cycle
+                    this.livestock_poultry_cycle = livestock_poultry_cycle
+                    this.livestock_rabbit_cycle = livestock_rabbit_cycle
+                    this.livestock_beekeeping_cycle = livestock_beekeeping_cycle 
+                    this.livestock_aquaculture_cycle = livestock_aquaculture_cycle
+                }
+            }
+
+            const obj = new Livestock (
+                this.itemsLivestock.type_activity,
+                this.itemsLivestock.surface,
+                this.itemsLivestock.destination,
+                this.itemsLivestock.make_technical_assistance,
+                this.itemsLivestock.problems,
+                this.itemsLivestock.suggestion,
+                this.itemsLivestock.livestock_animal_feeding,
+                this.itemsLivestock.livestock_reproduction,
+                this.itemsLivestock.livestock_animal_pens,
+                this.itemsLivestock.livestock_health,
+                this.itemsLivestock.livestock_marketing,
+                this.itemsLivestock.livestock_sales_channel,
+                this.itemsLivestock.livestock_bovine_cycle,
+                this.itemsLivestock.livestock_sheep_cycle,
+                this.itemsLivestock.livestock_goat_cycle,
+                this.itemsLivestock.livestock_pig_cycle,
+                this.itemsLivestock.livestock_llama_cycle,
+                this.itemsLivestock.livestock_poultry_cycle,
+                this.itemsLivestock.livestock_rabbit_cycle,
+                this.itemsLivestock.livestock_beekeeping_cycle, 
+                this.itemsLivestock.livestock_aquaculture_cycle,
+                )
+
+            let newArray = [] 
+            let array = this.form.producer.production[index].production_livestock
+
+            if (array.length != 0) {
+                newArray.push(obj)
+                this.form.producer.production[index].production_livestock = array.concat(newArray)
+                //document.getElementById('btnLivestock'+index).style.display='none'
+            }else{
+                array.push(obj)
+                //document.getElementById('btnLivestock'+index).style.display='none'
+            }
+        },
+        onDataFeeding (index_production,index_livestock) {
+
+            const objFeeding = {
                 feeding: "",
                 type_feeding: "",
                 daily_rations: 0
-            },
+            }
 
-            itemsPens: {
+            class Fedding {
+                constructor(feeding, type_feeding, daily_rations) {
+                    this.feeding = feeding
+                    this.type_feeding = type_feeding
+                    this.daily_rations = daily_rations
+                }
+            }
+
+            const obj = new Fedding (
+                this.itemsFeeding.feeding,
+                this.itemsFeeding.type_feeding,
+                this.itemsFeeding.daily_rations,
+                )
+
+            let newArray = [] 
+            let array = this.form.producer.production[index_production].production_livestock[index_livestock].livestock_animal_feeding
+            console.log(array)
+
+            if (array.length != 0) {
+                newArray.push(obj)
+                this.form.producer.production[index_production].production_livestock[index_livestock].livestock_animal_feeding = array.concat(newArray)
+                //document.getElementById('btnFeeding'+index_production+index_livestock).style.display='none'
+            }else{
+                array.push(obj)
+                //document.getElementById('btnFeeding'+index_production+index_livestock).style.display='none'
+            }
+        },
+        onDataPens (index_production,index_livestock) {
+
+            const objPens = {
                 orientation: "",
                 building_material: "",
                 roof_material: "",
@@ -2796,9 +3764,48 @@ export default {
                 num_animals: 0,
                 lat: 0,
                 lng: 0
-            },
-            
-            itemsAgroindustrial: {
+            }
+
+            class Pens {
+                constructor(orientation, building_material, roof_material, foor_material, surface, num_animals, lat, lng) {
+                    this.orientation = orientation
+                    this.building_material = building_material
+                    this.roof_material = roof_material
+                    this.foor_material = foor_material
+                    this.surface = surface
+                    this.num_animals = num_animals
+                    this.lat = lat
+                    this.lng = lng
+                }
+            }
+
+            const obj = new Pens (
+                this.itemsPens.orientation,
+                this.itemsPens.building_material,
+                this.itemsPens.roof_material,
+                this.itemsPens.foor_material,
+                this.itemsPens.surface,
+                this.itemsPens.num_animals,
+                this.itemsPens.lat,
+                this.itemsPens.lng
+                )
+
+            let newArray = [] 
+            let array = this.form.producer.production[index_production].production_livestock[index_livestock].livestock_animal_pens
+            console.log(array)
+
+            if (array.length != 0) {
+                newArray.push(obj)
+                this.form.producer.production[index_production].production_livestock[index_livestock].livestock_animal_pens = array.concat(newArray)
+                //document.getElementById('btnPens'+index_production+index_livestock).style.display='none'
+            }else{
+                array.push(obj)
+                //document.getElementById('btnPens'+index_production+index_livestock).style.display='none'
+            }
+        },
+        onDataAgroindustrial (index) {
+
+            const objAgro = {
                 description: "",
                 raw_material: "",
                 is_mechanized: false,
@@ -2806,328 +3813,161 @@ export default {
                 agroindustrial_food_product: [],
                 agroindustrial_handmande_product: [],
                 agroindustrial_tools: []
-            },
-        
-            itemsFood: {
-                name_product: "",
-                validity: "",
-                origin: "",
-                quantity: 0,
-                price: 0
-            },
-        
-            itemsHand: {
-                name_product: "",
-                quantity: 0,
-                price: 0
-            },
-
-            itemsTools: {
-                name_tool: "",
-                type_tool: "",
-                number_tools: 0
-            },
-        }
-    },
-    methods: {
-        onSubmit () {
-            this.showToggle();
-            event.preventDefault()
-            const path = `http://www.agrapi.com.ar/api/v1.0/producers/${this.producerId}/`
-            axios.patch(path,this.form).then((response) => {
-
-                Swal.fire("Productor actualizado correctamente!","","success").then(response => {
-                    this.getProducer()
-                })
-                this.show = false
-
-            })
-            .catch((error) => {
-                console.log(error)
-                Swal.fire(error + ", no pudimos actualizar los datos.","","error")
-                this.show = false
-            })
-        },
-        async getProducer () {
-            const path = `http://www.agrapi.com.ar/api/v1.0/producers/${this.producerId}/`
-            axios.get(path).then(response => {
-                //this.form.producer.modified = response.data.modified
-                this.form.producer.first_name = response.data.producer.first_name
-                this.form.producer.last_name = response.data.producer.last_name
-                this.form.producer.date_birth = response.data.producer.date_birth
-                this.form.producer.document = response.data.producer.document
-                this.form.producer.gender = response.data.producer.gender
-                this.form.producer.phone_number = response.data.producer.phone_number
-                //Producer Home
-                this.form.producer.producer_home.district = response.data.producer.producer_home.district
-                this.form.producer.producer_home.address = response.data.producer.producer_home.address
-                this.form.producer.producer_home.type_recidence = response.data.producer.producer_home.type_recidence
-                this.form.producer.producer_home.state_recidence = response.data.producer.producer_home.state_recidence
-                // Producer Person
-                this.form.producer.producer_person = response.data.producer.producer_person
-                // Producer Vehicle
-                this.form.producer.producer_vehicle = response.data.producer.producer_vehicle
-                //Producer Activity
-                this.form.producer.producer_activity.works_under_dependency = response.data.producer.producer_activity.works_under_dependency
-                this.form.producer.producer_activity.is_monotributista = response.data.producer.producer_activity.is_monotributista
-                this.form.producer.producer_activity.category = response.data.producer.producer_activity.category
-                this.form.producer.producer_activity.use_external_labor = response.data.producer.producer_activity.use_external_labor
-                this.form.producer.producer_activity.activity_worker = response.data.producer.producer_activity.activity_worker
-                this.form.producer.production = response.data.producer.production
-
-            })
-        },
-        showToggle() {
-            setTimeout(() => {
-                this.show = true;
-            }, 700);
-        },
-        //Add data
-        onDataPerson () {
-            let newArray = [] 
-            let array = this.form.producer.producer_person
-            if (array.length != 0) {
-                newArray.push(this.itemsPerson)
-                this.form.producer.producer_person = array.concat(newArray)
-        
-                document.getElementById('btnPerson').style.display='none'
-            }else{
-                array.push(this.itemsPerson)
-        
-                document.getElementById('btnPerson').style.display='none'
-            }
-            //this.form.producer.producer_person.push(data)
-        },
-        onDataVehicle () {
-            let newArray = [] 
-            let array = this.form.producer.producer_vehicle
-            if (array.length != 0) {
-                newArray.push(this.itemsVehicle)
-                this.form.producer.producer_vehicle = array.concat(newArray)
-                
-                document.getElementById('btnVehicle').style.display='none'
-            }else{
-                array.push(this.itemsVehicle)
-                
-                document.getElementById('btnVehicle').style.display='none'
-            }
-        },
-        onDataWorker () {
-            let newArray = [] 
-            let array = this.form.producer.producer_activity.activity_worker
-            if (array.length != 0) {
-                newArray.push(this.itemsWorker)
-                this.form.producer.producer_activity.activity_worker = array.concat(newArray)
-                
-                document.getElementById('btnWorker').style.display='none'
-            }else{
-                array.push(this.itemsWorker)
-                
-                document.getElementById('btnWorker').style.display='none'
-            }
-        }, 
-        onDataProduction () {
-            let newArray = [] 
-            let array = this.form.producer.production
-            if (array.length != 0) {
-                newArray.push(this.itemsProduction)
-                this.form.producer.production = array.concat(newArray)
-
-                document.getElementById('btnProduction').style.display='none'
-            }else{
-                array.push(this.itemsProduction)
-        
-                document.getElementById('btnProduction').style.display='none'
             }
 
-            //this.form.producer.production.push(this.itemsProduction)
-        },
-        onDataBarn (index) {
-            
-            let newArray = [] 
-            let array = this.form.producer.production[index].production_installation.installation_barn
+            class Agroidustrial {
+                constructor(
+                    description, 
+                    raw_material, 
+                    is_mechanized, 
+                    knowledge,
+                    agroindustrial_food_product,
+                    agroindustrial_handmande_product,
+                    agroindustrial_tools) {
 
-            if (array.length != 0) {
-                newArray.push(this.itemsBarn)
-                this.form.producer.production[index].production_installation.installation_barn = array.concat(newArray)
-                document.getElementById('btnBarn'+index).style.display='none'
-                
-            }else{
-                array.push(this.itemsBarn)
-                document.getElementById('btnBarn'+index).style.display='none'
+                    this.description = description
+                    this.raw_material = raw_material
+                    this.is_mechanized = is_mechanized
+                    this.knowledge = knowledge
+                    this.agroindustrial_food_product = agroindustrial_food_product
+                    this.agroindustrial_handmande_product = agroindustrial_handmande_product
+                    this.agroindustrial_tools = agroindustrial_tools
+                }
             }
-            //this.form.producer.production[this.indexProduction].production_installation.installation_barn.push(data)
-        },
-        onDataWell (index) {
 
-            let newArray = [] 
-            let array = this.form.producer.production[index].production_installation.installation_well
+            const obj = new Agroidustrial (
+                this.itemsAgroindustrial.description,
+                this.itemsAgroindustrial.raw_material,
+                this.itemsAgroindustrial.is_mechanized,
+                this.itemsAgroindustrial.knowledge,
+                this.itemsAgroindustrial.agroindustrial_food_product,
+                this.itemsAgroindustrial.agroindustrial_handmande_product,
+                this.itemsAgroindustrial.agroindustrial_tools,
+                )
 
-            if (array.length != 0) {
-                newArray.push(this.itemsWell)
-                this.form.producer.production[index].production_installation.installation_well = array.concat(newArray)
-                document.getElementById('btnWell'+index).style.display='none'
-                
-            }else{
-                array.push(this.itemsWell)
-                document.getElementById('btnWell'+index).style.display='none'   
-            }
-            //this.form.producer.production[this.indexProduction].production_installation.installation_well.push(data)
-        },
-        onDataMachine (index) {
-            let newArray = [] 
-            let array = this.form.producer.production[index].production_machine
-
-            if (array.length != 0) {
-                newArray.push(this.itemsMachine)
-                this.form.producer.production[index].production_machine = array.concat(newArray)
-                
-                document.getElementById('btnMachine'+index).style.display='none'
-                
-            }else{
-                array.push(this.itemsMachine)
-                
-                document.getElementById('btnMachine'+index).style.display='none'
-                
-            }
-            //this.form.producer.production[index].production_machine.push(this.itemsMachine)
-        },
-        onDataAgricultural (index) {
-            let newArray = [] 
-            let array = this.form.producer.production[index].production_agricultural
-
-            if (array.length != 0) {
-                newArray.push(this.itemsAgricultural)
-                this.form.producer.production[index].production_agricultural = array.concat(newArray)
-                document.getElementById('btnAgricultural'+index).style.display='none'
-            }else{
-                array.push(this.itemsAgricultural)
-                document.getElementById('btnAgricultural'+index).style.display='none'
-            }
-        },
-        onDataPests (index_production,index_agricultural) {
-            let newArray = [] 
-            let array = this.form.producer.production[index_production].production_agricultural[index_agricultural].agricultural_pests
-            console.log(array)
-
-            if (array.length != 0) {
-                newArray.push(this.itemsPests)
-                this.form.producer.production[index_production].production_agricultural[index_agricultural].agricultural_pests = array.concat(newArray)
-                document.getElementById('btnPests'+index_production+index_agricultural).style.display='none'
-            }else{
-                array.push(this.itemsPests)
-                document.getElementById('btnPests'+index_production+index_agricultural).style.display='none'
-            }
-        },
-        onDataClimatic (index_production,index_agricultural) {
-            let newArray = [] 
-            let array = this.form.producer.production[index_production].production_agricultural[index_agricultural].agricultural_climatic
-            console.log(array)
-
-            if (array.length != 0) {
-                newArray.push(this.itemsClimatic)
-                this.form.producer.production[index_production].production_agricultural[index_agricultural].agricultural_climatic = array.concat(newArray)
-                document.getElementById('btnClimatic'+index_production+index_agricultural).style.display='none'
-            }else{
-                array.push(this.itemsClimatic)
-                document.getElementById('btnClimatic'+index_production+index_agricultural).style.display='none'
-            }
-        },
-        onDataLivestock (index) {
-            let newArray = [] 
-            let array = this.form.producer.production[index].production_livestock
-
-            if (array.length != 0) {
-                newArray.push(this.itemsLivestock)
-                this.form.producer.production[index].production_livestock = array.concat(newArray)
-                document.getElementById('btnLivestock'+index).style.display='none'
-            }else{
-                array.push(this.itemsLivestock)
-                document.getElementById('btnLivestock'+index).style.display='none'
-            }
-        },
-        onDataFeeding (index_production,index_livestock) {
-            let newArray = [] 
-            let array = this.form.producer.production[index_production].production_livestock[index_livestock].livestock_animal_feeding
-            console.log(array)
-
-            if (array.length != 0) {
-                newArray.push(this.itemsFeeding)
-                this.form.producer.production[index_production].production_livestock[index_livestock].livestock_animal_feeding = array.concat(newArray)
-                document.getElementById('btnFeeding'+index_production+index_livestock).style.display='none'
-            }else{
-                array.push(this.itemsFeeding)
-                document.getElementById('btnFeeding'+index_production+index_livestock).style.display='none'
-            }
-        },
-        onDataPens (index_production,index_livestock) {
-            let newArray = [] 
-            let array = this.form.producer.production[index_production].production_livestock[index_livestock].livestock_animal_pens
-            console.log(array)
-
-            if (array.length != 0) {
-                newArray.push(this.itemsPens)
-                this.form.producer.production[index_production].production_livestock[index_livestock].livestock_animal_pens = array.concat(newArray)
-                document.getElementById('btnPens'+index_production+index_livestock).style.display='none'
-            }else{
-                array.push(this.itemsPens)
-                document.getElementById('btnPens'+index_production+index_livestock).style.display='none'
-            }
-        },
-        onDataAgroindustrial (index) {
             let newArray = [] 
             let array = this.form.producer.production[index].production_agroindustrial
             console.log(array)
 
             if (array.length != 0) {
-                newArray.push(this.itemsAgroindustrial)
+                newArray.push(obj)
                 this.form.producer.production[index].production_agroindustrial = array.concat(newArray)
-                document.getElementById('btnAgroindustrial'+index).style.display='none'
+                //document.getElementById('btnAgroindustrial'+index).style.display='none'
             }else{
-                array.push(this.itemsAgroindustrial)
-                document.getElementById('btnAgroindustrial'+index).style.display='none'
+                array.push(obj)
+                //document.getElementById('btnAgroindustrial'+index).style.display='none'
             }
         },
         onDataFood (index_production,index_agroindustrial) {
+            
+            const objFood = {
+                name_product: "",
+                validity: "",
+                origin: "",
+                quantity: 0,
+                price: 0
+            }
+
+            class Food {
+                constructor(name_product, validity, origin, quantity, price) {
+                    this.name_product = name_product
+                    this.validity = validity
+                    this.origin = origin
+                    this.quantity = quantity
+                    this.price = price
+                }
+            }
+
+            const obj = new Food (
+                this.itemsFood.name_product,
+                this.itemsFood.validity,
+                this.itemsFood.origin,
+                this.itemsFood.quantity,
+                this.itemsFood.price
+                )
+
             let newArray = [] 
             let array = this.form.producer.production[index_production].production_agroindustrial[index_agroindustrial].agroindustrial_food_product
             console.log(array)
 
             if (array.length != 0) {
-                newArray.push(this.itemsFood)
+                newArray.push(obj)
                 this.form.producer.production[index_production].production_agroindustrial[index_agroindustrial].agroindustrial_food_product = array.concat(newArray)
-                document.getElementById('btnFood'+index_production+index_agroindustrial).style.display='none'
+                //document.getElementById('btnFood'+index_production+index_agroindustrial).style.display='none'
             }else{
-                array.push(this.itemsFood)
-                document.getElementById('btnFood'+index_production+index_agroindustrial).style.display='none'
+                array.push(obj)
+                //document.getElementById('btnFood'+index_production+index_agroindustrial).style.display='none'
             }
         },
         onDataHand (index_production,index_agroindustrial) {
+
+            const objHand = {
+                name_product: "",
+                quantity: 0,
+                price: 0
+            }
+            
+            class Hand {
+                constructor(name_product, quantity, price) {
+                    this.name_product = name_product;
+                    this.quantity = quantity;
+                    this.price = price;
+                }
+            }
+
+            const obj = new Hand(
+                this.itemsHand.name_product,
+                this.itemsHand.quantity,
+                this.itemsHand.price
+                )
+
             let newArray = [] 
             let array = this.form.producer.production[index_production].production_agroindustrial[index_agroindustrial].agroindustrial_handmande_product
             console.log(array)
 
             if (array.length != 0) {
-                newArray.push(this.itemsHand)
+                newArray.push(obj)
                 this.form.producer.production[index_production].production_agroindustrial[index_agroindustrial].agroindustrial_handmande_product = array.concat(newArray)
-                document.getElementById('btnHand'+index_production+index_agroindustrial).style.display='none'
+                //document.getElementById('btnHand'+index_production+index_agroindustrial).style.display='none'
             }else{
-                array.push(this.itemsFood)
-                document.getElementById('btnHand'+index_production+index_agroindustrial).style.display='none'
+                array.push(obj)
+                //document.getElementById('btnHand'+index_production+index_agroindustrial).style.display='none'
             }
         },
         onDataTools (index_production,index_agroindustrial) {
+
+            const objTools = {
+                name_tool: "",
+                type_tool: "",
+                number_tools: 0
+            }
+
+            class Tools {
+                constructor(name_tool, type_tool, number_tools) {
+                    this.name_tool = name_tool;
+                    this.type_tool = type_tool;
+                    this.number_tools = number_tools;
+                }
+            }
+
+            const obj = new Tools (
+                this.itemsTools.name_tool,
+                this.itemsTools.type_tool,
+                this.itemsTools.number_tools
+                )
+
+
             let newArray = [] 
             let array = this.form.producer.production[index_production].production_agroindustrial[index_agroindustrial].agroindustrial_tools
             console.log(array)
 
             if (array.length != 0) {
-                newArray.push(this.itemsHand)
+                newArray.push(obj)
                 this.form.producer.production[index_production].production_agroindustrial[index_agroindustrial].agroindustrial_tools = array.concat(newArray)
-                document.getElementById('btnTools'+index_production+index_agroindustrial).style.display='none'
+                //document.getElementById('btnTools'+index_production+index_agroindustrial).style.display='none'
             }else{
-                array.push(this.itemsFood)
-                document.getElementById('btnTools'+index_production+index_agroindustrial).style.display='none'
+                array.push(obj)
+                //document.getElementById('btnTools'+index_production+index_agroindustrial).style.display='none'
             }
         },
         //Delete Data
@@ -3378,7 +4218,7 @@ export default {
                     document.getElementById('btnTools'+index_production+index_agroindustrial).style.display = "block"
                 }
             });
-        },
+        }
     },
     computed: {
 
@@ -3389,13 +4229,25 @@ export default {
 }
 </script>
 
-<style>
+<style lang="css">
+/*Buttons delete producer*/
+.btn-add {
 
+    margin-top: 15px;
+    margin-right: 15px;
+    position:absolute;
+    top:0;
+    right:0;
+}
+.btn-delete {
+
+    margin-top: 0px;
+    margin-right: 5px;
+    margin-bottom: 0px;
+}   
 .content-btn{
-    position: fixed;
     bottom: 20px;
 }
-
 #btn-save{
     width: 4rem;
     height: 4rem;
@@ -3408,25 +4260,7 @@ export default {
     border-radius: 50%;
     margin: 0.5rem;
 }
-.btn-add{
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    margin-top: 15px;
-    margin-right: 15px;
-    position:absolute;
-    top:0;
-    right:0;
 
-}
-.btn-delete {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 50%;
-    margin-top: 0px;
-    margin-right: 5px;
-    margin-bottom: 0px;
-}
 .margin-app {
     margin-top: 80px;
     margin-bottom: 120px;

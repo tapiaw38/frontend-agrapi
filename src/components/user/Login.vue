@@ -78,5 +78,39 @@ export default {
     font-weight: normal;
     font-weight: bold;
 }
-
+label {
+    display: block;
+    margin-bottom: 4px;
+}
+.login-heading {
+    margin-bottom: 16px;
+}
+.form-controls {
+    margin-bottom: 24px;
+}
+.mb-more {
+    margin-bottom: 42px;
+}
+.login-form {
+    max-width: 500px;
+    margin: auto;
+    padding-top: 30px;
+}
+.login-input {
+    width: 100%;
+    font-size: 16px;
+    padding: 12px 16px;
+    outline: 0;
+    border-radius: 3px;
+    border: 1px solid lightgrey;
+}
+.btn-submit {
+    width: 100%;
+    padding: 14px 12px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+}
 </style>

@@ -29,7 +29,7 @@
       <div class="row pb-2 pt-4 justify-content-center" v-if="show == false">
         <b-card-group rows class="justify-content-center">
           <div class="m-1" style="width: 19rem">
-            <div class="card">
+            <div class="card card-home">
               <div class="card-body text-center">
                 <div class="d-block content-card">
                   <b-icon
@@ -49,7 +49,7 @@
             </div>
           </div>
           <div class="m-1" style="width: 19rem">
-            <div class="card">
+            <div class="card card-home">
               <div class="card-body text-center">
                 <fusioncharts
                   :type="type_grafic3"
@@ -63,7 +63,7 @@
             </div>
           </div>
           <div class="m-1" style="width: 19rem">
-            <div class="card">
+            <div class="card card-home">
               <div class="card-body text-center">
                 <div class="d-block content-card">
                   <b-icon
@@ -81,7 +81,7 @@
             </div>
           </div>
           <div class="m-1" style="width: 19rem">
-            <div class="card">
+            <div class="card card-home">
               <div class="card-body text-center">
                 <fusioncharts
                   :type="type_grafic4"
@@ -95,7 +95,7 @@
             </div>
           </div>
           <div class="m-1" style="width: 19rem">
-            <div class="card">
+            <div class="card card-home">
               <div class="card-body text-center">
                 <div class="d-block content-card">
                   <b-icon
@@ -143,7 +143,7 @@
             </div>
           </div>
           <div class="m-1" style="width: 19rem">
-            <div class="card">
+            <div class="card card-home">
               <div class="card-body text-center">
                 <fusioncharts
                   :type="type_grafic1"
@@ -157,7 +157,7 @@
             </div>
           </div>
           <div class="m-1" style="width: 19rem">
-            <div class="card">
+            <div class="card card-home">
               <div class="card-body text-center">
                 <fusioncharts
                   :type="type_grafic2"
@@ -171,7 +171,7 @@
             </div>
           </div>
           <div class="m-1" style="width: 19rem">
-            <div class="card">
+            <div class="card card-home">
               <div class="card-body text-center">
                 <div class="d-block content-card">
                   <b-icon
@@ -189,7 +189,7 @@
             </div>
           </div>
           <div class="m-1" style="width: 19rem">
-            <div class="card">
+            <div class="card card-home">
               <div class="card-body text-center">
                 <div class="d-block content-card">
                   <b-icon
@@ -232,7 +232,7 @@
             class="m-1"
             style="width: 19rem"
           >
-            <div class="card">
+            <div class="card card-home">
               <div class="card-body text-center">
                 <fusioncharts
                   :type="type_grafic5"
@@ -711,7 +711,7 @@ export default {
   margin: 30px;
   height: 100%;
 }
-.card {
+.card-home {
   height: 100%;
   width: 100%;
 }
@@ -723,7 +723,7 @@ export default {
   position: absolute;
   width: 95%;
   height: 100%;
-  background-color: rgb(238, 230, 223);
+  background-color: rgb(255, 255, 255);
   z-index: 1;
 }
 .lds-ripple {

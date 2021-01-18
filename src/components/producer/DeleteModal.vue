@@ -60,7 +60,7 @@ export default {
             'retrieveProduction'
         ]),
         deleteProducer () {
-            const path = `http://localhost:8000/api/v1.0/pollsters/all/${this.producerDelete.id}/`
+            const path = `http://www.agrapi.com.ar/api/v1.0/producers/${this.producerDelete.id}/`
             axios.delete(path).then((response) => {
                 Swal.fire("Registro eliminado","","success")
                 this.retrieveProduction(this.producerDelete.page)

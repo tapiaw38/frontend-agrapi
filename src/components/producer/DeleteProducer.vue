@@ -55,7 +55,7 @@ export default {
         deleteProducer () {
             const path = `http://localhost:8000/api/v1.0/pollsters/all/${this.producerId}/`
             axios.delete(path).then((response) => {
-                location.href = '/producers'
+                location.href = '/producers/'
             })
             .catch ((error) => {
                 Swal.fire("Error at conect to server","","error")

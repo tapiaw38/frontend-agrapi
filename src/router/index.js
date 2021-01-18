@@ -14,7 +14,6 @@ import ListPolls from '@/components/polls/ListPolls'
 import Login from '@/components/user/Login'
 import Logout from '@/components/user/Logout'
 import Profile from '@/components/user/Profile'
-import EditProfile from '@/components/user/EditProfile'
 import ListUser from '@/components/user/ListUser'
 import { store } from '../store/store'
 
@@ -91,14 +90,6 @@ export default new Router({
       path: '/datePerson/:producerId',
       name: 'DatePerson',
       component: DatePerson,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
-      path: '/editProfile/',
-      name: 'EditProfile',
-      component: EditProfile,
       meta: {
         requiresAuth: true
       }
