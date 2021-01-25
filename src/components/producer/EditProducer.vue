@@ -511,6 +511,16 @@
                                                 Sí.
                                                 </b-form-checkbox>
                                             </div>
+                                            <div class="form-group row">
+                                                <label for="has_renspa" class="col-sm-2 col-form-label">Renaf</label>
+                                                <b-form-checkbox
+                                                v-model.trim="production.has_renaf"
+                                                value="true"
+                                                unchecked-value="false"
+                                                >
+                                                Sí.
+                                                </b-form-checkbox>
+                                            </div>
                                         </div>
                                     </div>
                                     <!--Production Property -->
@@ -562,12 +572,6 @@
                                                 </b-form-checkbox>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="type_service_aqua" class="col-sm-2 col-form-label">Tipo de servicio de agua</label>
-                                                <div class="col-sm-6">
-                                                    <input type="text" placeholder="Tipo de servicio de agua" name="type_service_aqua" class="form-control" v-model.trim='production.production_service.type_service_aqua'>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
                                                 <label for="has_service_energy" class="col-sm-2 col-form-label">Sevicio electrico</label>
                                                 <b-form-checkbox
                                                 v-model.trim="production.production_service.has_service_energy"
@@ -576,12 +580,6 @@
                                                 >
                                                 Sí.
                                                 </b-form-checkbox>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="type_service_energy" class="col-sm-2 col-form-label">Tipo de servicio electrico</label>
-                                                <div class="col-sm-6">
-                                                    <input type="text" placeholder="Tipo de servicio electrico" name="type_service_energy" class="form-control" v-model.trim='production.production_service.type_service_energy'>
-                                                </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="has_rural_energy" class="col-sm-2 col-form-label">Sevicio electrico rural</label>
@@ -1206,6 +1204,16 @@
                                                             Sí.
                                                             </b-form-checkbox>
                                                         </div>
+                                                        <div class="form-group row">
+                                                            <label for="make_direct_sale" class="col-sm-2 col-form-label">Venta directa</label>
+                                                            <b-form-checkbox
+                                                            v-model.trim="agricultural.agricultural_sales_channel.make_direct_sale"
+                                                            value="true"
+                                                            unchecked-value="false"
+                                                            >
+                                                            Sí.
+                                                            </b-form-checkbox>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <!--agricultural pests-->
@@ -1253,7 +1261,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
-                                                                    <label for="make_pests_control" class="col-sm-2 col-form-label">Control de heladas</label>
+                                                                    <label for="make_pests_control" class="col-sm-2 col-form-label">Control de la enfermedad / plaga / maleza</label>
                                                                     <b-form-checkbox
                                                                     v-model.trim="pests.make_pests_control"
                                                                     value="true"
@@ -1263,7 +1271,13 @@
                                                                     </b-form-checkbox>
                                                                 </div>
                                                                 <div class="form-group row">
-                                                                    <label for="make_pesticide" class="col-sm-2 col-form-label">Pesticidas</label>
+                                                                    <label for="type_pests_control" class="col-sm-2 col-form-label">Tipo de control</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Tipo de control" name="type_pests_control" class="form-control" v-model.trim='pests.type_pests_control'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="make_pesticide" class="col-sm-2 col-form-label">Agroquimicos</label>
                                                                     <b-form-checkbox
                                                                     v-model.trim="pests.make_pesticide"
                                                                     value="true"
@@ -1273,7 +1287,7 @@
                                                                     </b-form-checkbox>
                                                                 </div>
                                                                 <div class="form-group row">
-                                                                    <label for="type_pesticide" class="col-sm-2 col-form-label">Tipo de pesticida</label>
+                                                                    <label for="type_pesticide" class="col-sm-2 col-form-label">Tipo de agroquimico</label>
                                                                     <div class="col-sm-6">
                                                                         <input type="text" placeholder="Tipo de pesticida" name="type_pesticide" class="form-control" v-model.trim='pests.type_pesticide'>
                                                                     </div>
@@ -1494,39 +1508,15 @@
                                                             </b-form-checkbox>
                                                         </div>
                                                         <div class="form-group row">
+                                                            <label for="type_reproductive_management" class="col-sm-2 col-form-label">Tipo de manejo reproductivo</label>
+                                                            <div class="col-sm-6">
+                                                                <input type="text" placeholder="Manejo reproductivo" name="type_reproductive_management" class="form-control" v-model.trim='livestock.livestock_reproduction.type_reproductive_management'>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
                                                             <label for="make_continuous_service" class="col-sm-2 col-form-label">Servicio continuo</label>
                                                             <b-form-checkbox
                                                             v-model.trim="livestock.livestock_reproduction.make_continuous_service"
-                                                            value="true"
-                                                            unchecked-value="false"
-                                                            >
-                                                            Sí.
-                                                            </b-form-checkbox>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="make_corral_service" class="col-sm-2 col-form-label">Servicio al corral</label>
-                                                            <b-form-checkbox
-                                                            v-model.trim="livestock.livestock_reproduction.make_corral_service"
-                                                            value="true"
-                                                            unchecked-value="false"
-                                                            >
-                                                            Sí.
-                                                            </b-form-checkbox>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="make_artificial_insemination" class="col-sm-2 col-form-label">Inseminación artificial</label>
-                                                            <b-form-checkbox
-                                                            v-model.trim="livestock.livestock_reproduction.make_artificial_insemination"
-                                                            value="true"
-                                                            unchecked-value="false"
-                                                            >
-                                                            Sí.
-                                                            </b-form-checkbox>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="make_embryo_transplant" class="col-sm-2 col-form-label">Transplante embrionario</label>
-                                                            <b-form-checkbox
-                                                            v-model.trim="livestock.livestock_reproduction.make_embryo_transplant"
                                                             value="true"
                                                             unchecked-value="false"
                                                             >
@@ -1692,6 +1682,18 @@
                                                                 <input type="text" placeholder="Tipo de enfermedad" name="type_disease" class="form-control" v-model.trim='livestock.livestock_health.type_disease'>
                                                             </div>
                                                         </div>
+                                                        <div class="form-group row">
+                                                            <label for="name_disease" class="col-sm-2 col-form-label">Nombre enfermedad</label>
+                                                            <div class="col-sm-6">
+                                                                <input type="text" placeholder="Nombre enfermedad" name="name_disease" class="form-control" v-model.trim='livestock.livestock_health.name_disease'>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label for="other_practices" class="col-sm-2 col-form-label">Otras practicas</label>
+                                                            <div class="col-sm-6">
+                                                                <input type="text" placeholder="Otras practicas" name="other_practices" class="form-control" v-model.trim='livestock.livestock_health.other_practices'>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <!--Livestock marketing-->
@@ -1822,6 +1824,16 @@
                                                             <label for="use_fridge" class="col-sm-2 col-form-label">Frigorifico</label>
                                                             <b-form-checkbox
                                                             v-model.trim="livestock.livestock_sales_channel.use_fridge"
+                                                            value="true"
+                                                            unchecked-value="false"
+                                                            >
+                                                            Sí.
+                                                            </b-form-checkbox>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label for="make_direct_sale" class="col-sm-2 col-form-label">Venta directa</label>
+                                                            <b-form-checkbox
+                                                            v-model.trim="livestock.livestock_sales_channel.make_direct_sale"
                                                             value="true"
                                                             unchecked-value="false"
                                                             >
@@ -2011,7 +2023,7 @@
                                                     </div>
                                                 </div>
                                                  <!--Livestock llama cycle-->
-                                                 <div class="card no-border second" v-if="livestock.type_activity == 'llamas'">
+                                                 <div class="card no-border second" v-if="livestock.type_activity == 'camelido'">
                                                     <h4 class="m-4">Ciclo Llamas</h4>
                                                     <div class="card-body">
                                                         <div class="form-group row">
@@ -2546,6 +2558,7 @@ export default {
                 lat: 0,
                 lng: 0,
                 has_renspa: false,
+                has_renaf: false,
                 production_property: {
                     land_tenure: "",
                     has_land_title: false,
@@ -2675,7 +2688,8 @@ export default {
                   use_baler: false,
                   use_fair: false,
                   use_industry: false,
-                  use_fridge: false
+                  use_fridge: false,
+                  make_direct_sale: false
                 }
             },  
         
@@ -2683,6 +2697,7 @@ export default {
                 type_pests: "",
                 pests_description: "",
                 make_pests_control: false,
+                type_pests_control: "",
                 make_pesticide: false,
                 type_pesticide: "",
                 other_practices: ""
@@ -2704,10 +2719,8 @@ export default {
                 livestock_animal_feeding: [],
                 livestock_reproduction: {
                     make_reproductive_management: false,
+                    type_reproductive_management: "",
                     make_continuous_service: false,
-                    make_corral_service: false,
-                    make_artificial_insemination: false,
-                    make_embryo_transplant: false,
                     other_practices: ""
                 },
                 livestock_animal_pens: [],
@@ -2720,6 +2733,7 @@ export default {
                     make_vaccination: false,
                     type_vaccination: "",
                     type_disease: "",
+                    name_disease: "",
                     other_practices: ""
                 },
                 livestock_marketing: {
@@ -2740,7 +2754,8 @@ export default {
                     use_baler: false,
                     use_fair: false,
                     use_industry: false,
-                    use_fridge: false
+                    use_fridge: false,
+                    make_direct_sale: false
                 },
                 livestock_bovine_cycle: {
                     calves_under_one_year: 0,
@@ -3098,6 +3113,7 @@ export default {
                 lat: "",
                 lng: "",
                 has_renspa: false,
+                has_renaf: false,
                 production_property: {
                     land_tenure: "",
                     has_land_title: true,
@@ -3365,7 +3381,8 @@ export default {
                   use_baler: false,
                   use_fair: false,
                   use_industry: false,
-                  use_fridge: false
+                  use_fridge: false,
+                  make_direct_sale: false
                 }
             }
 
@@ -3435,6 +3452,7 @@ export default {
                 type_pests: "",
                 pests_description: "",
                 make_pests_control: false,
+                type_pests_control: "",
                 make_pesticide: false,
                 type_pesticide: "",
                 other_practices: ""
@@ -3521,9 +3539,7 @@ export default {
                 livestock_animal_feeding: [],
                 livestock_reproduction: {
                     make_reproductive_management: false,
-                    make_continuous_service: false,
-                    make_corral_service: false,
-                    make_artificial_insemination: false,
+                    type_reproductive_management: "",
                     make_embryo_transplant: false,
                     other_practices: ""
                 },
@@ -3537,6 +3553,7 @@ export default {
                     make_vaccination: false,
                     type_vaccination: "",
                     type_disease: "",
+                    name_disease: "",
                     other_practices: ""
                 },
                 livestock_marketing: {
@@ -3557,7 +3574,9 @@ export default {
                     use_baler: false,
                     use_fair: false,
                     use_industry: false,
-                    use_fridge: false
+                    use_fridge: false,
+                    make_direct_sale: false
+
                 },
                 livestock_bovine_cycle: {
                     calves_under_one_year: 0,

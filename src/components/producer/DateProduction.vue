@@ -11,10 +11,14 @@
                                 <strong v-else>No</strong>
                             </p>
                             <p>Distrito: <strong>{{item.district}}</strong></p>
-                            <p>Superficie de la producción: <strong>{{item.surface}} hectáreas</strong></p>
+                            <p>Superficie de la producción: <strong>{{item.surface}} ha.<sup>2</sup></strong></p>
                             <p>Estado de los caminos: <strong>{{item.road_state}}</strong></p>
                             <p>Renspa: 
                                 <strong v-if="item.has_renspa">Sí</strong>
+                                <strong v-else>No</strong>
+                            </p>
+                            <p>Renaf: 
+                                <strong v-if="item.has_renaf">Sí</strong>
                                 <strong v-else>No</strong>
                             </p>
                         </b-card-text>
@@ -58,12 +62,10 @@
                                 <strong v-if="item.production_service.has_service_aqua">Sí</strong>
                                 <strong v-else>No</strong>
                             </p>
-                            <p>Tipo de servicio de agua: <strong>{{item.production_service.type_service_aqua}}</strong></p>
                             <p>Servicio de energia: 
                                 <strong v-if="item.production_service.has_service_energy">Sí</strong>
                                 <strong v-else>No</strong>
                             </p>
-                            <p>Tipo de servicio de energia: <strong>{{item.production_service.type_service_energy}}</strong></p>
                             <p>Red electrica rural: 
                                 <strong v-if="item.production_service.has_rural_energy">Sí</strong>
                                 <strong v-else>No</strong>
@@ -200,9 +202,9 @@
                                     <h4 class="mb-4">Producción Agrícola</h4>
                                     <b-card-text>
                                         <p>Actividad agrícola: <strong>{{agricultural.activity_name}}</strong></p>
-                                        <p>Superficie de actividad: <strong>{{agricultural.surface}} hectáreas</strong></p>
+                                        <p>Superficie de actividad: <strong>{{agricultural.surface}} ha.<sup>2</sup></strong></p>
                                         <p>Destino de actividad: <strong>{{agricultural.destination}}</strong></p>
-                                        <p>Tipo de siembra: <strong>{{agricultural.sowing}}</strong></p>
+                                        <p>Siembra: <strong>{{agricultural.sowing}}</strong></p>
                                         <p>Tipo de siembra: <strong>{{agricultural.type_sowing}}</strong></p>
                                         <p>Edad en meses: <strong>{{agricultural.age}}</strong></p>
                                         <p>Problemas: <strong>{{agricultural.problems}}</strong></p>
@@ -269,7 +271,7 @@
                                                 {{climatic.risk}}
                                             </strong>
                                         </p>
-                                        <p>Utilización de feromonas: 
+                                        <p>Utilización de hormonas: 
                                             <strong>
                                                 {{climatic.damange_level}}
                                             </strong>
@@ -304,13 +306,18 @@
                                             </strong>
                                             <strong v-else>No</strong>
                                         </p>
-                                        <p>Pesticida: 
+                                        <p>Tipo de control: 
+                                            <strong>
+                                                {{pests.type_pests_control}}
+                                            </strong>
+                                        </p>
+                                        <p>Agroquimico: 
                                             <strong v-if="pests.make_pesticide">
                                                 Sí
                                             </strong>
                                             <strong v-else>No</strong>
                                         </p>
-                                        <p>Tipo de pesticida:
+                                        <p>Tipo de agroquimico:
                                             <strong>
                                                 {{pests.type_pesticide}}
                                             </strong>
@@ -331,7 +338,7 @@
                                     <b-card-text>
                                         <p>Superfiie de cosecha cosecha: 
                                             <strong>
-                                                {{agricultural.agricultural_harvest.harvest_surface}} hectáreas
+                                                {{agricultural.agricultural_harvest.harvest_surface}} ha.<sup>2</sup>
                                             </strong>
                                         </p>
                                         <p>Rendimiento: 
@@ -399,6 +406,12 @@
                                             </strong>
                                             <strong v-else>No</strong>
                                         </p>
+                                        <p>Venta directa: 
+                                            <strong v-if="agricultural.agricultural_sales_channel.make_direct_sale">
+                                                Sí
+                                            </strong>
+                                            <strong v-else>No</strong>
+                                        </p>
                                     </b-card-text>
                                 </b-card-body>
                             </b-card>
@@ -426,7 +439,7 @@
                                     <h4 class="mb-4">Producción Ganadera</h4>
                                     <b-card-text>
                                         <p>Actividad Ganadera: <strong>{{livestock.type_activity}}</strong></p>
-                                        <p>Superficie de actividad: <strong>{{livestock.surface}} hectáreas</strong></p>
+                                        <p>Superficie de actividad: <strong>{{livestock.surface}} ha.<sup>2</sup></strong></p>
                                         <p>Destino de actividad: <strong>{{livestock.destination}}</strong></p>
                                         <p>Asistencia técnica: 
                                             <strong v-if="livestock.make_technical_assistance">
@@ -480,26 +493,13 @@
                                             </strong>
                                             <strong v-else>No</strong>
                                         </p>
+                                        <p>Tipo de majo reproductivo 
+                                            <strong>
+                                                {{livestock.livestock_reproduction.type_reproductive_management}}
+                                            </strong>
+                                        </p>
                                         <p>Servicio continuo 
                                             <strong v-if="livestock.livestock_reproduction.make_continuous_service">
-                                                Sí
-                                            </strong>
-                                            <strong v-else>No</strong>
-                                        </p>
-                                        <p>Servicio al corral 
-                                            <strong v-if="livestock.livestock_reproduction.make_corral_service">
-                                                Sí
-                                            </strong>
-                                            <strong v-else>No</strong>
-                                        </p>
-                                        <p>Inseminación artificial 
-                                            <strong v-if="livestock.livestock_reproduction.make_artificial_insemination">
-                                                Sí
-                                            </strong>
-                                            <strong v-else>No</strong>
-                                        </p>
-                                        <p>Transplante embrionario 
-                                            <strong v-if="livestock.livestock_reproduction.make_embryo_transplant">
                                                 Sí
                                             </strong>
                                             <strong v-else>No</strong>
@@ -512,7 +512,7 @@
                                     </b-card-text>
                                 </b-card-body>
                             </b-card>
-                        </div>
+                        </div> 
                         <div class="mt-2">
                             <b-card no-body>
                                 <b-card-body>
@@ -561,6 +561,68 @@
                                             ></gmap-marker>
                                         </GmapMap>
                                     </div>
+                                </b-card-body>
+                            </b-card>
+                        </div>
+                        <div class="mt-2">
+                            <b-card no-body>
+                                <b-card-body>
+                                    <h4 class="mb-4">Sanidad</h4>
+                                    <b-card-text>
+                                        <p>Tipo de acesoramiento 
+                                            <strong>
+                                                {{livestock.livestock_health.type_technical_assistance}}
+                                            </strong>
+                                        </p>
+                                        <p>Aplicación de complejo vitaminico 
+                                            <strong>
+                                                {{livestock.livestock_health.vitamin_complex}}
+                                            </strong>
+                                        </p>
+                                        <p>Desparacitaciones internas 
+                                            <strong v-if="livestock.livestock_health.make_internal_deworming">
+                                                Sí
+                                            </strong>
+                                            <strong v-else>No</strong>
+                                        </p>
+                                        <p>Desparacitaciones externas 
+                                            <strong v-if="livestock.livestock_health.make_external_deworming">
+                                                Sí
+                                            </strong>
+                                            <strong v-else>No</strong>
+                                        </p>
+                                        <p>Tipo de antiparasitario 
+                                            <strong>
+                                                {{livestock.livestock_health.type_antiparasitic}}
+                                            </strong>
+                                        </p>
+                                        <p>Vacunación 
+                                            <strong v-if="livestock.livestock_health.make_vaccination">
+                                                Sí
+                                            </strong>
+                                            <strong v-else>No</strong>
+                                        </p>
+                                        <p>Tipo de vacunación 
+                                            <strong>
+                                                {{livestock.livestock_health.type_vaccination}}
+                                            </strong>
+                                        </p>
+                                        <p>Tipo de enfermedad 
+                                            <strong>
+                                                {{livestock.livestock_health.type_disease}}
+                                            </strong>
+                                        </p>
+                                        <p>Nombre enfermedad 
+                                            <strong>
+                                                {{livestock.livestock_health.name_disease}}
+                                            </strong>
+                                        </p>
+                                        <p>Otras practicas 
+                                            <strong>
+                                                {{livestock.livestock_health.other_practices}}
+                                            </strong>
+                                        </p>
+                                    </b-card-text>
                                 </b-card-body>
                             </b-card>
                         </div>
@@ -644,6 +706,12 @@
                                         </p>
                                         <p>Frigorifico: 
                                             <strong v-if="livestock.livestock_sales_channel.use_fridge">
+                                                Sí
+                                            </strong>
+                                            <strong v-else>No</strong>
+                                        </p>
+                                        <p>Venta directa: 
+                                            <strong v-if="livestock.livestock_sales_channel.make_direct_sale">
                                                 Sí
                                             </strong>
                                             <strong v-else>No</strong>

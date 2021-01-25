@@ -8,6 +8,7 @@ import DeleteProducer from '@/components/producer/DeleteProducer'
 import LocationProducer from '@/components/producer/LocationProducer'
 import DateProduction from '@/components/producer/DateProduction'
 import DatePerson from '@/components/producer/DatePerson'
+import ProductionMap from '@/components/map/ProductionMap'
 //Router Polls
 import ListPolls from '@/components/polls/ListPolls'
 // Routers User
@@ -15,7 +16,6 @@ import Login from '@/components/user/Login'
 import Logout from '@/components/user/Logout'
 import Profile from '@/components/user/Profile'
 import ListUser from '@/components/user/ListUser'
-import { store } from '../store/store'
 
 Vue.use(Router)
 
@@ -107,7 +107,15 @@ export default new Router({
       name: 'ListPolls',
       component: ListPolls,
       meta: {
-        requiresAuth: true
+        requiresVisitor: true
+      }
+    },
+    {
+      path: '/maps/',
+      name: 'ProductionMap',
+      component: ProductionMap,
+      meta: {
+        requiresVisitor: true
       }
     }
 
