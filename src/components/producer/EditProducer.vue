@@ -973,9 +973,15 @@
                                                     </div>
                                                     <div class="card-body">
                                                         <div class="form-group row">
-                                                            <label for="activity_name" class="col-sm-2 col-form-label">Tipo de actividad</label>
+                                                            <label for="activity_name" class="col-sm-2 col-form-label">Tipo de cultivo</label>
                                                             <div class="col-sm-6">
-                                                                <input type="text" placeholder="Tipo de actividad" name="activity_name" class="form-control" v-model.trim='agricultural.activity_name'>
+                                                                <input type="text" placeholder="Tipo de cultivo" name="activity_name" class="form-control" v-model.trim='agricultural.activity_name'>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label for="variety" class="col-sm-2 col-form-label">Variedad</label>
+                                                            <div class="col-sm-6">
+                                                                <input type="text" placeholder="Variedad" name="variety" class="form-control" v-model.trim='agricultural.variety'>
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
@@ -1009,9 +1015,9 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
-                                                            <label for="problems" class="col-sm-2 col-form-label">Problemas</label>
+                                                            <label for="perimeter_closure" class="col-sm-2 col-form-label">Cierre perimetral</label>
                                                             <div class="col-sm-6">
-                                                                <input type="text" placeholder="Problemas" name="problems" class="form-control" v-model.trim='agricultural.problems'>
+                                                                <input type="text" placeholder="Cierre perimetral" name="perimeter_closure" class="form-control" v-model.trim='agricultural.perimeter_closure'>
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
@@ -1086,134 +1092,142 @@
                                                 </div>
                                                 <!--Agricultural harvest-->
                                                 <div class="card no-border second">
-                                                    <h4 class="m-4">Cosecha</h4>
-                                                    <div class="card-body">
-                                                        <div class="form-group row">
-                                                            <label for="harvest_surface" class="col-sm-2 col-form-label">Superficie de la cosecha</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Superficie de la cosecha" name="harvest_surface" class="form-control" v-model.trim='agricultural.agricultural_harvest.harvest_surface'>
+                                                    <h4 class="m-4">Cosechas <b-badge variant="info">{{agricultural.agricultural_harvest.length}}</b-badge></h4>
+                                                    <b-button
+                                                    variant="info" 
+                                                    class="btn-add"
+                                                    size="sm"
+                                                    v-on:click="onDataHarvest(index_production,index_agricultural)"
+                                                    :id="'btnHarvest'+index_production+index_agricultural"
+                                                    >
+                                                        <b-icon font-scale="1" icon="plus"></b-icon>
+                                                    </b-button>
+                                                    <div
+                                                    class="mb-2 ml-5 mr-5" 
+                                                    v-for="(harvest, index_harvest) in agricultural.agricultural_harvest" 
+                                                    :key="index_harvest+1"
+                                                    >
+                                                        <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#harvest'+index_production+index_agricultural+index_harvest">
+                                                            <b-icon icon=""></b-icon> Cosecha 
+                                                        </b-button>
+                                                        <b-collapse :id="'harvest'+index_production+index_agricultural+index_harvest">
+                                                            <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
+                                                                <div class="text-right">
+                                                                    <b-button
+                                                                    class="btn-delete  mt-1"
+                                                                    variant="warning"
+                                                                    size="sm"
+                                                                    v-on:click="deleteHarvest(index_production,index_agricultural,index_harvest)"
+                                                                    >
+                                                                        <b-icon icon="trash"></b-icon>
+                                                                    </b-button>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="harvest_surface" class="col-sm-4 col-form-label">Superficie de la cosecha en hectáreas</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Superficie de la cosecha" name="harvest_surface" class="form-control" v-model.trim='harvest.harvest_surface'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="tons_production" class="col-sm-4 col-form-label">Rendimiento en toneladas</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Rendimiento en toneladas" name="tons_production" class="form-control" v-model.trim='harvest.tons_production'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="harvest_time" class="col-sm-4 col-form-label">Epoca de cosecha</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Epoca de cosecha" name="harvest_time" class="form-control" v-model.trim='harvest.harvest_time'>
+                                                                    </div>
+                                                                </div>
+                                                                <!--agricultural sales channel-->
+                                                                <div class="card no-border second">
+                                                                    <h4 class="m-4">Canal de ventas</h4>
+                                                                    <div class="card-body">
+                                                                        <div class="form-group row">
+                                                                            <label for="is_collector" class="col-sm-3 col-form-label">Acopiador</label>
+                                                                            <b-form-checkbox
+                                                                            v-model.trim="harvest.agricultural_sales_channel.is_collector"
+                                                                            value="true"
+                                                                            unchecked-value="false"
+                                                                            >
+                                                                            Sí.
+                                                                            </b-form-checkbox>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="is_cooperative" class="col-sm-3 col-form-label">Cooperativa</label>
+                                                                            <b-form-checkbox
+                                                                            v-model.trim="harvest.agricultural_sales_channel.is_cooperative"
+                                                                            value="true"
+                                                                            unchecked-value="false"
+                                                                            >
+                                                                            Sí.
+                                                                            </b-form-checkbox>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="is_exporter" class="col-sm-3 col-form-label">Exportación</label>
+                                                                            <b-form-checkbox
+                                                                            v-model.trim="harvest.agricultural_sales_channel.is_exporter"
+                                                                            value="true"
+                                                                            unchecked-value="false"
+                                                                            >
+                                                                            Sí.
+                                                                            </b-form-checkbox>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="use_baler" class="col-sm-3 col-form-label">Empacador</label>
+                                                                            <b-form-checkbox
+                                                                            v-model.trim="harvest.agricultural_sales_channel.use_baler"
+                                                                            value="true"
+                                                                            unchecked-value="false"
+                                                                            >
+                                                                            Sí.
+                                                                            </b-form-checkbox>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="use_fair" class="col-sm-3 col-form-label">Forma directa o feria</label>
+                                                                            <b-form-checkbox
+                                                                            v-model.trim="harvest.agricultural_sales_channel.use_fair"
+                                                                            value="true"
+                                                                            unchecked-value="false"
+                                                                            >
+                                                                            Sí.
+                                                                            </b-form-checkbox>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="use_industry" class="col-sm-3 col-form-label">Industria</label>
+                                                                            <b-form-checkbox
+                                                                            v-model.trim="harvest.agricultural_sales_channel.use_industry"
+                                                                            value="true"
+                                                                            unchecked-value="false"
+                                                                            >
+                                                                            Sí.
+                                                                            </b-form-checkbox>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="use_fridge" class="col-sm-3 col-form-label">Frigorifico</label>
+                                                                            <b-form-checkbox
+                                                                            v-model.trim="harvest.agricultural_sales_channel.use_fridge"
+                                                                            value="true"
+                                                                            unchecked-value="false"
+                                                                            >
+                                                                            Sí.
+                                                                            </b-form-checkbox>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="make_direct_sale" class="col-sm-3 col-form-label">Venta directa</label>
+                                                                            <b-form-checkbox
+                                                                            v-model.trim="harvest.agricultural_sales_channel.make_direct_sale"
+                                                                            value="true"
+                                                                            unchecked-value="false"
+                                                                            >
+                                                                            Sí.
+                                                                            </b-form-checkbox>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="tons_production" class="col-sm-2 col-form-label">Rendimiento en toneladas</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Rendimiento en toneladas" name="tons_production" class="form-control" v-model.trim='agricultural.agricultural_harvest.tons_production'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="has_curtains_insulated" class="col-sm-2 col-form-label">Corinas y aisladas</label>
-                                                            <b-form-checkbox
-                                                            v-model.trim="agricultural.agricultural_harvest.has_curtains_insulated"
-                                                            value="true"
-                                                            unchecked-value="false"
-                                                            >
-                                                            Sí.
-                                                            </b-form-checkbox>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="plant_species_curtains" class="col-sm-2 col-form-label">Especies de platas</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Especies de platas" name="plant_species_curtains" class="form-control" v-model.trim='agricultural.agricultural_harvest.plant_species_curtains'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="plant_length_curtains" class="col-sm-2 col-form-label">Longitud de platas en metros</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Longitud de platas en metros" name="plant_length_curtains" class="form-control" v-model.trim='agricultural.agricultural_harvest.plant_length_curtains'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="harvest_time" class="col-sm-2 col-form-label">Epoca de cosecha</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Epoca de cosecha" name="harvest_time" class="form-control" v-model.trim='agricultural.agricultural_harvest.harvest_time'>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!--agricultural sales channel-->
-                                                <div class="card no-border second">
-                                                    <h4 class="m-4">Canal de ventas</h4>
-                                                    <div class="card-body">
-                                                        <div class="form-group row">
-                                                            <label for="is_collector" class="col-sm-2 col-form-label">Acopiador</label>
-                                                            <b-form-checkbox
-                                                            v-model.trim="agricultural.agricultural_sales_channel.is_collector"
-                                                            value="true"
-                                                            unchecked-value="false"
-                                                            >
-                                                            Sí.
-                                                            </b-form-checkbox>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="is_cooperative" class="col-sm-2 col-form-label">Cooperativa</label>
-                                                            <b-form-checkbox
-                                                            v-model.trim="agricultural.agricultural_sales_channel.is_cooperative"
-                                                            value="true"
-                                                            unchecked-value="false"
-                                                            >
-                                                            Sí.
-                                                            </b-form-checkbox>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="is_exporter" class="col-sm-2 col-form-label">Exportación</label>
-                                                            <b-form-checkbox
-                                                            v-model.trim="agricultural.agricultural_sales_channel.is_exporter"
-                                                            value="true"
-                                                            unchecked-value="false"
-                                                            >
-                                                            Sí.
-                                                            </b-form-checkbox>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="use_baler" class="col-sm-2 col-form-label">Empacador</label>
-                                                            <b-form-checkbox
-                                                            v-model.trim="agricultural.agricultural_sales_channel.use_baler"
-                                                            value="true"
-                                                            unchecked-value="false"
-                                                            >
-                                                            Sí.
-                                                            </b-form-checkbox>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="use_fair" class="col-sm-2 col-form-label">Forma directa o feria</label>
-                                                            <b-form-checkbox
-                                                            v-model.trim="agricultural.agricultural_sales_channel.use_fair"
-                                                            value="true"
-                                                            unchecked-value="false"
-                                                            >
-                                                            Sí.
-                                                            </b-form-checkbox>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="use_industry" class="col-sm-2 col-form-label">Industria</label>
-                                                            <b-form-checkbox
-                                                            v-model.trim="agricultural.agricultural_sales_channel.use_industry"
-                                                            value="true"
-                                                            unchecked-value="false"
-                                                            >
-                                                            Sí.
-                                                            </b-form-checkbox>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="use_fridge" class="col-sm-2 col-form-label">Frigorifico</label>
-                                                            <b-form-checkbox
-                                                            v-model.trim="agricultural.agricultural_sales_channel.use_fridge"
-                                                            value="true"
-                                                            unchecked-value="false"
-                                                            >
-                                                            Sí.
-                                                            </b-form-checkbox>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="make_direct_sale" class="col-sm-2 col-form-label">Venta directa</label>
-                                                            <b-form-checkbox
-                                                            v-model.trim="agricultural.agricultural_sales_channel.make_direct_sale"
-                                                            value="true"
-                                                            unchecked-value="false"
-                                                            >
-                                                            Sí.
-                                                            </b-form-checkbox>
-                                                        </div>
+                                                        </b-collapse>
                                                     </div>
                                                 </div>
                                                 <!--agricultural pests-->
@@ -1347,9 +1361,9 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
-                                                                    <label for="damange_level" class="col-sm-2 col-form-label">Nivel de daño</label>
+                                                                    <label for="description" class="col-sm-2 col-form-label">Descripción</label>
                                                                     <div class="col-sm-6">
-                                                                        <input type="text" placeholder="Nivel de daño" name="damange_level" class="form-control" v-model.trim='climatic.damange_level'>
+                                                                        <input type="text" placeholder="Descripción" name="description" class="form-control" v-model.trim='climatic.description'>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1472,9 +1486,9 @@
                                                                     </b-button>
                                                                 </div>
                                                                 <div class="form-group row">
-                                                                    <label for="feeding" class="col-sm-2 col-form-label">Amimento</label>
+                                                                    <label for="feeding" class="col-sm-2 col-form-label">Amimentación</label>
                                                                     <div class="col-sm-6">
-                                                                        <input type="text" placeholder="Amimento" name="feeding" class="form-control" v-model.trim='feeding.feeding'>
+                                                                        <input type="text" placeholder="Amimentación" name="feeding" class="form-control" v-model.trim='feeding.feeding'>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
@@ -1487,6 +1501,12 @@
                                                                     <label for="daily_rations" class="col-sm-2 col-form-label">Raciones diarias</label>
                                                                     <div class="col-sm-6">
                                                                         <input type="text" placeholder="Raciones diarias" name="daily_rations" class="form-control" v-model.trim='feeding.daily_rations'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="description" class="col-sm-2 col-form-label">Descripción</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Descripción" name="description" class="form-control" v-model.trim='feeding.description'>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1698,544 +1718,896 @@
                                                 </div>
                                                 <!--Livestock marketing-->
                                                 <div class="card no-border second">
-                                                    <h4 class="m-4">Comercialización</h4>
-                                                    <div class="card-body">
-                                                        <div class="form-group row">
-                                                            <label for="number_slaughtered" class="col-sm-2 col-form-label">Cantidad de faenados</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Cantidad de faenados" name="number_slaughtered" class="form-control" v-model.trim='livestock.livestock_marketing.number_slaughtered'>
+                                                    <h4 class="m-4">Comercialización <b-badge variant="info">{{livestock.livestock_marketing.length}}</b-badge></h4>
+                                                    <b-button
+                                                    variant="info" 
+                                                    class="btn-add"
+                                                    size="sm"
+                                                    v-on:click="onDataMarketing(index_production,index_livestock)"
+                                                    :id="'btnMarketing'+index_production+index_livestock"
+                                                    >
+                                                        <b-icon font-scale="1" icon="plus"></b-icon>
+                                                    </b-button>
+                                                    <div
+                                                    class="mb-2 ml-5 mr-5" 
+                                                    v-for="(marketing, index_marketing) in livestock.livestock_marketing" 
+                                                    :key="index_marketing+1"
+                                                    >
+                                                        <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#marketing'+index_production+index_livestock+index_marketing">
+                                                            <b-icon icon=""></b-icon> Comercialización
+                                                        </b-button>
+                                                        <b-collapse :id="'marketing'+index_production+index_livestock+index_marketing">
+                                                            <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
+                                                                <div class="text-right">
+                                                                    <b-button
+                                                                    class="btn-delete mt-1"
+                                                                    variant="warning"
+                                                                    size="sm"
+                                                                    v-on:click="deleteMarketing(index_production,index_livestock,index_marketing)"
+                                                                    >
+                                                                        <b-icon icon="trash"></b-icon>
+                                                                    </b-button>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_slaughtered" class="col-sm-4 col-form-label">Cantidad de faenados</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Cantidad de faenados" name="number_slaughtered" class="form-control" v-model.trim='marketing.number_slaughtered'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="slaughter_destination" class="col-sm-4 col-form-label">Destino de faenados</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Destino de faenados" name="slaughter_destination" class="form-control" v-model.trim='marketing.slaughter_destination'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="amount_leather" class="col-sm-4 col-form-label">Cantidad de piel obtenida</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Cantidad de piel obtenida" name="amount_leather" class="form-control" v-model.trim='marketing.amount_leather'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="leather_destination" class="col-sm-4 col-form-label">Destino de piel</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Destino de piel" name="leather_destination" class="form-control" v-model.trim='marketing.leather_destination'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_shorn" class="col-sm-4 col-form-label">Cantidad de esquilados</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Cantidad de esquilados" name="number_shorn" class="form-control" v-model.trim='marketing.number_shorn'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="amount_wool" class="col-sm-4 col-form-label">Cantidad de lana obtenida</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Cantidad de lana obtenida" name="amount_wool" class="form-control" v-model.trim='marketing.amount_wool'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="wool_destination" class="col-sm-4 col-form-label">Destino de lana</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Destino de lana" name="wool_destination" class="form-control" v-model.trim='marketing.wool_destination'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="liters_milk" class="col-sm-4 col-form-label">Litros de leche obtenidos</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Litros de leche obtenidos" name="liters_milk" class="form-control" v-model.trim='marketing.liters_milk'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="milk_destination" class="col-sm-4 col-form-label">Destino de leche</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Destino de leche" name="milk_destination" class="form-control" v-model.trim='marketing.milk_destination'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_eggs" class="col-sm-4 col-form-label">Cantidad de huevos</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Cantidad de huevos" name="number_eggs" class="form-control" v-model.trim='marketing.number_eggs'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="eggs_destination" class="col-sm-4 col-form-label">Destino de huevos</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Destino de huevos" name="eggs_destination" class="form-control" v-model.trim='marketing.eggs_destination'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="honey_yield" class="col-sm-4 col-form-label">Producción de miel en litros</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Producción de miel en litros" name="honey_yield" class="form-control" v-model.trim='marketing.honey_yield'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="honey_destination" class="col-sm-4 col-form-label">Destino de miel</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Destino de miel" name="honey_destination" class="form-control" v-model.trim='marketing.honey_destination'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="amount_feces" class="col-sm-4 col-form-label">Cantidad de heces</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Cantidad de heces" name="amount_feces" class="form-control" v-model.trim='marketing.amount_feces'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="feces_destination" class="col-sm-4 col-form-label">Destino de heces</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Destino de heces" name="feces_destination" class="form-control" v-model.trim='marketing.feces_destination'>
+                                                                    </div>
+                                                                </div>
+                                                                <!--Livestock sales channel-->
+                                                                <div class="card no-border second">
+                                                                    <h4 class="m-4">Canal de ventas</h4>
+                                                                    <div class="card-body">
+                                                                        <div class="form-group row">
+                                                                            <label for="is_collector" class="col-sm-3 col-form-label">Acopiador</label>
+                                                                            <b-form-checkbox
+                                                                            v-model.trim="marketing.livestock_sales_channel.is_collector"
+                                                                            value="true"
+                                                                            unchecked-value="false"
+                                                                            >
+                                                                            Sí.
+                                                                            </b-form-checkbox>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="is_cooperative" class="col-sm-3 col-form-label">Cooperativa</label>
+                                                                            <b-form-checkbox
+                                                                            v-model.trim="marketing.livestock_sales_channel.is_cooperative"
+                                                                            value="true"
+                                                                            unchecked-value="false"
+                                                                            >
+                                                                            Sí.
+                                                                            </b-form-checkbox>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="is_exporter" class="col-sm-3 col-form-label">Exportación</label>
+                                                                            <b-form-checkbox
+                                                                            v-model.trim="marketing.livestock_sales_channel.is_exporter"
+                                                                            value="true"
+                                                                            unchecked-value="false"
+                                                                            >
+                                                                            Sí.
+                                                                            </b-form-checkbox>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="use_baler" class="col-sm-3 col-form-label">Empacador</label>
+                                                                            <b-form-checkbox
+                                                                            v-model.trim="marketing.livestock_sales_channel.use_baler"
+                                                                            value="true"
+                                                                            unchecked-value="false"
+                                                                            >
+                                                                            Sí.
+                                                                            </b-form-checkbox>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="use_fair" class="col-sm-3 col-form-label">Forma directa o feria</label>
+                                                                            <b-form-checkbox
+                                                                            v-model.trim="marketing.livestock_sales_channel.use_fair"
+                                                                            value="true"
+                                                                            unchecked-value="false"
+                                                                            >
+                                                                            Sí.
+                                                                            </b-form-checkbox>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="use_industry" class="col-sm-3 col-form-label">Industria</label>
+                                                                            <b-form-checkbox
+                                                                            v-model.trim="marketing.livestock_sales_channel.use_industry"
+                                                                            value="true"
+                                                                            unchecked-value="false"
+                                                                            >
+                                                                            Sí.
+                                                                            </b-form-checkbox>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="use_fridge" class="col-sm-3 col-form-label">Frigorifico</label>
+                                                                            <b-form-checkbox
+                                                                            v-model.trim="marketing.livestock_sales_channel.use_fridge"
+                                                                            value="true"
+                                                                            unchecked-value="false"
+                                                                            >
+                                                                            Sí.
+                                                                            </b-form-checkbox>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="make_direct_sale" class="col-sm-3 col-form-label">Venta directa</label>
+                                                                            <b-form-checkbox
+                                                                            v-model.trim="marketing.livestock_sales_channel.make_direct_sale"
+                                                                            value="true"
+                                                                            unchecked-value="false"
+                                                                            >
+                                                                            Sí.
+                                                                            </b-form-checkbox>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="number_shorn" class="col-sm-2 col-form-label">Cantidad de esquilados</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Cantidad de esquilados" name="number_shorn" class="form-control" v-model.trim='livestock.livestock_marketing.number_shorn'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="amount_wool_hair" class="col-sm-2 col-form-label">Cantidad de lana pelo obtenido</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Cantidad de faenados" name="amount_wool_hair" class="form-control" v-model.trim='livestock.livestock_marketing.amount_wool_hair'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="amount_leather" class="col-sm-2 col-form-label">Cantidad de piel obtenida</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Cantidad de piel obtenida" name="amount_leather" class="form-control" v-model.trim='livestock.livestock_marketing.amount_leather'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="liters_milk" class="col-sm-2 col-form-label">Litros de leche obtenidos</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Litros de leche obtenidos" name="liters_milk" class="form-control" v-model.trim='livestock.livestock_marketing.liters_milk'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="milk_destination" class="col-sm-2 col-form-label">Destino de leche</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Destino de leche" name="milk_destination" class="form-control" v-model.trim='livestock.livestock_marketing.milk_destination'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="wool_hair_destination" class="col-sm-2 col-form-label">Destino de lana pelo</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Destino de lana pelo" name="wool_hair_destination" class="form-control" v-model.trim='livestock.livestock_marketing.wool_hair_destination'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="leather_destination" class="col-sm-2 col-form-label">Destino de piel</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Destino de piel" name="leather_destination" class="form-control" v-model.trim='livestock.livestock_marketing.leather_destination'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="slaughter_destination" class="col-sm-2 col-form-label">Destino de faenados</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Destino de faenados" name="slaughter_destination" class="form-control" v-model.trim='livestock.livestock_marketing.slaughter_destination'>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!--Livestock sales channel-->
-                                                <div class="card no-border second">
-                                                    <h4 class="m-4">Canal de ventas</h4>
-                                                    <div class="card-body">
-                                                        <div class="form-group row">
-                                                            <label for="is_collector" class="col-sm-2 col-form-label">Acopiador</label>
-                                                            <b-form-checkbox
-                                                            v-model.trim="livestock.livestock_sales_channel.is_collector"
-                                                            value="true"
-                                                            unchecked-value="false"
-                                                            >
-                                                            Sí.
-                                                            </b-form-checkbox>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="is_cooperative" class="col-sm-2 col-form-label">Cooperativa</label>
-                                                            <b-form-checkbox
-                                                            v-model.trim="livestock.livestock_sales_channel.is_cooperative"
-                                                            value="true"
-                                                            unchecked-value="false"
-                                                            >
-                                                            Sí.
-                                                            </b-form-checkbox>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="is_exporter" class="col-sm-2 col-form-label">Exportación</label>
-                                                            <b-form-checkbox
-                                                            v-model.trim="livestock.livestock_sales_channel.is_exporter"
-                                                            value="true"
-                                                            unchecked-value="false"
-                                                            >
-                                                            Sí.
-                                                            </b-form-checkbox>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="use_baler" class="col-sm-2 col-form-label">Empacador</label>
-                                                            <b-form-checkbox
-                                                            v-model.trim="livestock.livestock_sales_channel.use_baler"
-                                                            value="true"
-                                                            unchecked-value="false"
-                                                            >
-                                                            Sí.
-                                                            </b-form-checkbox>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="use_fair" class="col-sm-2 col-form-label">Forma directa o feria</label>
-                                                            <b-form-checkbox
-                                                            v-model.trim="livestock.livestock_sales_channel.use_fair"
-                                                            value="true"
-                                                            unchecked-value="false"
-                                                            >
-                                                            Sí.
-                                                            </b-form-checkbox>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="use_industry" class="col-sm-2 col-form-label">Industria</label>
-                                                            <b-form-checkbox
-                                                            v-model.trim="livestock.livestock_sales_channel.use_industry"
-                                                            value="true"
-                                                            unchecked-value="false"
-                                                            >
-                                                            Sí.
-                                                            </b-form-checkbox>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="use_fridge" class="col-sm-2 col-form-label">Frigorifico</label>
-                                                            <b-form-checkbox
-                                                            v-model.trim="livestock.livestock_sales_channel.use_fridge"
-                                                            value="true"
-                                                            unchecked-value="false"
-                                                            >
-                                                            Sí.
-                                                            </b-form-checkbox>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="make_direct_sale" class="col-sm-2 col-form-label">Venta directa</label>
-                                                            <b-form-checkbox
-                                                            v-model.trim="livestock.livestock_sales_channel.make_direct_sale"
-                                                            value="true"
-                                                            unchecked-value="false"
-                                                            >
-                                                            Sí.
-                                                            </b-form-checkbox>
-                                                        </div>
+                                                        </b-collapse>
                                                     </div>
                                                 </div>
                                                 <!--Livestock bovine cycle-->
                                                 <div class="card no-border second" v-if="livestock.type_activity == 'bovino'">
                                                     <h4 class="m-4">Ciclo bovino</h4>
-                                                    <div class="card-body">
-                                                        <div class="form-group row">
-                                                            <label for="calves_under_one_year" class="col-sm-2 col-form-label">Terneros menores de un año</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Terneros menores de un año" name="calves_under_one_year" class="form-control" v-model.trim='livestock.livestock_bovine_cycle.calves_under_one_year'>
+                                                    <b-button
+                                                    variant="info" 
+                                                    class="btn-add"
+                                                    size="sm"
+                                                    v-on:click="onDataBovine(index_production,index_livestock)"
+                                                    :id="'btnBovine'+index_production+index_livestock"
+                                                    >
+                                                        <b-icon font-scale="1" icon="plus"></b-icon>
+                                                    </b-button>
+                                                    <div
+                                                    class="mb-2 ml-5 mr-5" 
+                                                    v-for="(bovine, index_bovine) in livestock.livestock_bovine_cycle" 
+                                                    :key="index_bovine+1"
+                                                    >
+                                                        <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#bovine'+index_production+index_livestock+index_bovine">
+                                                            <b-icon icon=""></b-icon> Ciclo Bovino
+                                                        </b-button>
+                                                        <b-collapse :id="'bovine'+index_production+index_livestock+index_bovine">
+                                                            <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
+                                                                <div class="text-right">
+                                                                    <b-button
+                                                                    class="btn-delete mt-1"
+                                                                    variant="warning"
+                                                                    size="sm"
+                                                                    v-on:click="deleteBovine(index_production,index_livestock,index_bovine)"
+                                                                    >
+                                                                        <b-icon icon="trash"></b-icon>
+                                                                    </b-button>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="calves_under_one_year" class="col-sm-2 col-form-label">Terneros menores de un año</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Terneros menores de un año" name="calves_under_one_year" class="form-control" v-model.trim='livestock.livestock_bovine_cycle.calves_under_one_year'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="heifers_one_to_two_years" class="col-sm-2 col-form-label">Vaquillonas de uno a dos años</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Vaquillonas de uno a dos años" name="heifers_one_to_two_years" class="form-control" v-model.trim='livestock.livestock_bovine_cycle.heifers_one_to_two_years'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="heifers_over_two_years" class="col-sm-2 col-form-label">Vaquillonas mas de dos años</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Vaquillonas mas de dos años" name="heifers_over_two_years" class="form-control" v-model.trim='livestock.livestock_bovine_cycle.heifers_over_two_years'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_cows" class="col-sm-2 col-form-label">Cantidad de vacas</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Cantidad de vacas" name="number_cows" class="form-control" v-model.trim='livestock.livestock_bovine_cycle.number_cows'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="steers_one_to_two_years" class="col-sm-2 col-form-label">Novillos de uno a dos años</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Novillos de uno a dos años" name="steers_one_to_two_years" class="form-control" v-model.trim='livestock.livestock_bovine_cycle.steers_one_to_two_years'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="steers_older_two_years" class="col-sm-2 col-form-label">Novillos más de dos años</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Novillos más de dos años" name="steers_older_two_years" class="form-control" v-model.trim='livestock.livestock_bovine_cycle.steers_older_two_years'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="bulls_one_to_two_years" class="col-sm-2 col-form-label">Toritos de uno a dos años</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Toritos de uno a dos años" name="bulls_one_to_two_years" class="form-control" v-model.trim='livestock.livestock_bovine_cycle.bulls_one_to_two_years'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="bulls_older_two_years" class="col-sm-2 col-form-label">Toritos más de dos años</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Toritos más de dos años" name="bulls_older_two_years" class="form-control" v-model.trim='livestock.livestock_bovine_cycle.bulls_older_two_years'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_oxen_torunos" class="col-sm-2 col-form-label">Bueyes y torunos</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Bueyes y torunos" name="number_oxen_torunos" class="form-control" v-model.trim='livestock.livestock_bovine_cycle.number_oxen_torunos'>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="heifers_one_to_two_years" class="col-sm-2 col-form-label">Vaquillonas de uno a dos años</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Vaquillonas de uno a dos años" name="heifers_one_to_two_years" class="form-control" v-model.trim='livestock.livestock_bovine_cycle.heifers_one_to_two_years'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="heifers_over_two_years" class="col-sm-2 col-form-label">Vaquillonas mas de dos años</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Vaquillonas mas de dos años" name="heifers_over_two_years" class="form-control" v-model.trim='livestock.livestock_bovine_cycle.heifers_over_two_years'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="number_cows" class="col-sm-2 col-form-label">Cantidad de vacas</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Cantidad de vacas" name="number_cows" class="form-control" v-model.trim='livestock.livestock_bovine_cycle.number_cows'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="steers_one_to_two_years" class="col-sm-2 col-form-label">Novillos de uno a dos años</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Novillos de uno a dos años" name="steers_one_to_two_years" class="form-control" v-model.trim='livestock.livestock_bovine_cycle.steers_one_to_two_years'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="steers_older_two_years" class="col-sm-2 col-form-label">Novillos más de dos años</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Novillos más de dos años" name="steers_older_two_years" class="form-control" v-model.trim='livestock.livestock_bovine_cycle.steers_older_two_years'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="bulls_one_to_two_years" class="col-sm-2 col-form-label">Toritos de uno a dos años</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Toritos de uno a dos años" name="bulls_one_to_two_years" class="form-control" v-model.trim='livestock.livestock_bovine_cycle.bulls_one_to_two_years'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="bulls_older_two_years" class="col-sm-2 col-form-label">Toritos más de dos años</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Toritos más de dos años" name="bulls_older_two_years" class="form-control" v-model.trim='livestock.livestock_bovine_cycle.bulls_older_two_years'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="number_oxen_torunos" class="col-sm-2 col-form-label">Bueyes y torunos</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Bueyes y torunos" name="number_oxen_torunos" class="form-control" v-model.trim='livestock.livestock_bovine_cycle.number_oxen_torunos'>
-                                                            </div>
-                                                        </div>
+                                                        </b-collapse>
                                                     </div>
                                                 </div>
                                                 <!--Livestock sheep cycle-->
                                                 <div class="card no-border second" v-if="livestock.type_activity == 'ovino'">
                                                     <h4 class="m-4">Ciclo ovino</h4>
-                                                    <div class="card-body">
-                                                        <div class="form-group row">
-                                                            <label for="sheep_under_six_months" class="col-sm-2 col-form-label">Menores de seis meses</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Menores de seis meses" name="sheep_under_six_months" class="form-control" v-model.trim='livestock.livestock_sheep_cycle.sheep_under_six_months'>
+                                                    <b-button
+                                                    variant="info" 
+                                                    class="btn-add"
+                                                    size="sm"
+                                                    v-on:click="onDataSheep(index_production,index_livestock)"
+                                                    :id="'btnSheep'+index_production+index_livestock"
+                                                    >
+                                                        <b-icon font-scale="1" icon="plus"></b-icon>
+                                                    </b-button>
+                                                    <div
+                                                    class="mb-2 ml-5 mr-5" 
+                                                    v-for="(sheep, index_sheep) in livestock.livestock_sheep_cycle" 
+                                                    :key="index_sheep+1"
+                                                    >
+                                                        <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#sheep'+index_production+index_livestock+index_sheep">
+                                                            <b-icon icon=""></b-icon> Ovino
+                                                        </b-button>
+                                                        <b-collapse :id="'sheep'+index_production+index_livestock+index_sheep">
+                                                            <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
+                                                                <div class="text-right">
+                                                                    <b-button
+                                                                    class="btn-delete mt-1"
+                                                                    variant="warning"
+                                                                    size="sm"
+                                                                    v-on:click="deleteSheep(index_production,index_livestock,index_sheep)"
+                                                                    >
+                                                                        <b-icon icon="trash"></b-icon>
+                                                                    </b-button>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="sheep_under_six_months" class="col-sm-2 col-form-label">Menores de seis meses</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Menores de seis meses" name="sheep_under_six_months" class="form-control" v-model.trim='sheep.sheep_under_six_months'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="sheep_older_six_months_to_calving" class="col-sm-2 col-form-label">Borregas de seis meses hasta parición</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Borregas de seis meses hasta parición" name="sheep_older_six_months_to_calving" class="form-control" v-model.trim='sheep.sheep_older_six_months_to_calving'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="sheep_older_six_months_one_year" class="col-sm-2 col-form-label">Borregos de seis meses hasta un año</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Borregos de seis meses hasta un año" name="sheep_older_six_months_one_year" class="form-control" v-model.trim='sheep.sheep_older_six_months_one_year'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_sheep" class="col-sm-2 col-form-label">Cantidad de obejas</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Cantidad de obejas" name="number_sheep" class="form-control" v-model.trim='sheep.number_sheep'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_capons" class="col-sm-2 col-form-label">Cantidad de capones</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Cantidad de capones" name="number_capons" class="form-control" v-model.trim='sheep.number_capons'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_rams" class="col-sm-2 col-form-label">Cantidad de carneros</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Cantidad de carneros" name="number_rams" class="form-control" v-model.trim='sheep.number_rams'>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="sheep_older_six_months_to_calving" class="col-sm-2 col-form-label">Borregas de seis meses hasta parición</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Borregas de seis meses hasta parición" name="sheep_older_six_months_to_calving" class="form-control" v-model.trim='livestock.livestock_sheep_cycle.sheep_older_six_months_to_calving'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="sheep_older_six_months_one_year" class="col-sm-2 col-form-label">Borregos de seis meses hasta un año</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Borregos de seis meses hasta un año" name="sheep_older_six_months_one_year" class="form-control" v-model.trim='livestock.livestock_sheep_cycle.sheep_older_six_months_one_year'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="number_sheep" class="col-sm-2 col-form-label">Cantidad de obejas</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Cantidad de obejas" name="number_sheep" class="form-control" v-model.trim='livestock.livestock_sheep_cycle.number_sheep'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="number_capons" class="col-sm-2 col-form-label">Cantidad de capones</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Cantidad de capones" name="number_capons" class="form-control" v-model.trim='livestock.livestock_sheep_cycle.number_capons'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="number_rams" class="col-sm-2 col-form-label">Cantidad de carneros</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Cantidad de carneros" name="number_rams" class="form-control" v-model.trim='livestock.livestock_sheep_cycle.number_rams'>
-                                                            </div>
-                                                        </div>
+                                                        </b-collapse>
                                                     </div>
                                                 </div>
                                                 <!--Livestock goat cycle-->
                                                 <div class="card no-border second" v-if="livestock.type_activity == 'caprino'">
                                                     <h4 class="m-4">Ciclo caprino</h4>
-                                                    <div class="card-body">
-                                                        <div class="form-group row">
-                                                            <label for="goats_under_six_months" class="col-sm-2 col-form-label">Cabritas y cabritos menores de seis meses</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Cabritas y cabritos menores de seis meses" name="goats_under_six_months" class="form-control" v-model.trim='livestock.livestock_goat_cycle.goats_under_six_months'>
+                                                    <b-button
+                                                    variant="info" 
+                                                    class="btn-add"
+                                                    size="sm"
+                                                    v-on:click="onDataGoat(index_production,index_livestock)"
+                                                    :id="'btnGoat'+index_production+index_livestock"
+                                                    >
+                                                        <b-icon font-scale="1" icon="plus"></b-icon>
+                                                    </b-button>
+                                                    <div
+                                                    class="mb-2 ml-5 mr-5" 
+                                                    v-for="(goat, index_goat) in livestock.livestock_goat_cycle" 
+                                                    :key="index_goat+1"
+                                                    >
+                                                        <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#goat'+index_production+index_livestock+index_goat">
+                                                            <b-icon icon=""></b-icon> Caprino
+                                                        </b-button>
+                                                        <b-collapse :id="'goat'+index_production+index_livestock+index_goat">
+                                                            <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
+                                                                <div class="text-right">
+                                                                    <b-button
+                                                                    class="btn-delete mt-1"
+                                                                    variant="warning"
+                                                                    size="sm"
+                                                                    v-on:click="deleteGoat(index_production,index_livestock,index_goat)"
+                                                                    >
+                                                                        <b-icon icon="trash"></b-icon>
+                                                                    </b-button>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="goats_under_six_months" class="col-sm-2 col-form-label">Cabritas y cabritos menores de seis meses</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Cabritas y cabritos menores de seis meses" name="goats_under_six_months" class="form-control" v-model.trim='goat.goats_under_six_months'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="goats_six_months_to_first_calving" class="col-sm-2 col-form-label">Cabrillas de seis meses hasta parición</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Cabirllas de seis meses hasta parición" name="goats_six_months_to_first_calving" class="form-control" v-model.trim='goat.goats_six_months_to_first_calving'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_goats" class="col-sm-2 col-form-label">Cantidad de cabras</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Cantidad de cabras" name="number_goats" class="form-control" v-model.trim='goat.number_goats'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_capons" class="col-sm-2 col-form-label">Cantidad de obejas</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Cantidad de obejas" name="number_capons" class="form-control" v-model.trim='goat.number_capons'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_stallions" class="col-sm-2 col-form-label">Cantidad de machos cabrios y chivos</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Cantidad de machos cabrios y chivos" name="number_stallions" class="form-control" v-model.trim='goat.number_stallions'>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="goats_six_months_to_first_calving" class="col-sm-2 col-form-label">Cabrillas de seis meses hasta parición</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Cabirllas de seis meses hasta parición" name="goats_six_months_to_first_calving" class="form-control" v-model.trim='livestock.livestock_goat_cycle.goats_six_months_to_first_calving'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="number_goats" class="col-sm-2 col-form-label">Cantidad de cabras</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Cantidad de cabras" name="number_goats" class="form-control" v-model.trim='livestock.livestock_goat_cycle.number_goats'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="number_capons" class="col-sm-2 col-form-label">Cantidad de obejas</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Cantidad de obejas" name="number_capons" class="form-control" v-model.trim='livestock.livestock_goat_cycle.number_capons'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="number_stallions" class="col-sm-2 col-form-label">Cantidad de machos cabrios y chivos</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Cantidad de machos cabrios y chivos" name="number_stallions" class="form-control" v-model.trim='livestock.livestock_goat_cycle.number_stallions'>
-                                                            </div>
-                                                        </div>
+                                                        </b-collapse>
                                                     </div>
                                                 </div>
                                                 <!--Livestock pig cycle-->
                                                 <div class="card no-border second" v-if="livestock.type_activity == 'porcino'">
                                                     <h4 class="m-4">Ciclo porcino</h4>
-                                                    <div class="card-body">
-                                                        <div class="form-group row">
-                                                            <label for="up_two_months" class="col-sm-2 col-form-label">Lechones hasta dos meses</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Lechones hasta dos meses" name="up_two_months" class="form-control" v-model.trim='livestock.livestock_pig_cycle.up_two_months'>
+                                                    <b-button
+                                                    variant="info" 
+                                                    class="btn-add"
+                                                    size="sm"
+                                                    v-on:click="onDataPig(index_production,index_livestock)"
+                                                    :id="'btnPig'+index_production+index_livestock"
+                                                    >
+                                                        <b-icon font-scale="1" icon="plus"></b-icon>
+                                                    </b-button>
+                                                    <div
+                                                    class="mb-2 ml-5 mr-5" 
+                                                    v-for="(pig, index_pig) in livestock.livestock_pig_cycle" 
+                                                    :key="index_pig+1"
+                                                    >
+                                                        <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#pig'+index_production+index_livestock+index_pig">
+                                                            <b-icon icon=""></b-icon> Avicultura
+                                                        </b-button>
+                                                        <b-collapse :id="'pig'+index_production+index_livestock+index_pig">
+                                                            <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
+                                                                <div class="text-right">
+                                                                    <b-button
+                                                                    class="btn-delete mt-1"
+                                                                    variant="warning"
+                                                                    size="sm"
+                                                                    v-on:click="deletePig(index_production,index_livestock,index_pig)"
+                                                                    >
+                                                                        <b-icon icon="trash"></b-icon>
+                                                                    </b-button>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="up_three_months" class="col-sm-2 col-form-label">Cantidad de lechones hasta tres meses</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Cantidad de lechones hasta tres meses" name="up_three_months" class="form-control" v-model.trim='pig.up_three_months'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="three_eight_months" class="col-sm-2 col-form-label">Lechones de tres a ocho meses</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Lechones de tres a ocho meses" name="three_eight_months" class="form-control" v-model.trim='pig.three_eight_months'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="males_older_eight_months" class="col-sm-2 col-form-label">Machos mayores a ocho meses</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Machos mayores a ocho meses" name="males_older_eight_months" class="form-control" v-model.trim='pig.males_older_eight_months'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="females_older_eight_months" class="col-sm-2 col-form-label">Hembras mayores a ocho meses</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Hembras mayores a ocho meses" name="females_older_eight_months" class="form-control" v-model.trim='pig.females_older_eight_months'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_pigs" class="col-sm-2 col-form-label">Cantidad de capones</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Cantidad de capones" name="number_pigs" class="form-control" v-model.trim='pig.number_pigs'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_stallions" class="col-sm-2 col-form-label">Cantidad de padrillos</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Cantidad de machos cabrios y chivos" name="number_stallions" class="form-control" v-model.trim='pig.number_stallions'>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="older_two_months" class="col-sm-2 col-form-label">lechones mayores de dos meses</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="lechones mayores de dos meses" name="older_two_months" class="form-control" v-model.trim='livestock.livestock_pig_cycle.older_two_months'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="less_four_months" class="col-sm-2 col-form-label">lechones menores de cuatro meses</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="lechones menores de cuatro meses" name="less_four_months" class="form-control" v-model.trim='livestock.livestock_pig_cycle.less_four_months'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="older_four_months" class="col-sm-2 col-form-label">lechones mayores de cuatro meses</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="lechones mayores de cuatro meses" name="older_four_months" class="form-control" v-model.trim='livestock.livestock_pig_cycle.older_four_months'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="number_pigs" class="col-sm-2 col-form-label">Cantidad de cerdos</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Cantidad de cerdos" name="number_pigs" class="form-control" v-model.trim='livestock.livestock_pig_cycle.number_pigs'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="number_stallions" class="col-sm-2 col-form-label">Cantidad de padrillos</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Cantidad de machos cabrios y chivos" name="number_stallions" class="form-control" v-model.trim='livestock.livestock_pig_cycle.number_stallions'>
-                                                            </div>
-                                                        </div>
+                                                        </b-collapse>
                                                     </div>
                                                 </div>
                                                  <!--Livestock llama cycle-->
                                                  <div class="card no-border second" v-if="livestock.type_activity == 'camelido'">
-                                                    <h4 class="m-4">Ciclo Llamas</h4>
-                                                    <div class="card-body">
-                                                        <div class="form-group row">
-                                                            <label for="number_chitas_teques" class="col-sm-2 col-form-label">Cantidad de chitas y tekes</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Cantidad de chitas y tekes" name="number_chitas_teques" class="form-control" v-model.trim='livestock.livestock_llama_cycle.number_chitas_teques'>
+                                                    <h4 class="m-4">Ciclo Camelido</h4>
+                                                    <b-button
+                                                    variant="info" 
+                                                    class="btn-add"
+                                                    size="sm"
+                                                    v-on:click="onDataLlama(index_production,index_livestock)"
+                                                    :id="'btnLlama'+index_production+index_livestock"
+                                                    >
+                                                        <b-icon font-scale="1" icon="plus"></b-icon>
+                                                    </b-button>
+                                                    <div
+                                                    class="mb-2 ml-5 mr-5" 
+                                                    v-for="(llama, index_llama) in livestock.livestock_llama_cycle" 
+                                                    :key="index_llama+1"
+                                                    >
+                                                        <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#llama'+index_production+index_livestock+index_llama">
+                                                            <b-icon icon=""></b-icon> Avicultura
+                                                        </b-button>
+                                                        <b-collapse :id="'llama'+index_production+index_livestock+index_llama">
+                                                            <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
+                                                                <div class="text-right">
+                                                                    <b-button
+                                                                    class="btn-delete mt-1"
+                                                                    variant="warning"
+                                                                    size="sm"
+                                                                    v-on:click="deleteLlama(index_production,index_livestock,index_llama)"
+                                                                    >
+                                                                        <b-icon icon="trash"></b-icon>
+                                                                    </b-button>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_tekes" class="col-sm-2 col-form-label">Cantidad de tekes</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Cantidad de tekes" name="number_tekes" class="form-control" v-model.trim='llama.number_tekes'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_tekes_weaned" class="col-sm-2 col-form-label">Cantidad de tekes destetados</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Cantidad de tekes destetados" name="number_tekes_weaned" class="form-control" v-model.trim='llama.number_tekes_weaned'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_maltones" class="col-sm-2 col-form-label">Cantidad de maltonas y maltones</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Cantidad de maltonas y maltones" name="number_maltones" class="form-control" v-model.trim='llama.number_maltones'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_young_females" class="col-sm-2 col-form-label">Cantidad de hembras jovenes</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Cantidad de hembras jovenes" name="number_young_females" class="form-control" v-model.trim='llama.number_young_females'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_young_males" class="col-sm-2 col-form-label">Cantidad de machos jovenes</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Cantidad de machos jovenes" name="number_young_males" class="form-control" v-model.trim='llama.number_young_males'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_llamas_mothers" class="col-sm-2 col-form-label">Cantidad de llamas madres</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Cantidad de llamas madres" name="number_llamas_mothers" class="form-control" v-model.trim='llama.number_llamas_mothers'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_capons" class="col-sm-2 col-form-label">Cantidad de capones</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Cantidad de capones" name="number_capons" class="form-control" v-model.trim='llama.number_capons'>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="number_maltones" class="col-sm-2 col-form-label">Cantidad de maltonas y maltones</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Cantidad de maltonas y maltones" name="number_maltones" class="form-control" v-model.trim='livestock.livestock_llama_cycle.number_maltones'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="number_janachos" class="col-sm-2 col-form-label">Cantidad de janachos</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Cantidad de janachos" name="number_janachos" class="form-control" v-model.trim='livestock.livestock_llama_cycle.number_janachos'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="number_llamas_mothers" class="col-sm-2 col-form-label">Cantidad de llamas madres</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Cantidad de llamas madres" name="number_llamas_mothers" class="form-control" v-model.trim='livestock.livestock_llama_cycle.number_llamas_mothers'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="number_capons" class="col-sm-2 col-form-label">Cantidad de capones</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Cantidad de capones" name="number_capons" class="form-control" v-model.trim='livestock.livestock_llama_cycle.number_capons'>
-                                                            </div>
-                                                        </div>
+                                                        </b-collapse>
                                                     </div>
                                                 </div>
                                                 <!--Livestock poulty cycle-->
                                                 <div class="card no-border second" v-if="livestock.type_activity == 'avicultura'">
                                                     <h4 class="m-4">Ciclo Avicola</h4>
-                                                    <div class="card-body">
-                                                        <div class="form-group row">
-                                                            <label for="is_intensive_poultry" class="col-sm-2 col-form-label">Avicultura intensiva</label>
-                                                            <b-form-checkbox
-                                                            v-model.trim="livestock.livestock_poultry_cycle.is_intensive_poultry"
-                                                            value="true"
-                                                            unchecked-value="false"
-                                                            >
-                                                            Sí.
-                                                            </b-form-checkbox>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="number_broilers_incubated" class="col-sm-2 col-form-label">Parrilleros</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Parrilleros" name="number_broilers_incubated" class="form-control" v-model.trim='livestock.livestock_poultry_cycle.number_broilers_incubated'>
+                                                    <b-button
+                                                    variant="info" 
+                                                    class="btn-add"
+                                                    size="sm"
+                                                    v-on:click="onDataPoultry(index_production,index_livestock)"
+                                                    :id="'btnPoultry'+index_production+index_livestock"
+                                                    >
+                                                        <b-icon font-scale="1" icon="plus"></b-icon>
+                                                    </b-button>
+                                                    <div
+                                                    class="mb-2 ml-5 mr-5" 
+                                                    v-for="(poultry, index_poultry) in livestock.livestock_poultry_cycle" 
+                                                    :key="index_poultry+1"
+                                                    >
+                                                        <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#poultry'+index_production+index_livestock+index_poultry">
+                                                            <b-icon icon=""></b-icon> Avicultura
+                                                        </b-button>
+                                                        <b-collapse :id="'poultry'+index_production+index_livestock+index_poultry">
+                                                            <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
+                                                                <div class="text-right">
+                                                                    <b-button
+                                                                    class="btn-delete mt-1"
+                                                                    variant="warning"
+                                                                    size="sm"
+                                                                    v-on:click="deletePoultry(index_production,index_livestock,index_poultry)"
+                                                                    >
+                                                                        <b-icon icon="trash"></b-icon>
+                                                                    </b-button>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="is_intensive_poultry" class="col-sm-3 col-form-label">Avicultura intensiva</label>
+                                                                    <b-form-checkbox
+                                                                    v-model.trim="poultry.is_intensive_poultry"
+                                                                    value="true"
+                                                                    unchecked-value="false"
+                                                                    >
+                                                                    Sí.
+                                                                    </b-form-checkbox>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="has_hatchery" class="col-sm-3 col-form-label">Planta de incubación</label>
+                                                                    <b-form-checkbox
+                                                                    v-model.trim="poultry.has_hatchery"
+                                                                    value="true"
+                                                                    unchecked-value="false"
+                                                                    >
+                                                                    Sí.
+                                                                    </b-form-checkbox>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_incubators" class="col-sm-3 col-form-label">Cantidad de incubadoras</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Cantidad de incubadoras" name="number_incubators" class="form-control" v-model.trim='poultry.number_incubators'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_hatching_eggs" class="col-sm-3 col-form-label">Huevos incubables</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Huevos incubables" name="number_hatching_eggs" class="form-control" v-model.trim='poultry.number_hatching_eggs'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="chicks_one_two_months" class="col-sm-3 col-form-label">Pollitos de uno a dos meses</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Pollitos de uno a dos meses" name="chicks_one_two_months" class="form-control" v-model.trim='poultry.chicks_one_two_months'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="chicks_three_five_months" class="col-sm-3 col-form-label">Pollos de recria de tres a cinco meses</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Pollos de recria de tres a cinco meses" name="chicks_three_five_months" class="form-control" v-model.trim='poultry.chicks_three_five_months'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="females_older_six_months" class="col-sm-3 col-form-label">Hembras mayores a seis meses</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Hembras mayores a seis meses" name="females_older_six_months" class="form-control" v-model.trim='poultry.females_older_six_months'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_broiler_chickens" class="col-sm-3 col-form-label">Parrilleros en engorde</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Parrilleros en engorde" name="number_broiler_chickens" class="form-control" v-model.trim='poultry.number_broiler_chickens'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_breeder_layers" class="col-sm-3 col-form-label">Ponedoras reproductoras</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Ponedoras reproductoras" name="number_breeder_layers" class="form-control" v-model.trim='poultry.number_breeder_layers'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_breeding_males" class="col-sm-3 col-form-label">Machos reproductores</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Machos reproductores" name="number_breeding_males" class="form-control" v-model.trim='poultry.number_breeding_males'>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="breeding_males" class="col-sm-2 col-form-label">Machos reproductores</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Machos reproductores" name="breeding_males" class="form-control" v-model.trim='livestock.livestock_poultry_cycle.breeding_males'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="number_eggs_chickens_babies" class="col-sm-2 col-form-label">huevos incubables y pollos bebes</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="huevos incubables y pollos bebes" name="number_eggs_chickens_babies" class="form-control" v-model.trim='livestock.livestock_poultry_cycle.number_eggs_chickens_babies'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="number_incubators" class="col-sm-2 col-form-label">Cantidad de incubadoras</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Cantidad de incubadoras" name="number_incubators" class="form-control" v-model.trim='livestock.livestock_poultry_cycle.number_incubators'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="number_broilers_fattening" class="col-sm-2 col-form-label">Cantidad de incubadoras</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Cantidad de incubadoras" name="number_broilers_fattening" class="form-control" v-model.trim='livestock.livestock_poultry_cycle.number_broilers_fattening'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="number_breeding_layers" class="col-sm-2 col-form-label">Ponedores reproductores</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Ponedores reproductores" name="number_breeding_layers" class="form-control" v-model.trim='livestock.livestock_poultry_cycle.number_breeding_layers'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="existence" class="col-sm-2 col-form-label">Existencia</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Existencia" name="existence" class="form-control" v-model.trim='livestock.livestock_poultry_cycle.existence'>
-                                                            </div>
-                                                        </div>
+                                                        </b-collapse>
                                                     </div>
                                                 </div>
                                                 <!--Livestock rabbit cycle-->
                                                 <div class="card no-border second" v-if="livestock.type_activity == 'cunicultura'">
                                                     <h4 class="m-4">Ciclo cunicultura</h4>
-                                                    <div class="card-body">
-                                                        <div class="form-group row">
-                                                            <label for="orientation" class="col-sm-2 col-form-label">Orientación</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Orientación" name="orientation" class="form-control" v-model.trim='livestock.livestock_rabbit_cycle.orientation'>
+                                                    <b-button
+                                                    variant="info" 
+                                                    class="btn-add"
+                                                    size="sm"
+                                                    v-on:click="onDataRabbit(index_production,index_livestock)"
+                                                    :id="'btnRabbit'+index_production+index_livestock"
+                                                    >
+                                                        <b-icon font-scale="1" icon="plus"></b-icon>
+                                                    </b-button>
+                                                    <div
+                                                    class="mb-2 ml-5 mr-5" 
+                                                    v-for="(rabbit, index_rabbit) in livestock.livestock_rabbit_cycle" 
+                                                    :key="index_rabbit+1"
+                                                    >
+                                                        <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#rabbit'+index_production+index_livestock+index_rabbit">
+                                                            <b-icon icon=""></b-icon> Avicultura
+                                                        </b-button>
+                                                        <b-collapse :id="'rabbit'+index_production+index_livestock+index_rabbit">
+                                                            <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
+                                                                <div class="text-right">
+                                                                    <b-button
+                                                                    class="btn-delete mt-1"
+                                                                    variant="warning"
+                                                                    size="sm"
+                                                                    v-on:click="deleteRabbit(index_production,index_livestock,index_rabbit)"
+                                                                    >
+                                                                        <b-icon icon="trash"></b-icon>
+                                                                    </b-button>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="orientation" class="col-sm-3 col-form-label">Orientación</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Orientación" name="orientation" class="form-control" v-model.trim='rabbit.orientation'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_breeding_males" class="col-sm-3 col-form-label">Reproductres machos</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="number" placeholder="Reproductres machos" name="number_breeding_males" class="form-control" v-model.trim='rabbit.number_breeding_males'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_breeding_females" class="col-sm-3 col-form-label">Reproductores hembras</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="number" placeholder="Reproductores hembras" name="number_breeding_females" class="form-control" v-model.trim='rabbit.number_breeding_females'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_rabbit" class="col-sm-3 col-form-label">Cantidad de conejos</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="number" placeholder="Cantidad de conejos" name="number_rabbit" class="form-control" v-model.trim='rabbit.number_rabbit'>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="number_breeding_males" class="col-sm-2 col-form-label">Reproductres machos</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="number" placeholder="Reproductres machos" name="number_breeding_males" class="form-control" v-model.trim='livestock.livestock_rabbit_cycle.number_breeding_males'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="number_breeding_females" class="col-sm-2 col-form-label">Reproductores hembras</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="number" placeholder="Reproductores hembras" name="number_breeding_females" class="form-control" v-model.trim='livestock.livestock_rabbit_cycle.number_breeding_females'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="number_rabbit" class="col-sm-2 col-form-label">Cantidad de conejos</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="number" placeholder="Cantidad de conejos" name="number_rabbit" class="form-control" v-model.trim='livestock.livestock_rabbit_cycle.number_rabbit'>
-                                                            </div>
-                                                        </div>
+                                                        </b-collapse>
                                                     </div>
                                                 </div>
                                                 <!--Livestock beekeeping cycle-->
                                                 <div class="card no-border second" v-if="livestock.type_activity == 'apicultura'">
                                                     <h4 class="m-4">Ciclo apicultura</h4>
-                                                    <div class="card-body">
-                                                        <div class="form-group row">
-                                                            <label for="kind_bee" class="col-sm-2 col-form-label">Raza de abejas</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Raza de abejas" name="kind_bee" class="form-control" v-model.trim='livestock.livestock_beekeeping_cycle.kind_bee'>
+                                                    <b-button
+                                                    variant="info" 
+                                                    class="btn-add"
+                                                    size="sm"
+                                                    v-on:click="onDataBeekeeping(index_production,index_livestock)"
+                                                    :id="'btnBeekeeping'+index_production+index_livestock"
+                                                    >
+                                                        <b-icon font-scale="1" icon="plus"></b-icon>
+                                                    </b-button>
+                                                    <div
+                                                    class="mb-2 ml-5 mr-5" 
+                                                    v-for="(beekeeping, index_beekeeping) in livestock.livestock_beekeeping_cycle" 
+                                                    :key="index_beekeeping+1"
+                                                    >
+                                                        <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#beekeeping'+index_production+index_livestock+index_beekeeping">
+                                                            <b-icon icon=""></b-icon> Apicultura
+                                                        </b-button>
+                                                        <b-collapse :id="'beekeeping'+index_production+index_livestock+index_beekeeping">
+                                                            <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
+                                                                <div class="text-right">
+                                                                    <b-button
+                                                                    class="btn-delete mt-1"
+                                                                    variant="warning"
+                                                                    size="sm"
+                                                                    v-on:click="deleteBeekeeping(index_production,index_livestock,index_beekeeping)"
+                                                                    >
+                                                                        <b-icon icon="trash"></b-icon>
+                                                                    </b-button>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="has_renapa" class="col-sm-2 col-form-label">Renapa</label>
+                                                                    <b-form-checkbox
+                                                                    v-model.trim="beekeeping.renapa"
+                                                                    value="true"
+                                                                    unchecked-value="false"
+                                                                    >
+                                                                    Sí.
+                                                                    </b-form-checkbox>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="kind_bee" class="col-sm-2 col-form-label">Raza de abejas</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Raza de abejas" name="kind_bee" class="form-control" v-model.trim='beekeeping.kind_bee'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="has_bee_hives" class="col-sm-2 col-form-label">Existencia de colmenas</label>
+                                                                    <b-form-checkbox
+                                                                    v-model.trim="beekeeping.has_bee_hives"
+                                                                    value="true"
+                                                                    unchecked-value="false"
+                                                                    >
+                                                                    Sí.
+                                                                    </b-form-checkbox>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="type_bee_hives" class="col-sm-2 col-form-label">Tipo de colmenas</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Tipo de colmenas" name="type_bee_hives" class="form-control" v-model.trim='beekeeping.type_bee_hives'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="number_drawers" class="col-sm-2 col-form-label">Cantidad de cajones</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="number" placeholder="Cantidad de cajones" name="number_drawers" class="form-control" v-model.trim='beekeeping.number_drawers'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="alsas_drawer" class="col-sm-2 col-form-label">Alsas por cajones</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="number" placeholder="Alsas por cajones" name="alsas_drawer" class="form-control" v-model.trim='beekeeping.alsas_drawer'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="pollination_period" class="col-sm-2 col-form-label">Periodo de polinización</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Periodo de polinización" name="pollination_period" class="form-control" v-model.trim='beekeeping.pollination_period'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="pollinated_flower" class="col-sm-2 col-form-label">Flor polinizada</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Flor polinizada" name="pollinated_flower" class="form-control" v-model.trim='beekeeping.pollinated_flower'>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="has_bee_hives" class="col-sm-2 col-form-label">Existencia de colmenas</label>
-                                                            <b-form-checkbox
-                                                            v-model.trim="livestock.livestock_beekeeping_cycle.has_bee_hives"
-                                                            value="true"
-                                                            unchecked-value="false"
-                                                            >
-                                                            Sí.
-                                                            </b-form-checkbox>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="type_bee_hives" class="col-sm-2 col-form-label">Tipo de colmenas</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Tipo de colmenas" name="type_bee_hives" class="form-control" v-model.trim='livestock.livestock_beekeeping_cycle.type_bee_hives'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="number_drawers" class="col-sm-2 col-form-label">Cantidad de cajones</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="number" placeholder="Cantidad de cajones" name="number_drawers" class="form-control" v-model.trim='livestock.livestock_beekeeping_cycle.number_drawers'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="alsas_drawer" class="col-sm-2 col-form-label">Alsas por cajones</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="number" placeholder="Alsas por cajones" name="alsas_drawer" class="form-control" v-model.trim='livestock.livestock_beekeeping_cycle.alsas_drawer'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="type_drawer" class="col-sm-2 col-form-label">Tipo de cajones</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Tipo de cajones" name="type_drawer" class="form-control" v-model.trim='livestock.livestock_beekeeping_cycle.type_drawer'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="honey_stones" class="col-sm-2 col-form-label">Rendimiento de miel por litro en cada cajon</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Rendimiento de miel por litro en cada cajon" name="honey_stones" class="form-control" v-model.trim='livestock.livestock_beekeeping_cycle.honey_stones'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="pollination_period" class="col-sm-2 col-form-label">Periodo de polinización</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Periodo de polinización" name="pollination_period" class="form-control" v-model.trim='livestock.livestock_beekeeping_cycle.pollination_period'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="pollinated_flower" class="col-sm-2 col-form-label">Flor polinizada</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Flor polinizada" name="pollinated_flower" class="form-control" v-model.trim='livestock.livestock_beekeeping_cycle.pollinated_flower'>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="has_renapa" class="col-sm-2 col-form-label">Renapa</label>
-                                                            <b-form-checkbox
-                                                            v-model.trim="livestock.livestock_beekeeping_cycle.has_renapa"
-                                                            value="true"
-                                                            unchecked-value="false"
-                                                            >
-                                                            Sí.
-                                                            </b-form-checkbox>
-                                                        </div>
+                                                        </b-collapse>
                                                     </div>
                                                 </div>
                                                 <!--Livestock aquaculture cycle-->
                                                 <div class="card no-border second" v-if="livestock.type_activity == 'acuicultura'">
                                                     <h4 class="m-4">Ciclo acuicultura</h4>
-                                                    <div class="card-body">
-                                                        <div class="form-group row">
-                                                            <label for="orientation" class="col-sm-2 col-form-label">Orientación</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Orientación" name="orientation" class="form-control" v-model.trim='livestock.livestock_aquaculture_cycle.orientation'>
+                                                    <b-button
+                                                    variant="info" 
+                                                    class="btn-add"
+                                                    size="sm"
+                                                    v-on:click="onDataAquaculture(index_production,index_livestock)"
+                                                    :id="'btnAquaculture'+index_production+index_livestock"
+                                                    >
+                                                        <b-icon font-scale="1" icon="plus"></b-icon>
+                                                    </b-button>
+                                                    <div
+                                                    class="mb-2 ml-5 mr-5" 
+                                                    v-for="(aquaculture, index_aquaculture) in livestock.livestock_aquaculture_cycle" 
+                                                    :key="index_aquaculture+1"
+                                                    >
+                                                        <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#aquaculture'+index_production+index_livestock+index_aquaculture">
+                                                            <b-icon icon=""></b-icon> Acuicultura
+                                                        </b-button>
+                                                        <b-collapse :id="'aquaculture'+index_production+index_livestock+index_aquaculture">
+                                                            <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
+                                                                <div class="text-right">
+                                                                    <b-button
+                                                                    class="btn-delete mt-1"
+                                                                    variant="warning"
+                                                                    size="sm"
+                                                                    v-on:click="deleteAquaculture(index_production,index_livestock,index_aquaculture)"
+                                                                    >
+                                                                        <b-icon icon="trash"></b-icon>
+                                                                    </b-button>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="orientation" class="col-sm-2 col-form-label">Orientación</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Orientación" name="orientation" class="form-control" v-model.trim='aquaculture.orientation'>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="existence" class="col-sm-2 col-form-label">Existencia</label>
+                                                                    <div class="col-sm-6">
+                                                                        <input type="text" placeholder="Existencia" name="existence" class="form-control" v-model.trim='aquaculture.existence'>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="existence" class="col-sm-2 col-form-label">Existencia</label>
-                                                            <div class="col-sm-6">
-                                                                <input type="text" placeholder="Existencia" name="existence" class="form-control" v-model.trim='livestock.livestock_aquaculture_cycle.existence'>
-                                                            </div>
-                                                        </div>
+                                                        </b-collapse>
                                                     </div>
                                                 </div>
                                             </b-collapse>
@@ -2656,6 +3028,7 @@ export default {
             
             itemsAgricultural: {
                 activity_name: "",
+                variety: "",
                 surface: 0,
                 destination: "",
                 sowing: "",
@@ -2673,25 +3046,24 @@ export default {
                 },
                 agricultural_climatic: [],
                 agricultural_pests: [],
-                agricultural_harvest: {
-                  harvest_surface: 0,
-                  tons_production: 0,
-                  has_curtains_insulated: false,
-                  plant_length_curtains: 0,
-                  plant_species_curtains: "",
-                  harvest_time: ""
-                },
-                agricultural_sales_channel: {
-                  is_collector: false,
-                  is_cooperative: false,
-                  is_exporter: false,
-                  use_baler: false,
-                  use_fair: false,
-                  use_industry: false,
-                  use_fridge: false,
-                  make_direct_sale: false
-                }
-            },  
+                agricultural_harvest: []
+            },
+
+            itemsHarvest: {
+                    harvest_surface: 0,
+                    tons_production: 0,
+                    harvest_time: "",
+                    agricultural_sales_channel: {
+                        is_collector: false,
+                        is_cooperative: false,
+                        is_exporter: false,
+                        use_baler: false,
+                        use_fair: false,
+                        use_industry: false,
+                        use_fridge: false,
+                        make_direct_sale: false
+                    }
+            },
         
             itemsPests: {
                 type_pests: "",
@@ -2706,7 +3078,7 @@ export default {
             itemsClimatic: {
                 factor: "",
                 risk: "",
-                damange_level: ""
+                description: ""
             },
         
             itemsLivestock: {
@@ -2736,17 +3108,34 @@ export default {
                     name_disease: "",
                     other_practices: ""
                 },
-                livestock_marketing: {
-                    number_slaughtered: 0,
-                    number_shorn: 0,
-                    amount_wool_hair: 0,
-                    amount_leather: 0,
-                    liters_milk: 0,
-                    milk_destination: "",
-                    wool_hair_destination: "",
-                    leather_destination: "",
-                    slaughter_destination: ""
-                },
+                livestock_marketing: [],
+                livestock_bovine_cycle: [],
+                livestock_sheep_cycle: [],
+                livestock_goat_cycle: [],
+                livestock_pig_cycle: [],
+                livestock_llama_cycle: [],
+                livestock_poultry_cycle: [],
+                livestock_rabbit_cycle: [],
+                livestock_beekeeping_cycle: [],
+                livestock_aquaculture_cycle: []
+            },
+            
+            itemsMarketing: {
+                number_slaughtered: 0,
+                slaughter_destination: "",
+                amount_leather: 0,
+                leather_destination: "",
+                number_shorn: 0,
+                amount_wool: 0,
+                wool_destination: "",
+                liters_milk: 0,
+                milk_destination: "",
+                number_eggs: 0,
+                eggs_destination: "",
+                honey_yield: 0,
+                honey_destination: "",
+                amount_feces: 0,
+                feces_destination: "",
                 livestock_sales_channel: {
                     is_collector: false,
                     is_cooperative: false,
@@ -2756,79 +3145,6 @@ export default {
                     use_industry: false,
                     use_fridge: false,
                     make_direct_sale: false
-                },
-                livestock_bovine_cycle: {
-                    calves_under_one_year: 0,
-                    heifers_one_to_two_years: 0,
-                    heifers_over_two_years: 0,
-                    number_cows: 0,
-                    steers_one_to_two_years: 0,
-                    steers_older_two_years: 0,
-                    bulls_one_to_two_years: 0,
-                    bulls_older_two_years: 0,
-                    number_oxen_torunos: 0
-                },
-                livestock_sheep_cycle: {
-                    sheep_under_six_months: 0,
-                    sheep_older_six_months_to_calving: 0,
-                    sheep_older_six_months_one_year: 0,
-                    number_sheep: 0,
-                    number_capons: 0,
-                    number_rams: 0
-                },
-                livestock_goat_cycle: {
-                    goats_under_six_months: 0,
-                    goats_six_months_to_first_calving: 0,
-                    number_goats: 0,
-                    number_capons: 0,
-                    number_stallions: 0
-                },
-                livestock_pig_cycle: {
-                    up_two_months: 0,
-                    older_two_months: 0,
-                    less_four_months: 0,
-                    older_four_months: 0,
-                    number_pigs: 0,
-                    number_stallions: 0
-                },
-                livestock_llama_cycle: {
-                    number_chitas_teques: 0,
-                    number_maltones: 0,
-                    number_janachos: 0,
-                    number_llamas_mothers: 0,
-                    number_capons: 0
-                },
-                livestock_poultry_cycle: {
-                    is_intensive_poultry: false,
-                    number_broilers_incubated: 0,
-                    breeding_males: 0,
-                    number_eggs_chickens_babies: 0,
-                    number_incubators: 0,
-                    number_broilers_fattening: 0,
-                    number_breeding_layers: 0,
-                    existence: ""
-                },
-                livestock_rabbit_cycle: {
-                    orientation: "",
-                    number_breeding_males: 0,
-                    number_breeding_females: 0,
-                    number_rabbit: 0
-                },
-                livestock_beekeeping_cycle: {
-                    kind_bee: "",
-                    has_bee_hives: false,
-                    type_bee_hives: "",
-                    number_drawers: 0,
-                    alsas_drawer: 0,
-                    type_drawer: "",
-                    honey_stones: 0,
-                    pollination_period: "",
-                    pollinated_flower: "",
-                    has_renapa: true
-                },
-                livestock_aquaculture_cycle: {
-                    orientation: "",
-                    existence: ""
                 }
             },
 
@@ -3349,6 +3665,7 @@ export default {
 
             const objAgricultural = {
                 activity_name: "",
+                variety: "",
                 surface: 0,
                 destination: "",
                 sowing: "",
@@ -3366,24 +3683,7 @@ export default {
                 },
                 agricultural_climatic: [],
                 agricultural_pests: [],
-                agricultural_harvest: {
-                  harvest_surface: 0,
-                  tons_production: 0,
-                  has_curtains_insulated: false,
-                  plant_length_curtains: 0,
-                  plant_species_curtains: "",
-                  harvest_time: ""
-                },
-                agricultural_sales_channel: {
-                  is_collector: false,
-                  is_cooperative: false,
-                  is_exporter: false,
-                  use_baler: false,
-                  use_fair: false,
-                  use_industry: false,
-                  use_fridge: false,
-                  make_direct_sale: false
-                }
+                agricultural_harvest: []
             }
 
             class Agricultural {
@@ -3497,21 +3797,21 @@ export default {
             const objClimatic = {
                 factor: "",
                 risk: "",
-                damange_level: ""
+                description: ""
             }
 
             class Climatic {
-                constructor(factor, risk, damange_level) {
+                constructor(factor, risk, description) {
                     this.factor = factor
                     this.risk = risk
-                    this.damange_level = damange_level
+                    this.description = description
                 }
             }
 
             const obj = new Climatic (
                 this.itemsClimatic.factor,
                 this.itemsClimatic.risk,
-                this.itemsClimatic.damange_level,
+                this.itemsClimatic.description,
                 )
 
             let newArray = [] 
@@ -3521,6 +3821,53 @@ export default {
             if (array.length != 0) {
                 newArray.push(obj)
                 this.form.producer.production[index_production].production_agricultural[index_agricultural].agricultural_climatic = array.concat(newArray)
+                //document.getElementById('btnClimatic'+index_production+index_agricultural).style.display='none'
+            }else{
+                array.push(obj)
+                //document.getElementById('btnClimatic'+index_production+index_agricultural).style.display='none'
+            }
+        },
+        onDataHarvest (index_production, index_agricultural){
+
+            const objHarvest = {
+                harvest_surface: 0,
+                tons_production: 0,
+                harvest_time: "",
+                agricultural_sales_channel: {
+                    is_collector: false,
+                    is_cooperative: false,
+                    is_exporter: false,
+                    use_baler: false,
+                    use_fair: false,
+                    use_industry: false,
+                    use_fridge: false,
+                    make_direct_sale: false
+                }
+            }
+
+            class Harvest {
+                constructor(harvest_surface, tons_production, harvest_time, agricultural_sales_channel) {
+                    this.harvest_surface = harvest_surface
+                    this.tons_production = tons_production
+                    this.harvest_time = harvest_time
+                    this.agricultural_sales_channel = agricultural_sales_channel
+                }
+            }
+
+            const obj = new Harvest (
+                this.itemsHarvest.harvest_surface,
+                this.itemsHarvest.tons_production,
+                this.itemsHarvest.harvest_time,
+                this.itemsHarvest.agricultural_sales_channel
+            )
+
+            let newArray = [] 
+            let array = this.form.producer.production[index_production].production_agricultural[index_agricultural].agricultural_harvest
+            console.log(array)
+
+            if (array.length != 0) {
+                newArray.push(obj)
+                this.form.producer.production[index_production].production_agricultural[index_agricultural].agricultural_harvest = array.concat(newArray)
                 //document.getElementById('btnClimatic'+index_production+index_agricultural).style.display='none'
             }else{
                 array.push(obj)
@@ -3556,101 +3903,16 @@ export default {
                     name_disease: "",
                     other_practices: ""
                 },
-                livestock_marketing: {
-                    number_slaughtered: 0,
-                    number_shorn: 0,
-                    amount_wool_hair: 0,
-                    amount_leather: 0,
-                    liters_milk: 0,
-                    milk_destination: "",
-                    wool_hair_destination: "",
-                    leather_destination: "",
-                    slaughter_destination: ""
-                },
-                livestock_sales_channel: {
-                    is_collector: false,
-                    is_cooperative: false,
-                    is_exporter: false,
-                    use_baler: false,
-                    use_fair: false,
-                    use_industry: false,
-                    use_fridge: false,
-                    make_direct_sale: false
-
-                },
-                livestock_bovine_cycle: {
-                    calves_under_one_year: 0,
-                    heifers_one_to_two_years: 0,
-                    heifers_over_two_years: 0,
-                    number_cows: 0,
-                    steers_one_to_two_years: 0,
-                    steers_older_two_years: 0,
-                    bulls_one_to_two_years: 0,
-                    bulls_older_two_years: 0,
-                    number_oxen_torunos: 0
-                },
-                    livestock_sheep_cycle: {
-                    sheep_under_six_months: 0,
-                    sheep_older_six_months_to_calving: 0,
-                    sheep_older_six_months_one_year: 0,
-                    number_sheep: 0,
-                    number_capons: 0,
-                    number_rams: 0
-                },
-                livestock_goat_cycle: {
-                    goats_under_six_months: 0,
-                    goats_six_months_to_first_calving: 0,
-                    number_goats: 0,
-                    number_capons: 0,
-                    number_stallions: 0
-                },
-                livestock_pig_cycle: {
-                    up_two_months: 0,
-                    older_two_months: 0,
-                    less_four_months: 0,
-                    older_four_months: 0,
-                    number_pigs: 0,
-                    number_stallions: 0
-                },
-                livestock_llama_cycle: {
-                    number_chitas_teques: 0,
-                    number_maltones: 0,
-                    number_janachos: 0,
-                    number_llamas_mothers: 0,
-                    number_capons: 0
-                },
-                livestock_poultry_cycle: {
-                    is_intensive_poultry: false,
-                    number_broilers_incubated: 0,
-                    breeding_males: 0,
-                    number_eggs_chickens_babies: 0,
-                    number_incubators: 0,
-                    number_broilers_fattening: 0,
-                    number_breeding_layers: 0,
-                    existence: ""
-                },
-                livestock_rabbit_cycle: {
-                    orientation: "",
-                    number_breeding_males: 0,
-                    number_breeding_females: 0,
-                    number_rabbit: 0
-                },
-                livestock_beekeeping_cycle: {
-                    kind_bee: "",
-                    has_bee_hives: false,
-                    type_bee_hives: "",
-                    number_drawers: 0,
-                    alsas_drawer: 0,
-                    type_drawer: "",
-                    honey_stones: 0,
-                    pollination_period: "",
-                    pollinated_flower: "",
-                    has_renapa: true
-                },
-                    livestock_aquaculture_cycle: {
-                    orientation: "",
-                    existence: ""
-                }
+                livestock_marketing: [],
+                livestock_bovine_cycle: [],
+                livestock_sheep_cycle: [],
+                livestock_goat_cycle: [],
+                livestock_pig_cycle: [],
+                livestock_llama_cycle: [],
+                livestock_poultry_cycle: [],
+                livestock_rabbit_cycle: [],
+                livestock_beekeeping_cycle: [],
+                livestock_aquaculture_cycle: []
             }
 
             class Livestock {
@@ -3666,7 +3928,6 @@ export default {
                     livestock_animal_pens,
                     livestock_health,
                     livestock_marketing,
-                    livestock_sales_channel,
                     livestock_bovine_cycle,
                     livestock_sheep_cycle,
                     livestock_goat_cycle,
@@ -3688,7 +3949,6 @@ export default {
                     this.livestock_animal_pens = livestock_animal_pens
                     this.livestock_health = livestock_health
                     this.livestock_marketing = livestock_marketing
-                    this.livestock_sales_channel = livestock_sales_channel
                     this.livestock_bovine_cycle = livestock_bovine_cycle
                     this.livestock_sheep_cycle = livestock_sheep_cycle
                     this.livestock_goat_cycle = livestock_goat_cycle
@@ -3713,7 +3973,6 @@ export default {
                 this.itemsLivestock.livestock_animal_pens,
                 this.itemsLivestock.livestock_health,
                 this.itemsLivestock.livestock_marketing,
-                this.itemsLivestock.livestock_sales_channel,
                 this.itemsLivestock.livestock_bovine_cycle,
                 this.itemsLivestock.livestock_sheep_cycle,
                 this.itemsLivestock.livestock_goat_cycle,
@@ -3816,6 +4075,106 @@ export default {
             if (array.length != 0) {
                 newArray.push(obj)
                 this.form.producer.production[index_production].production_livestock[index_livestock].livestock_animal_pens = array.concat(newArray)
+                //document.getElementById('btnPens'+index_production+index_livestock).style.display='none'
+            }else{
+                array.push(obj)
+                //document.getElementById('btnPens'+index_production+index_livestock).style.display='none'
+            }
+        },
+        onDataMarketing(index_production,index_livestock) {
+
+            const objMarketing = {
+                number_slaughtered: 0,
+                slaughter_destination: "",
+                amount_leather: 0,
+                leather_destination: "",
+                number_shorn: 0,
+                amount_wool: 0,
+                wool_destination: "",
+                liters_milk: 0,
+                milk_destination: "",
+                number_eggs: 0,
+                eggs_destination: "",
+                honey_yield: 0,
+                honey_destination: "",
+                amount_feces: 0,
+                feces_destination: "",
+                livestock_sales_channel: {
+                    is_collector: false,
+                    is_cooperative: false,
+                    is_exporter: false,
+                    use_baler: false,
+                    use_fair: false,
+                    use_industry: false,
+                    use_fridge: false,
+                    make_direct_sale: false
+                }
+            }
+
+            class Marketing {
+                constructor(
+                    number_slaughtered, 
+                    slaughter_destination, 
+                    amount_leather, 
+                    leather_destination, 
+                    number_shorn, 
+                    amount_wool, 
+                    wool_destination, 
+                    liters_milk,
+                    milk_destination,
+                    number_eggs,
+                    eggs_destination,
+                    honey_yield,
+                    honey_destination,
+                    amount_feces,
+                    feces_destination,
+                    livestock_sales_channel
+                    ) {
+                    this.number_slaughtered = number_slaughtered
+                    this.slaughter_destination = slaughter_destination
+                    this.amount_leather = amount_leather
+                    this.leather_destination = leather_destination
+                    this.number_shorn = number_shorn
+                    this.amount_wool = amount_wool
+                    this.wool_destination = wool_destination
+                    this.liters_milk = liters_milk
+                    this.milk_destination = milk_destination
+                    this.number_eggs = number_eggs
+                    this.eggs_destination = eggs_destination
+                    this.honey_yield = honey_yield
+                    this.honey_destination = honey_destination
+                    this.amount_feces = amount_feces
+                    this.feces_destination = feces_destination
+                    this.livestock_sales_channel = livestock_sales_channel
+                }
+            }
+
+            const obj = new Marketing (
+                this.itemsMarketing.number_slaughtered,
+                this.itemsMarketing.slaughter_destination,
+                this.itemsMarketing.amount_leather,
+                this.itemsMarketing.leather_destination,
+                this.itemsMarketing.number_shorn,
+                this.itemsMarketing.amount_wool,
+                this.itemsMarketing.wool_destination,
+                this.itemsMarketing.liters_milk,
+                this.itemsMarketing.milk_destination,
+                this.itemsMarketing.number_eggs,
+                this.itemsMarketing.eggs_destination,
+                this.itemsMarketing.honey_yield,
+                this.itemsMarketing.honey_destination,
+                this.itemsMarketing.amount_feces,
+                this.itemsMarketing.feces_destination,
+                this.itemsMarketing.livestock_sales_channel
+                )
+
+            let newArray = [] 
+            let array = this.form.producer.production[index_production].production_livestock[index_livestock].livestock_marketing
+            console.log(array)
+
+            if (array.length != 0) {
+                newArray.push(obj)
+                this.form.producer.production[index_production].production_livestock[index_livestock].livestock_marketing = array.concat(newArray)
                 //document.getElementById('btnPens'+index_production+index_livestock).style.display='none'
             }else{
                 array.push(obj)
@@ -4147,6 +4506,19 @@ export default {
                 }
             });
         },
+        deleteHarvest(index_production,index_agricultural,index_harvest) {
+            let array = this.form.producer.production[index_production].production_agricultural[index_agricultural].agricultural_harvest
+            array.splice(index_harvest,1)
+
+            if (array.length == 0) {
+                document.getElementById('btnHarvest'+index_production+index_agricultural).style.display = "block"
+            }
+            array.forEach(element => {
+                if (element || array == 0) {
+                    document.getElementById('btnHarvest'+index_production+index_agricultural).style.display = "block"
+                }
+            });
+        },
         deleteLivestock(index_livestock, index_production) {
             let array = this.form.producer.production[index_production].production_livestock
             array.splice(index_livestock,1)
@@ -4183,6 +4555,19 @@ export default {
             array.forEach(element => {
                 if (element || array == 0) {
                     document.getElementById('btnPens'+index_production+index_livestock).style.display = "block"
+                }
+            });
+        },
+        deleteMarketing(index_production,index_livestock,index_marketing){
+            let array = this.form.producer.production[index_production].production_livestock[index_livestock].livestock_marketing
+            array.splice(index_marketing,1)
+
+            if (array.length == 0) {
+                document.getElementById('btnMarketing'+index_production+index_livestock).style.display = "block"
+            }
+            array.forEach(element => {
+                if (element || array == 0) {
+                    document.getElementById('btnMarketing'+index_production+index_livestock).style.display = "block"
                 }
             });
         },

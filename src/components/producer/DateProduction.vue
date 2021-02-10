@@ -201,13 +201,14 @@
                                 <b-card-body>
                                     <h4 class="mb-4">Producción Agrícola</h4>
                                     <b-card-text>
-                                        <p>Actividad agrícola: <strong>{{agricultural.activity_name}}</strong></p>
+                                        <p>Tipo de cultivo: <strong>{{agricultural.activity_name}}</strong></p>
+                                        <p>Variedad: <strong>{{agricultural.variety}}</strong></p>
                                         <p>Superficie de actividad: <strong>{{agricultural.surface}} ha.<sup>2</sup></strong></p>
                                         <p>Destino de actividad: <strong>{{agricultural.destination}}</strong></p>
                                         <p>Siembra: <strong>{{agricultural.sowing}}</strong></p>
                                         <p>Tipo de siembra: <strong>{{agricultural.type_sowing}}</strong></p>
                                         <p>Edad en meses: <strong>{{agricultural.age}}</strong></p>
-                                        <p>Problemas: <strong>{{agricultural.problems}}</strong></p>
+                                        <p>Cierre perimetral: <strong>{{agricultural.perimeter_closure}}</strong></p>
                                         <p>Sugerencias al Municipio: <strong>{{agricultural.suggestion}}</strong></p>
                                     </b-card-text>
                                 </b-card-body>
@@ -266,14 +267,14 @@
                                                 {{climatic.factor}}
                                             </strong>
                                         </p>
-                                        <p>Abono orgánico: 
+                                        <p>Riesgo: 
                                             <strong>
                                                 {{climatic.risk}}
                                             </strong>
                                         </p>
-                                        <p>Utilización de hormonas: 
+                                        <p>Descripción: 
                                             <strong>
-                                                {{climatic.damange_level}}
+                                                {{climatic.description}}
                                             </strong>
                                         </p>
                                     </b-card-text>
@@ -634,14 +635,23 @@
                                         <p>Cantidad de faenafos: 
                                             <strong>{{livestock.livestock_marketing.number_slaughtered}} animales</strong>
                                         </p>
-                                        <p>Cantidad de esquilados: 
-                                            <strong>{{livestock.livestock_marketing.number_shorn}} animales</strong>
-                                        </p>
-                                        <p>Cantidad de lana pelo obtenido: 
-                                            <strong>{{livestock.livestock_marketing.amount_wool_hair}} kg.</strong>
+                                        <p>Destino de faenados: 
+                                            <strong>{{livestock.livestock_marketing.slaughter_destination}}</strong>
                                         </p>
                                         <p>Cantidad de piel obtenida: 
                                             <strong>{{livestock.livestock_marketing.amount_leather}} kg.</strong>
+                                        </p>
+                                        <p>Destino de piel: 
+                                            <strong>{{livestock.livestock_marketing.leather_destination}}</strong>
+                                        </p>
+                                        <p>Cantidad de esquilados: 
+                                            <strong>{{livestock.livestock_marketing.number_shorn}} animales</strong>
+                                        </p>
+                                        <p>Cantidad de lana obtenido: 
+                                            <strong>{{livestock.livestock_marketing.amount_wool}} kg.</strong>
+                                        </p>
+                                        <p>Destino de lana: 
+                                            <strong>{{livestock.livestock_marketing.wool_destination}}</strong>
                                         </p>
                                         <p>Litros de leche obtenidos: 
                                             <strong>{{livestock.livestock_marketing.liters_milk}} lts.</strong>
@@ -649,16 +659,18 @@
                                         <p>Destino de leche: 
                                             <strong>{{livestock.livestock_marketing.milk_destination}}</strong>
                                         </p>
-                                        <p>Destino de lana pelo: 
-                                            <strong>{{livestock.livestock_marketing.wool_hair_destination}}</strong>
+                                        <p>Cantidad de hevos: 
+                                            <strong>{{livestock.livestock_marketing.amount_eggs}}</strong>
                                         </p>
-                                        <p>Destino de piel: 
-                                            <strong>{{livestock.livestock_marketing.leather_destination}}</strong>
+                                        <p>Destino de hevos: 
+                                            <strong>{{livestock.livestock_marketing.eggs_destination}}</strong>
                                         </p>
-                                        <p>Destino de faenados: 
-                                            <strong>{{livestock.livestock_marketing.slaughter_destination}}</strong>
+                                        <p>Cantidad de heces: 
+                                            <strong>{{livestock.livestock_marketing.amount_feces}}</strong>
                                         </p>
-    
+                                        <p>Destino de heces: 
+                                            <strong>{{livestock.livestock_marketing.feces_destination}}</strong>
+                                        </p>
                                     </b-card-text>
                                 </b-card-body>
                             </b-card>
@@ -830,19 +842,19 @@
                                 <b-card-body>
                                     <h4 class="mb-2">Ciclo Porcino</h4>
                                     <b-card-text>
-                                        <p>Cantidad de lechones hasta dos meses:
-                                            <strong>{{livestock.livestock_pig_cycle.up_to_months}}</strong>
+                                        <p>Cantidad de lechones hasta tres meses:
+                                            <strong>{{livestock.livestock_pig_cycle.up_three_months}}</strong>
                                         </p>
-                                        <p>Mayores de dos meses
-                                            <strong>{{livestock.livestock_pig_cycle.older_two_months}}</strong>
+                                        <p>Lechones de tres a ocho meses
+                                            <strong>{{livestock.livestock_pig_cycle.three_eight_months}}</strong>
                                         </p>
-                                        <p>Menores de cuatro meses:
-                                            <strong>{{livestock.livestock_pig_cycle.less_four_months}}</strong>
+                                        <p>Machos mayores a ocho meses:
+                                            <strong>{{livestock.livestock_pig_cycle.males_older_eight_months}}</strong>
                                         </p>
-                                        <p>Mayores de cuatro meses:
-                                            <strong>{{livestock.livestock_pig_cycle.older_four_months}}</strong>
+                                        <p>Hembras mayores a ocho meses:
+                                            <strong>{{livestock.livestock_pig_cycle.females_older_eight_months}}</strong>
                                         </p>
-                                        <p>Total de cerdos
+                                        <p>Total de capones
                                             <strong>{{livestock.livestock_pig_cycle.number_pigs}}</strong>
                                         </p>
                                         <p>Total de Padrillos
@@ -852,10 +864,10 @@
                                 </b-card-body>
                             </b-card>
                         </div>
-                        <div class="mt-2" v-if="livestock.type_activity=='llamas'">
+                        <div class="mt-2" v-if="livestock.type_activity=='camelido'">
                             <b-card no-body>
                                 <b-card-body>
-                                    <h4 class="mb-2">Ciclo de Llamas</h4>
+                                    <h4 class="mb-2">Ciclo de camelido</h4>
                                     <p>Cantidad de chitas y tekes: 
                                         <strong>{{livestock.livestock_llama_cycle.number_chitas_teques}}</strong>
                                     </p>
