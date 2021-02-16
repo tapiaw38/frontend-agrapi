@@ -35,6 +35,7 @@
                         :position="{lat:item.lat, lng:item.lng}"
                         :clickable="clickable"
                         :draggable="draggable"
+                        icon="/static/img/location.png"
                         ></gmap-marker>
                     </GmapMap>
                 </div>
@@ -134,7 +135,7 @@
                         :position="{lat:barn.lat, lng:barn.lng}"
                         :clickable="clickable"
                         :draggable="draggable"
-                        label="Galpon"
+                        icon="/static/img/barn.png"
                         ></gmap-marker>
                         <gmap-marker
                         v-for="(well,index_well) in item.production_installation.installation_well"
@@ -142,7 +143,7 @@
                         :position="{lat:well.lat, lng:well.lng}"
                         :clickable="clickable"
                         :draggable="draggable"
-                        label="Pozo"
+                        icon="/static/img/well.png"
                         ></gmap-marker>
                     </GmapMap>
                 </div>
@@ -336,84 +337,74 @@
                             <b-card no-body>
                                 <b-card-body>
                                     <h4 class="mb-4">Cosecha</h4>
-                                    <b-card-text>
-                                        <p>Superfiie de cosecha cosecha: 
-                                            <strong>
-                                                {{agricultural.agricultural_harvest.harvest_surface}} ha.<sup>2</sup>
-                                            </strong>
-                                        </p>
-                                        <p>Rendimiento: 
-                                            <strong>
-                                                {{agricultural.agricultural_harvest.tons_production}} toneladas
-                                            </strong>
-                                        </p>
-                                        <p>Cortinas y aisladas: 
-                                            <strong v-if="agricultural.agricultural_harvest.has_curtains_insulated">
-                                                Sí
-                                            </strong>
-                                            <strong>No</strong>
-                                        </p>
-                                        <p>Longitud de las plantas usadas como cortinas:
-                                            <strong>{{agricultural.agricultural_harvest.plant_length_curtains}} metros</strong>
-                                        </p>
-                                        <p>Especies de plantas:
-                                            <strong>{{agricultural.agricultural_harvest.plant_species_curtains}}</strong>
-                                        </p>
-                                        <p>Epoca de cosecha:
-                                            <strong>{{agricultural.agricultural_harvest.harvest_time}}</strong>
-                                        </p>
-                                    </b-card-text>
-                                </b-card-body>
-                            </b-card>
-                        </div>
-                        <div class="mt-2">
-                            <b-card no-body>
-                                <b-card-body>
-                                    <h4 class="mb-4">Canal de ventas</h4>
-                                    <b-card-text>
-                                        <p>Acopiador: 
-                                            <strong v-if="agricultural.agricultural_sales_channel.is_collector">
-                                                Sí
-                                            </strong>
-                                            <strong v-else>No</strong>
-                                        </p>
-                                        <p>Cooperativa: 
-                                            <strong v-if="agricultural.agricultural_sales_channel.is_cooperative">
-                                                Sí
-                                            </strong>
-                                            <strong v-else>No</strong>
-                                        </p>
-                                        <p>Exportación: 
-                                            <strong v-if="agricultural.agricultural_sales_channel.is_exporter">
-                                                Sí
-                                            </strong>
-                                            <strong v-else>No</strong>
-                                        </p>
-                                        <p>Empacadora: 
-                                            <strong v-if="agricultural.agricultural_sales_channel.use_baler">
-                                                Sí
-                                            </strong>
-                                            <strong v-else>No</strong>
-                                        </p>
-                                        <p>Forma directa o feria: 
-                                            <strong v-if="agricultural.agricultural_sales_channel.use_fair">
-                                                Sí
-                                            </strong>
-                                            <strong v-else>No</strong>
-                                        </p>
-                                        <p>Frigoríficos: 
-                                            <strong v-if="agricultural.agricultural_sales_channel.use_fridge">
-                                                Sí
-                                            </strong>
-                                            <strong v-else>No</strong>
-                                        </p>
-                                        <p>Venta directa: 
-                                            <strong v-if="agricultural.agricultural_sales_channel.make_direct_sale">
-                                                Sí
-                                            </strong>
-                                            <strong v-else>No</strong>
-                                        </p>
-                                    </b-card-text>
+                                    <div
+                                    v-for="(harvest,index_harvest) in agricultural.agricultural_harvest" 
+                                    :key="'harvest'+index_harvest+1" 
+                                    class="mb-2 second"
+                                    style="padding:15px; border-radius:20px;"
+                                    >
+                                        <b-card-text>
+                                            <p><b-badge>{{ harvest.created | date-filter }}</b-badge></p>
+                                            <p>Superfiie de cosecha cosecha: 
+                                                <strong>
+                                                    {{harvest.harvest_surface}} ha.<sup>2</sup>
+                                                </strong>
+                                            </p>
+                                            <p>Rendimiento: 
+                                                <strong>
+                                                    {{harvest.tons_production}} toneladas
+                                                </strong>
+                                            </p>
+                                            <p>Epoca de cosecha:
+                                                <strong>{{harvest.harvest_time}}</strong>
+                                            </p>
+                                        </b-card-text>
+                                        <b-card-text>
+                                            <h4 class="mb-4">Canal de ventas</h4>
+                                            <p>Acopiador: 
+                                                <strong v-if="harvest.agricultural_sales_channel.is_collector">
+                                                    Sí
+                                                </strong>
+                                                <strong v-else>No</strong>
+                                            </p>
+                                            <p>Cooperativa: 
+                                                <strong v-if="harvest.agricultural_sales_channel.is_cooperative">
+                                                    Sí
+                                                </strong>
+                                                <strong v-else>No</strong>
+                                            </p>
+                                            <p>Exportación: 
+                                                <strong v-if="harvest.agricultural_sales_channel.is_exporter">
+                                                    Sí
+                                                </strong>
+                                                <strong v-else>No</strong>
+                                            </p>
+                                            <p>Empacadora: 
+                                                <strong v-if="harvest.agricultural_sales_channel.use_baler">
+                                                    Sí
+                                                </strong>
+                                                <strong v-else>No</strong>
+                                            </p>
+                                            <p>Forma directa o feria: 
+                                                <strong v-if="harvest.agricultural_sales_channel.use_fair">
+                                                    Sí
+                                                </strong>
+                                                <strong v-else>No</strong>
+                                            </p>
+                                            <p>Frigoríficos: 
+                                                <strong v-if="harvest.agricultural_sales_channel.use_fridge">
+                                                    Sí
+                                                </strong>
+                                                <strong v-else>No</strong>
+                                            </p>
+                                            <p>Venta directa: 
+                                                <strong v-if="harvest.agricultural_sales_channel.make_direct_sale">
+                                                    Sí
+                                                </strong>
+                                                <strong v-else>No</strong>
+                                            </p>
+                                        </b-card-text>
+                                    </div>
                                 </b-card-body>
                             </b-card>
                         </div>
@@ -474,9 +465,14 @@
                                                 {{feeding.type_feeding}}
                                             </strong>
                                         </p>
-                                        <p>Raciones diarias: 
+                                        <p>Raciones diarias per capita: 
                                             <strong>
                                                 {{feeding.daily_rations}} kg.
+                                            </strong>
+                                        </p>
+                                        <p>Descripción: 
+                                            <strong>
+                                                {{feeding.description}}
                                             </strong>
                                         </p>
                                     </b-card-text>
@@ -558,7 +554,7 @@
                                             :position="{lat:pens_maps.lat, lng:pens_maps.lng}"
                                             :clickable="clickable"
                                             :draggable="draggable"
-                                            label="Corral"
+                                            icon="/static/img/pens.png"
                                             ></gmap-marker>
                                         </GmapMap>
                                     </div>
@@ -631,104 +627,106 @@
                             <b-card no-body>
                                 <b-card-body>
                                     <h4 class="mb-4">Comercialización</h4>
-                                    <b-card-text>
-                                        <p>Cantidad de faenafos: 
-                                            <strong>{{livestock.livestock_marketing.number_slaughtered}} animales</strong>
-                                        </p>
-                                        <p>Destino de faenados: 
-                                            <strong>{{livestock.livestock_marketing.slaughter_destination}}</strong>
-                                        </p>
-                                        <p>Cantidad de piel obtenida: 
-                                            <strong>{{livestock.livestock_marketing.amount_leather}} kg.</strong>
-                                        </p>
-                                        <p>Destino de piel: 
-                                            <strong>{{livestock.livestock_marketing.leather_destination}}</strong>
-                                        </p>
-                                        <p>Cantidad de esquilados: 
-                                            <strong>{{livestock.livestock_marketing.number_shorn}} animales</strong>
-                                        </p>
-                                        <p>Cantidad de lana obtenido: 
-                                            <strong>{{livestock.livestock_marketing.amount_wool}} kg.</strong>
-                                        </p>
-                                        <p>Destino de lana: 
-                                            <strong>{{livestock.livestock_marketing.wool_destination}}</strong>
-                                        </p>
-                                        <p>Litros de leche obtenidos: 
-                                            <strong>{{livestock.livestock_marketing.liters_milk}} lts.</strong>
-                                        </p>
-                                        <p>Destino de leche: 
-                                            <strong>{{livestock.livestock_marketing.milk_destination}}</strong>
-                                        </p>
-                                        <p>Cantidad de hevos: 
-                                            <strong>{{livestock.livestock_marketing.amount_eggs}}</strong>
-                                        </p>
-                                        <p>Destino de hevos: 
-                                            <strong>{{livestock.livestock_marketing.eggs_destination}}</strong>
-                                        </p>
-                                        <p>Cantidad de heces: 
-                                            <strong>{{livestock.livestock_marketing.amount_feces}}</strong>
-                                        </p>
-                                        <p>Destino de heces: 
-                                            <strong>{{livestock.livestock_marketing.feces_destination}}</strong>
-                                        </p>
-                                    </b-card-text>
-                                </b-card-body>
-                            </b-card>
-                        </div>
-                        <div class="mt-2">
-                            <b-card no-body>
-                                <b-card-body>
-                                    <h4 class="mb-2">Canales de venta</h4>
-                                    <b-card-text>
-                                        <p>Acopiador:
-                                            <strong v-if="livestock.livestock_sales_channel.is_collector">
-                                                Sí
-                                            </strong>
-                                            <strong v-else>No</strong>
-                                        </p>
-                                        <p>Cooperativa:
-                                            <strong v-if="livestock.livestock_sales_channel.is_cooperative">
-                                                Sí
-                                            </strong>
-                                            <strong v-else>No</strong>
-                                        </p>
-                                        <p>Exportador:
-                                            <strong v-if="livestock.livestock_sales_channel.is_exporter">
-                                                Sí
-                                            </strong>
-                                            <strong v-else>No</strong>
-                                        </p>
-                                        <p>Empacadora:
-                                            <strong v-if="livestock.livestock_sales_channel.use_baler">
-                                                Sí
-                                            </strong>
-                                            <strong v-else>No</strong>
-                                        </p>
-                                        <p>Forma directa o feria:
-                                            <strong v-if="livestock.livestock_sales_channel.use_fair">
-                                                Sí
-                                            </strong>
-                                            <strong v-else>No</strong>
-                                        </p>
-                                        <p>Industria:
-                                            <strong v-if="livestock.livestock_sales_channel.use_industry">
-                                                Sí
-                                            </strong>
-                                            <strong v-else>No</strong>
-                                        </p>
-                                        <p>Frigorifico: 
-                                            <strong v-if="livestock.livestock_sales_channel.use_fridge">
-                                                Sí
-                                            </strong>
-                                            <strong v-else>No</strong>
-                                        </p>
-                                        <p>Venta directa: 
-                                            <strong v-if="livestock.livestock_sales_channel.make_direct_sale">
-                                                Sí
-                                            </strong>
-                                            <strong v-else>No</strong>
-                                        </p>
-                                    </b-card-text>
+                                    <div
+                                    v-for="(marketing,index_marketing) in livestock.livestock_marketing" 
+                                    :key="'marketing'+index_marketing+1" 
+                                    class="second"
+                                    style="padding:15px; border-radius:20px; "
+                                    >
+                                        <b-card-text>
+                                            <p><b-badge>{{ marketing.created | date-filter }}</b-badge></p>
+                                            <p>Cantidad de faenafos: 
+                                                <strong>{{marketing.number_slaughtered}} animales</strong>
+                                            </p>
+                                            <p>Destino de faenados: 
+                                                <strong>{{marketing.slaughter_destination}}</strong>
+                                            </p>
+                                            <p>Cantidad de piel obtenida: 
+                                                <strong>{{marketing.amount_leather}} kg.</strong>
+                                            </p>
+                                            <p>Destino de piel: 
+                                                <strong>{{marketing.leather_destination}}</strong>
+                                            </p>
+                                            <p>Cantidad de esquilados: 
+                                                <strong>{{marketing.number_shorn}} animales</strong>
+                                            </p>
+                                            <p>Cantidad de lana obtenido: 
+                                                <strong>{{marketing.amount_wool}} kg.</strong>
+                                            </p>
+                                            <p>Destino de lana: 
+                                                <strong>{{marketing.wool_destination}}</strong>
+                                            </p>
+                                            <p>Litros de leche obtenidos: 
+                                                <strong>{{marketing.liters_milk}} lts.</strong>
+                                            </p>
+                                            <p>Destino de leche: 
+                                                <strong>{{marketing.milk_destination}}</strong>
+                                            </p>
+                                            <p>Cantidad de hevos: 
+                                                <strong>{{marketing.amount_eggs}}</strong>
+                                            </p>
+                                            <p>Destino de hevos: 
+                                                <strong>{{marketing.eggs_destination}}</strong>
+                                            </p>
+                                            <p>Cantidad de heces: 
+                                                <strong>{{marketing.amount_feces}}</strong>
+                                            </p>
+                                            <p>Destino de heces: 
+                                                <strong>{{marketing.feces_destination}}</strong>
+                                            </p>
+                                        </b-card-text>
+                                        <b-card-text>
+                                            <h4 class="mb-4">Canal de ventas</h4>
+                                            <p>Acopiador:
+                                                <strong v-if="marketing.livestock_sales_channel.is_collector">
+                                                    Sí
+                                                </strong>
+                                                <strong v-else>No</strong>
+                                            </p>
+                                            <p>Cooperativa:
+                                                <strong v-if="marketing.livestock_sales_channel.is_cooperative">
+                                                    Sí
+                                                </strong>
+                                                <strong v-else>No</strong>
+                                            </p>
+                                            <p>Exportador:
+                                                <strong v-if="marketing.livestock_sales_channel.is_exporter">
+                                                    Sí
+                                                </strong>
+                                                <strong v-else>No</strong>
+                                            </p>
+                                            <p>Empacadora:
+                                                <strong v-if="marketing.livestock_sales_channel.use_baler">
+                                                    Sí
+                                                </strong>
+                                                <strong v-else>No</strong>
+                                            </p>
+                                            <p>Forma directa o feria:
+                                                <strong v-if="marketing.livestock_sales_channel.use_fair">
+                                                    Sí
+                                                </strong>
+                                                <strong v-else>No</strong>
+                                            </p>
+                                            <p>Industria:
+                                                <strong v-if="marketing.livestock_sales_channel.use_industry">
+                                                    Sí
+                                                </strong>
+                                                <strong v-else>No</strong>
+                                            </p>
+                                            <p>Frigorifico: 
+                                                <strong v-if="marketing.livestock_sales_channel.use_fridge">
+                                                    Sí
+                                                </strong>
+                                                <strong v-else>No</strong>
+                                            </p>
+                                            <p>Venta directa: 
+                                                <strong v-if="marketing.livestock_sales_channel.make_direct_sale">
+                                                    Sí
+                                                </strong>
+                                                <strong v-else>No</strong>
+                                            </p>
+                                        </b-card-text>
+                                    </div>
                                 </b-card-body>
                             </b-card>
                         </div>
@@ -736,50 +734,56 @@
                             <b-card no-body>
                                 <b-card-body>
                                     <h4 class="mb-2">Ciclo bobino</h4>
-                                    <b-card-text>
+                                    <b-card-text
+                                    v-for="(bovine,index_bovine) in livestock.livestock_bovine_cycle" 
+                                    :key="'bovine'+index_bovine+1" 
+                                    class="second"
+                                    style="padding:15px; border-radius:20px; "
+                                    >
+                                        <p><b-badge>{{ bovine.created | date-filter }}</b-badge></p>
                                         <p>Terneros menos de un año: 
                                            <strong>
-                                               {{livestock.livestock_bovine_cycle.calves_under_one_year}}
+                                               {{bovine.calves_under_one_year}}
                                            </strong> 
                                         </p>
                                         <p>Vaquillonas de uno a dos años: 
                                             <strong>
-                                                {{livestock.livestock_bovine_cycle.heifers_one_to_two_years}}
+                                                {{bovine.heifers_one_to_two_years}}
                                             </strong> 
                                          </p>
                                          <p>Vaquillonas mayores de dos años: 
                                             <strong>
-                                                {{livestock.livestock_bovine_cycle.heifers_over_two_years}}
+                                                {{bovine.heifers_over_two_years}}
                                             </strong> 
                                          </p>
                                          <p>Cantidad de vacas: 
                                             <strong>
-                                                {{livestock.livestock_bovine_cycle.number_cows}}
+                                                {{bovine.number_cows}}
                                             </strong> 
                                          </p>
                                          <p>Novillos de uno a dos años: 
                                             <strong>
-                                                {{livestock.livestock_bovine_cycle.steers_one_to_two_years}}
+                                                {{bovine.steers_one_to_two_years}}
                                             </strong> 
                                          </p>
                                          <p>Novillos mayores de dos años: 
                                             <strong>
-                                                {{livestock.livestock_bovine_cycle.steers_older_two_years}}
+                                                {{bovine.steers_older_two_years}}
                                             </strong> 
                                          </p>
                                          <p>Toritos de uno a dos años: 
                                             <strong>
-                                                {{livestock.livestock_bovine_cycle.bulls_one_to_two_years}}
+                                                {{bovine.bulls_one_to_two_years}}
                                             </strong> 
                                          </p>
                                          <p>Toritos mayores de dos años: 
                                             <strong>
-                                                {{livestock.livestock_bovine_cycle.bulls_older_two_years}}
+                                                {{bovine.bulls_older_two_years}}
                                             </strong> 
                                          </p>
                                          <p>Cantidad de bueyes y torunos: 
                                             <strong>
-                                                {{livestock.livestock_bovine_cycle.number_oxen_torunos}}
+                                                {{bovine.number_oxen_torunos}}
                                             </strong> 
                                          </p>
                                     </b-card-text>
@@ -790,24 +794,30 @@
                             <b-card no-body>
                                 <b-card-body>
                                     <h4 class="mb-2">Ciclo ovino</h4>
-                                    <b-card-text>
+                                    <b-card-text
+                                    v-for="(sheep,index_sheep) in livestock.livestock_sheep_cycle" 
+                                    :key="'sheep'+index_sheep+1" 
+                                    class="second"
+                                    style="padding:15px; border-radius:20px; "
+                                    >
+                                        <p><b-badge>{{ sheep.created | date-filter }}</b-badge></p>
                                         <p>Mayores de seis meses: 
-                                            <strong>{{livestock.livestock_sheep_cycle.sheep_under_six_months}}</strong>
+                                            <strong>{{sheep.sheep_under_six_months}}</strong>
                                         </p>
                                         <p>Borregas de seis meses hasta parición: 
-                                            <strong>{{livestock.livestock_sheep_cycle.sheep_older_six_months_to_calving}}</strong>
+                                            <strong>{{sheep.sheep_older_six_months_to_calving}}</strong>
                                         </p>
                                         <p>Borregos de seis meses hasta un año: 
-                                            <strong>{{livestock.livestock_sheep_cycle.sheep_older_six_months_one_year}}</strong>
+                                            <strong>{{sheep.sheep_older_six_months_one_year}}</strong>
                                         </p>
                                         <p>Cantidad de ovejas: 
-                                            <strong>{{livestock.livestock_sheep_cycle.number_sheep}}</strong>
+                                            <strong>{{sheep.number_sheep}}</strong>
                                         </p>
                                         <p>Cantidad de capones: 
-                                            <strong>{{livestock.livestock_sheep_cycle.number_capons}}</strong>
+                                            <strong>{{sheep.number_capons}}</strong>
                                         </p>
                                         <p>Cantidad de carneros: 
-                                            <strong>{{livestock.livestock_sheep_cycle.number_rams}}</strong>
+                                            <strong>{{sheep.number_rams}}</strong>
                                         </p>
                                     </b-card-text>
                                 </b-card-body>
@@ -817,21 +827,27 @@
                             <b-card no-body>
                                 <b-card-body>
                                     <h4 class="mb-2">Ciclo Caprino</h4>
-                                    <b-card-text>
+                                    <b-card-text
+                                    v-for="(goat,index_goat) in livestock.livestock_goat_cycle" 
+                                    :key="'goat'+index_goat+1" 
+                                    class="second"
+                                    style="padding:15px; border-radius:20px; "
+                                    >
+                                        <p><b-badge>{{ goat.created | date-filter }}</b-badge></p>
                                         <p>Cantidad de cabritas y cabritos menores de seis meses:
-                                            <strong>{{livestock.livestock_goat_cycle.goats_six_months_to_first_calving}}</strong>
+                                            <strong>{{goat.goats_six_months_to_first_calving}}</strong>
                                         </p>
                                         <p>Cantidad de cabritas  de seis meses hasta la primera parición: 
-                                            <strong>{{livestock.livestock_goat_cycle.goats_under_six_months}}</strong>
+                                            <strong>{{goat.goats_under_six_months}}</strong>
                                         </p>
                                         <p>Cantidad de cabras: 
-                                            <strong>{{livestock.livestock_goat_cycle.number_goats}}</strong>
+                                            <strong>{{goat.number_goats}}</strong>
                                         </p>
                                         <p>Cantidad de capones: 
-                                            <strong>{{livestock.livestock_goat_cycle.number_capons}}</strong>
+                                            <strong>{{goat.number_capons}}</strong>
                                         </p>
                                         <p>Cantidad de machos cabrios y chivos: 
-                                            <strong>{{livestock.livestock_goat_cycle.number_stallions}}</strong>
+                                            <strong>{{goat.number_stallions}}</strong>
                                         </p>
                                     </b-card-text>
                                 </b-card-body>
@@ -841,24 +857,30 @@
                             <b-card no-body>
                                 <b-card-body>
                                     <h4 class="mb-2">Ciclo Porcino</h4>
-                                    <b-card-text>
+                                    <b-card-text
+                                    v-for="(pig,index_pig) in livestock.livestock_pig_cycle" 
+                                    :key="'pig'+index_pig+1" 
+                                    class="second"
+                                    style="padding:15px; border-radius:20px; "
+                                    >
+                                        <p><b-badge>{{ pig.created | date-filter }}</b-badge></p>
                                         <p>Cantidad de lechones hasta tres meses:
-                                            <strong>{{livestock.livestock_pig_cycle.up_three_months}}</strong>
+                                            <strong>{{pig.up_three_months}}</strong>
                                         </p>
                                         <p>Lechones de tres a ocho meses
-                                            <strong>{{livestock.livestock_pig_cycle.three_eight_months}}</strong>
+                                            <strong>{{pig.three_eight_months}}</strong>
                                         </p>
                                         <p>Machos mayores a ocho meses:
-                                            <strong>{{livestock.livestock_pig_cycle.males_older_eight_months}}</strong>
+                                            <strong>{{pig.males_older_eight_months}}</strong>
                                         </p>
                                         <p>Hembras mayores a ocho meses:
-                                            <strong>{{livestock.livestock_pig_cycle.females_older_eight_months}}</strong>
+                                            <strong>{{pig.females_older_eight_months}}</strong>
                                         </p>
                                         <p>Total de capones
-                                            <strong>{{livestock.livestock_pig_cycle.number_pigs}}</strong>
+                                            <strong>{{pig.number_pigs}}</strong>
                                         </p>
                                         <p>Total de Padrillos
-                                            <strong>{{livestock.livestock_pig_cycle.number_stallions}}</strong>
+                                            <strong>{{pig.number_stallions}}</strong>
                                         </p>
                                     </b-card-text>
                                 </b-card-body>
@@ -868,21 +890,35 @@
                             <b-card no-body>
                                 <b-card-body>
                                     <h4 class="mb-2">Ciclo de camelido</h4>
-                                    <p>Cantidad de chitas y tekes: 
-                                        <strong>{{livestock.livestock_llama_cycle.number_chitas_teques}}</strong>
-                                    </p>
-                                    <p>Cantidad de maltonas y maltones: 
-                                        <strong>{{livestock.livestock_llama_cycle.number_maltones}}</strong>
-                                    </p>
-                                    <p>Cantidad de janachos: 
-                                        <strong>{{livestock.livestock_llama_cycle.number_janachos}}</strong>
-                                    </p>
-                                    <p>Cantidad de llamas madres: 
-                                        <strong>{{livestock.livestock_llama_cycle.number_llamas_mothers}}</strong>
-                                    </p>
-                                    <p>Cantidad de capones: 
-                                        <strong>{{livestock.livestock_llama_cycle.number_capons}}</strong>
-                                    </p>
+                                    <b-card-text
+                                    v-for="(llama,index_llama) in livestock.livestock_llama_cycle" 
+                                    :key="'llama'+index_llama+1" 
+                                    class="second"
+                                    style="padding:15px; border-radius:20px; "
+                                    >
+                                        <p><b-badge>{{ llama.created | date-filter }}</b-badge></p>
+                                        <p>Cantidad de tekes: 
+                                            <strong>{{llama.number_tekes}}</strong>
+                                        </p>
+                                        <p>Cantidad de tekes destetados: 
+                                            <strong>{{llama.number_tekes_weaned}}</strong>
+                                        </p>
+                                        <p>Cantidad de maltonas y maltones: 
+                                            <strong>{{llama.number_maltones}}</strong>
+                                        </p>
+                                        <p>Cantidad de hembras jovenes: 
+                                            <strong>{{llama.number_young_females}}</strong>
+                                        </p>
+                                        <p>Cantidad de machos jovenes: 
+                                            <strong>{{llama.number_young_males}}</strong>
+                                        </p>
+                                        <p>Cantidad de madres: 
+                                            <strong>{{llama.number_llamas_mothers}}</strong>
+                                        </p>
+                                        <p>Cantidad de capones: 
+                                            <strong>{{llama.number_capons}}</strong>
+                                        </p>
+                                    </b-card-text>
                                 </b-card-body>
                             </b-card>
                         </div>
@@ -890,36 +926,48 @@
                             <b-card no-body>
                                 <b-card-body>
                                     <h4 class="mb-2">Ciclo avicultura</h4>
-                                    <b-card-text>
+                                    <b-card-text
+                                    v-for="(poultry,index_poultry) in livestock.livestock_poultry_cycle" 
+                                    :key="'poultry'+index_poultry+1" 
+                                    class="second"
+                                    style="padding:15px; border-radius:20px; "
+                                    >
+                                        <p><b-badge>{{ poultry.created | date-filter }}</b-badge></p>
                                         <p>Avicultura intensiva: 
-                                            <strong v-if="livestock.livestock_poultry_cycle.is_intensive_poultry">
+                                            <strong v-if="poultry.is_intensive_poultry">
                                                 Sí
                                             </strong>
                                             <strong v-else>No</strong>
                                         </p>
-                                        <p>Número de pollos de engorde incubados: 
-                                            <strong>{{livestock.livestock_poultry_cycle.number_broilers_incubated}}</strong>
-                                        </p>
-                                        <p>Machos reproductores: 
-                                            <strong>{{livestock.livestock_poultry_cycle.breeding_males}}</strong>
-                                        </p>
-                                        <p>Exitencia de huevos incubables y pollos bebes: 
-                                            <strong v-if="livestock.livestock_poultry_cycle.number_eggs_chickens_babies">
+                                        <p>Planta de incubación: 
+                                            <strong v-if="poultry.has_hatchery">
                                                 Sí
                                             </strong>
                                             <strong v-else>No</strong>
                                         </p>
-                                        <p>Cantidad de incuvadoras: 
-                                            <strong>{{livestock.livestock_poultry_cycle.number_incubators}}</strong>
+                                        <p>Cantidad de incubadoras: 
+                                            <strong>{{poultry.number_incubators}}</strong>
+                                        </p>
+                                        <p>Huevos incubables: 
+                                            <strong>{{poultry.number_hatching_eggs}}</strong>
+                                        </p>
+                                        <p>Pollitos de uno a dos meses: 
+                                            <strong>{{poultry.chicks_one_two_months}}</strong>
+                                        </p>
+                                        <p>Pollos de recria de tres a cinco meses: 
+                                            <strong>{{poultry.chicks_three_five_months}}</strong>
+                                        </p>
+                                        <p>Hembras mayores a seis meses: 
+                                            <strong>{{poultry.females_older_six_months}}</strong>
                                         </p>
                                         <p>Parrilleros en engorde: 
-                                            <strong>{{livestock.livestock_poultry_cycle.number_broilers_fattening}}</strong>
+                                            <strong>{{poultry.number_broiler_chickens}}</strong>
                                         </p>
-                                        <p>Cantidad de ponedores reproductores: 
-                                            <strong>{{livestock.livestock_poultry_cycle.number_breeding_layers}}</strong>
+                                        <p>Ponedoras reproductoras: 
+                                            <strong>{{poultry.number_breeder_layers}}</strong>
                                         </p>
-                                        <p>Existencia
-                                            <strong>{{livestock.livestock_poultry_cycle.existence}}</strong>
+                                        <p>Machos reproductores: 
+                                            <strong>{{poultry.number_breeding_males}}</strong>
                                         </p>
                                     </b-card-text>
                                 </b-card-body>
@@ -929,7 +977,13 @@
                             <b-card no-body>
                                 <b-card-body>
                                     <h4 class="mb-2">Ciclo cunicultura</h4>
-                                    <b-card-text>
+                                    <b-card-text
+                                    v-for="(rabbit,index_rabbit) in livestock.livestock_rabbit_cycle" 
+                                    :key="'rabbit'+index_rabbit+1" 
+                                    class="second"
+                                    style="padding:15px; border-radius:20px; "
+                                    >
+                                        <p><b-badge>{{ rabbit.created | date-filter }}</b-badge></p>
                                         <p>Orientación: 
                                             <strong>{{livestock.livestock_rabbit_cycle.orientation}}</strong>
                                         </p>
@@ -950,43 +1004,44 @@
                             <b-card no-body>
                                 <b-card-body>
                                     <h4 class="mb-2">Ciclo apicultura</h4>
-                                    <b-card-text>
-                                        <p>Especie de abejas:
-                                            <strong>{{livestock.livestock_beekeeping_cycle.kind_bee}}</strong>
+                                    <b-card-text
+                                    v-for="(beekeeping,index_beekeeping) in livestock.livestock_beekeeping_cycle" 
+                                    :key="'beekeeping'+index_beekeeping+1" 
+                                    class="second"
+                                    style="padding:15px; border-radius:20px; "
+                                    >
+                                        <p><b-badge>{{ beekeeping.created | date-filter }}</b-badge></p>
+                                        <p>Renapa: 
+                                            <strong v-if="beekeeping.renapa">
+                                                Sí
+                                            </strong>
+                                            <strong v-else>No</strong>
+                                        </p>
+                                        <p>Raza de abejas:
+                                            <strong>{{beekeeping.kind_bee}}</strong>
                                         </p>
                                         <p>Existencia de colmenas: 
-                                            <strong v-if="livestock.livestock_beekeeping_cycle.has_bee_hives">
+                                            <strong v-if="beekeeping.has_bee_hives">
                                                 Sí
                                             </strong>
                                             <strong v-else>No</strong>
                                         </p>
                                         <p>Tipo de colmenas: 
-                                            <strong>{{livestock.livestock_beekeeping_cycle.number_drawers}}</strong>
+                                            <strong>{{beekeeping.type_bee_hives}}</strong>
                                         </p>
                                         <p>Cantidad de cajones: 
-                                            <strong>{{livestock.livestock_beekeeping_cycle.number_drawers}}</strong>
+                                            <strong>{{beekeeping.number_drawers}}</strong>
                                         </p>
-                                        <p>Cantidad de alsas por cajones: 
-                                            <strong>{{livestock.livestock_beekeeping_cycle.alsas_drawer}}</strong>
-                                        </p>
-                                        <p>Tipo de Cajones: 
-                                            <strong>{{livestock.livestock_beekeeping_cycle.type_drawer}}</strong>
-                                        </p>
-                                        <p>Rendimiento de miel en litros: 
-                                            <strong>{{livestock.livestock_beekeeping_cyclehoney_stones}} ltrs.</strong>
+                                        <p>Cantidad de alsas por cajon: 
+                                            <strong>{{beekeeping.alsas_drawer}}</strong>
                                         </p>
                                         <p>Periodo de polinización: 
-                                            <strong>{{livestock.livestock_beekeeping_cycle.pollination_period}}</strong>
+                                            <strong>{{beekeeping.pollination_period}}</strong>
                                         </p>
                                         <p>Tipo de flor polinizada: 
-                                            <strong>{{livestock.livestock_beekeeping_cycle.pollinated_flower}}</strong>
+                                            <strong>{{beekeeping.pollinated_flower}}</strong>
                                         </p>
-                                        <p>Renapa: 
-                                            <strong v-if="livestock.livestock_beekeeping_cycle.has_renapa">
-                                                Sí
-                                            </strong>
-                                            <strong v-else>No</strong>
-                                        </p>
+                                        
                                     </b-card-text>
                                 </b-card-body>
                             </b-card>
@@ -995,7 +1050,13 @@
                             <b-card no-body>
                                 <b-card-body>
                                     <h4 class="mb-2">Ciclo acuicultura</h4>
-                                    <b-card-text>
+                                    <b-card-text
+                                    v-for="(aquaculture,index_aquaculture) in livestock.livestock_aquaculture_cycle" 
+                                    :key="'aquaculture'+index_aquaculture+1" 
+                                    class="second"
+                                    style="padding:15px; border-radius:20px; "
+                                    >
+                                        <p><b-badge>{{ aquaculture.created | date-filter }}</b-badge></p>
                                         <p>Orientación: 
                                             <strong>{{livestock.livestock_aquaculture_cycle.orientation}}</strong>
                                         </p>
@@ -1198,5 +1259,10 @@ export default {
     width:100%;
     height:400px;
     margin: 10px auto;
+}
+.labels {
+    color: white;
+    margin-top: 20px;
+    size: 30px;
 }
 </style>

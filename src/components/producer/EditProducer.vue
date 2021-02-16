@@ -1108,7 +1108,7 @@
                                                     :key="index_harvest+1"
                                                     >
                                                         <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#harvest'+index_production+index_agricultural+index_harvest">
-                                                            <b-icon icon=""></b-icon> Cosecha 
+                                                            <b-icon icon=""></b-icon> Cosecha {{harvest.created | date-filter}} 
                                                         </b-button>
                                                         <b-collapse :id="'harvest'+index_production+index_agricultural+index_harvest">
                                                             <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
@@ -1734,7 +1734,7 @@
                                                     :key="index_marketing+1"
                                                     >
                                                         <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#marketing'+index_production+index_livestock+index_marketing">
-                                                            <b-icon icon=""></b-icon> Comercialización
+                                                            <b-icon icon=""></b-icon> Comercialización {{marketing.created | date-filter}}
                                                         </b-button>
                                                         <b-collapse :id="'marketing'+index_production+index_livestock+index_marketing">
                                                             <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
@@ -1946,7 +1946,7 @@
                                                     :key="index_bovine+1"
                                                     >
                                                         <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#bovine'+index_production+index_livestock+index_bovine">
-                                                            <b-icon icon=""></b-icon> Ciclo Bovino
+                                                            <b-icon icon=""></b-icon> Bovinos {{bovine.created | date-filter}}
                                                         </b-button>
                                                         <b-collapse :id="'bovine'+index_production+index_livestock+index_bovine">
                                                             <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
@@ -2036,7 +2036,7 @@
                                                     :key="index_sheep+1"
                                                     >
                                                         <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#sheep'+index_production+index_livestock+index_sheep">
-                                                            <b-icon icon=""></b-icon> Ovino
+                                                            <b-icon icon=""></b-icon> Ovinos {{sheep.created | date-filter}}
                                                         </b-button>
                                                         <b-collapse :id="'sheep'+index_production+index_livestock+index_sheep">
                                                             <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
@@ -2108,7 +2108,7 @@
                                                     :key="index_goat+1"
                                                     >
                                                         <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#goat'+index_production+index_livestock+index_goat">
-                                                            <b-icon icon=""></b-icon> Caprino
+                                                            <b-icon icon=""></b-icon> Caprinos {{ goat.created | date-filter }}
                                                         </b-button>
                                                         <b-collapse :id="'goat'+index_production+index_livestock+index_goat">
                                                             <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
@@ -2174,7 +2174,7 @@
                                                     :key="index_pig+1"
                                                     >
                                                         <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#pig'+index_production+index_livestock+index_pig">
-                                                            <b-icon icon=""></b-icon> Avicultura
+                                                            <b-icon icon=""></b-icon> Porcinos {{ pig.created | date-filter }}
                                                         </b-button>
                                                         <b-collapse :id="'pig'+index_production+index_livestock+index_pig">
                                                             <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
@@ -2246,7 +2246,7 @@
                                                     :key="index_llama+1"
                                                     >
                                                         <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#llama'+index_production+index_livestock+index_llama">
-                                                            <b-icon icon=""></b-icon> Avicultura
+                                                            <b-icon icon=""></b-icon> Camelidos {{ llama.created | date-filter }}
                                                         </b-button>
                                                         <b-collapse :id="'llama'+index_production+index_livestock+index_llama">
                                                             <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
@@ -2324,7 +2324,7 @@
                                                     :key="index_poultry+1"
                                                     >
                                                         <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#poultry'+index_production+index_livestock+index_poultry">
-                                                            <b-icon icon=""></b-icon> Avicultura
+                                                            <b-icon icon=""></b-icon> Avicultura {{ poultry.created | date-filter }}
                                                         </b-button>
                                                         <b-collapse :id="'poultry'+index_production+index_livestock+index_poultry">
                                                             <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
@@ -2428,7 +2428,7 @@
                                                     :key="index_rabbit+1"
                                                     >
                                                         <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#rabbit'+index_production+index_livestock+index_rabbit">
-                                                            <b-icon icon=""></b-icon> Avicultura
+                                                            <b-icon icon=""></b-icon> Cunicultura {{ rabbit.created | date-filter }}
                                                         </b-button>
                                                         <b-collapse :id="'rabbit'+index_production+index_livestock+index_rabbit">
                                                             <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
@@ -2488,7 +2488,7 @@
                                                     :key="index_beekeeping+1"
                                                     >
                                                         <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#beekeeping'+index_production+index_livestock+index_beekeeping">
-                                                            <b-icon icon=""></b-icon> Apicultura
+                                                            <b-icon icon=""></b-icon> Apicultura {{ beekeeping.created | date-filter }}
                                                         </b-button>
                                                         <b-collapse :id="'beekeeping'+index_production+index_livestock+index_beekeeping">
                                                             <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
@@ -2580,7 +2580,7 @@
                                                     :key="index_aquaculture+1"
                                                     >
                                                         <b-button class="btn-block" variant="secondary" v-b-toggle :href="'#aquaculture'+index_production+index_livestock+index_aquaculture">
-                                                            <b-icon icon=""></b-icon> Acuicultura
+                                                            <b-icon icon=""></b-icon> Acuicultura {{ aquaculture.created | date-filter }}
                                                         </b-button>
                                                         <b-collapse :id="'aquaculture'+index_production+index_livestock+index_aquaculture">
                                                             <div class="second p-4 card-body" style="padding:5px; border-radius:20px;">
@@ -2888,7 +2888,7 @@ export default {
             { value: 'ovino', text: 'ovino' },
             { value: 'caprino', text: 'caprino' },
             { value: 'porcino', text: 'porcino' },
-            { value: 'llamas', text: 'llamas' },
+            { value: 'camelido', text: 'camelido' },
             { value: 'avicultura', text: 'avicultura' },
             { value: 'cunicultura', text: 'cunicultura' },
             { value: 'apicultura', text: 'apicultura' },
@@ -3165,6 +3165,91 @@ export default {
                 lng: 0
             },
             
+            itemsBovine: {
+
+                calves_under_one_year: 0,
+                heifers_one_to_two_years: 0,
+                heifers_over_two_years: 0,
+                number_cows: 0,
+                steers_one_to_two_years: 0,
+                steers_older_two_years: 0,
+                bulls_one_to_two_years: 0,
+                bulls_older_two_years: 0,
+                number_oxen_torunos: 0
+            },
+            
+            itemsSheep: {
+                sheep_under_six_months: 0,
+                sheep_older_six_months_to_calving: 0,
+                sheep_older_six_months_one_year: 0,
+                number_sheep: 0,
+                number_capons: 0,
+                number_rams: 0
+            },
+            
+            itemsGoat: {
+                goats_under_six_months: 0,
+                goats_six_months_to_first_calving: 0,
+                number_goats: 0,
+                number_capons: 0,
+                number_stallions: 0
+            },
+            
+            itemsPig: {
+                up_three_months: 0,
+                three_eight_months: 0,
+                males_older_eight_months: 0,
+                females_older_eight_months: 0,
+                number_pigs: 0,
+                number_stallions: 0
+            },
+            
+            itemsLlama: {
+                number_tekes: 0,
+                number_tekes_weaned: 0,
+                number_maltones: 0,
+                number_young_females: 0,
+                number_young_males: 0,
+                number_llamas_mothers: 0,
+                number_capons: 0
+            },
+            
+            itemsPoultry: {
+                is_intensive_poultry: false,
+                has_hatchery: false,
+                number_incubators: 0,
+                number_hatching_eggs: 0,
+                chicks_one_two_months: 0,
+                chicks_three_five_months: 0,
+                females_older_six_months: 0,
+                number_broiler_chickens: 0,
+                number_breeder_layers: 0,
+                number_breeding_males: 0
+            },
+            
+            itemsRabbit: {
+                orientation: "",
+                number_breeding_males: 0,
+                number_breeding_females: 0,
+                number_rabbit: 0
+            },
+            
+            itemsBeekeeping: {
+                renapa: false,
+                kind_bee: "",
+                has_bee_hives: false,
+                type_bee_hives: 0,
+                number_drawers: 0,
+                alsas_drawer: 0,
+                pollination_period: "",
+                pollinated_flower: ""
+            },
+            
+            itemsAquaculture: {
+                orientation: "",
+                existence: ""
+            },
+            
             itemsAgroindustrial: {
                 description: "",
                 raw_material: "",
@@ -3208,9 +3293,7 @@ export default {
                         console.log(response)
                         if (response.value == true){
                             setTimeout(() => {
-                                console.log("esperando 3 segundos")
                                 this.getProducer()
-                                
                             }, 3000);
                         }
                     })
@@ -3887,7 +3970,7 @@ export default {
                 livestock_reproduction: {
                     make_reproductive_management: false,
                     type_reproductive_management: "",
-                    make_embryo_transplant: false,
+                    make_continuous_service: false,
                     other_practices: ""
                 },
                 livestock_animal_pens: [],
@@ -3936,7 +4019,7 @@ export default {
                     livestock_poultry_cycle,
                     livestock_rabbit_cycle,
                     livestock_beekeeping_cycle,
-                    livestock_aquaculture_cycle,
+                    livestock_aquaculture_cycle
                     ) {
                     this.type_activity = type_activity
                     this.surface = surface
@@ -3981,7 +4064,7 @@ export default {
                 this.itemsLivestock.livestock_poultry_cycle,
                 this.itemsLivestock.livestock_rabbit_cycle,
                 this.itemsLivestock.livestock_beekeeping_cycle, 
-                this.itemsLivestock.livestock_aquaculture_cycle,
+                this.itemsLivestock.livestock_aquaculture_cycle
                 )
 
             let newArray = [] 
@@ -4175,6 +4258,477 @@ export default {
             if (array.length != 0) {
                 newArray.push(obj)
                 this.form.producer.production[index_production].production_livestock[index_livestock].livestock_marketing = array.concat(newArray)
+                //document.getElementById('btnPens'+index_production+index_livestock).style.display='none'
+            }else{
+                array.push(obj)
+                //document.getElementById('btnPens'+index_production+index_livestock).style.display='none'
+            }
+        },
+        onDataBovine (index_production,index_livestock) {
+
+            const objBovine = {
+                calves_under_one_year: 0,
+                heifers_one_to_two_years: 0,
+                heifers_over_two_years: 0,
+                number_cows: 0,
+                steers_one_to_two_years: 0,
+                steers_older_two_years: 0,
+                bulls_one_to_two_years: 0,
+                bulls_older_two_years: 0,
+                number_oxen_torunos: 0
+            }
+            
+            class Bovine {
+                constructor(
+                    calves_under_one_year, 
+                    heifers_one_to_two_years, 
+                    heifers_over_two_years, 
+                    number_cows, 
+                    steers_one_to_two_years, 
+                    steers_older_two_years, 
+                    bulls_one_to_two_years, 
+                    bulls_older_two_years,
+                    number_oxen_torunos,
+                    ) {
+                    this.calves_under_one_year = calves_under_one_year
+                    this.heifers_one_to_two_years = heifers_one_to_two_years
+                    this.heifers_over_two_years = heifers_over_two_years
+                    this.number_cows = number_cows
+                    this.steers_one_to_two_years = steers_one_to_two_years
+                    this.steers_older_two_years = steers_older_two_years
+                    this.bulls_one_to_two_years = bulls_one_to_two_years
+                    this.bulls_older_two_years = bulls_older_two_years
+                    this.number_oxen_torunos = number_oxen_torunos
+                }
+            }
+
+            const obj = new Bovine (
+                this.itemsBovine.calves_under_one_year,
+                this.itemsBovine.heifers_one_to_two_years,
+                this.itemsBovine.heifers_over_two_years,
+                this.itemsBovine.number_cows,
+                this.itemsBovine.steers_one_to_two_years,
+                this.itemsBovine.steers_older_two_years,
+                this.itemsBovine.bulls_one_to_two_years,
+                this.itemsBovine.bulls_older_two_years,
+                this.itemsBovine.number_oxen_torunos
+                )
+
+            let newArray = [] 
+            let array = this.form.producer.production[index_production].production_livestock[index_livestock].livestock_bovine_cycle
+            console.log(array)
+
+            if (array.length != 0) {
+                newArray.push(obj)
+                this.form.producer.production[index_production].production_livestock[index_livestock].livestock_bovine_cycle = array.concat(newArray)
+                //document.getElementById('btnPens'+index_production+index_livestock).style.display='none'
+            }else{
+                array.push(obj)
+                //document.getElementById('btnPens'+index_production+index_livestock).style.display='none'
+            }
+        },
+        onDataSheep(index_production,index_livestock) {
+
+            const objSheep = {
+                sheep_under_six_months: 0,
+                sheep_older_six_months_to_calving: 0,
+                sheep_older_six_months_one_year: 0,
+                number_sheep: 0,
+                number_capons: 0,
+                number_rams: 0
+            }
+            
+            class Sheep {
+                constructor(
+                    sheep_under_six_months, 
+                    sheep_older_six_months_to_calving, 
+                    sheep_older_six_months_one_year, 
+                    number_sheep, 
+                    number_capons, 
+                    number_rams
+                    ) {
+                    this.sheep_under_six_months = sheep_under_six_months
+                    this.sheep_older_six_months_to_calving = sheep_older_six_months_to_calving
+                    this.sheep_older_six_months_one_year = sheep_older_six_months_one_year
+                    this.number_sheep = number_sheep
+                    this.number_capons = number_capons
+                    this.number_rams = number_rams
+                }
+            }
+
+            const obj = new Sheep (
+                this.itemsSheep.sheep_under_six_months,
+                this.itemsSheep.sheep_older_six_months_to_calving,
+                this.itemsSheep.sheep_older_six_months_one_year,
+                this.itemsSheep.number_sheep,
+                this.itemsSheep.number_capons,
+                this.itemsSheep.number_rams
+                )
+
+            let newArray = [] 
+            let array = this.form.producer.production[index_production].production_livestock[index_livestock].livestock_sheep_cycle
+            console.log(array)
+
+            if (array.length != 0) {
+                newArray.push(obj)
+                this.form.producer.production[index_production].production_livestock[index_livestock].livestock_sheep_cycle = array.concat(newArray)
+                //document.getElementById('btnPens'+index_production+index_livestock).style.display='none'
+            }else{
+                array.push(obj)
+                //document.getElementById('btnPens'+index_production+index_livestock).style.display='none'
+            }
+        },
+        onDataGoat(index_production,index_livestock) {
+
+            const objGoat = {
+                goats_under_six_months: 0,
+                goats_six_months_to_first_calving: 0,
+                number_goats: 0,
+                number_capons: 0,
+                number_stallions: 0
+            }
+            
+            class Goat {
+                constructor(
+                    goats_under_six_months, 
+                    goats_six_months_to_first_calving, 
+                    number_goats, 
+                    number_sheep, 
+                    number_stallions
+                    ) {
+                    this.goats_under_six_months = goats_under_six_months
+                    this.goats_six_months_to_first_calving = goats_six_months_to_first_calving
+                    this.number_goats = number_goats
+                    this.number_sheep = number_sheep
+                    this.number_stallions = number_stallions
+                }
+            }
+
+            const obj = new Goat (
+                this.itemsGoat.goats_under_six_months,
+                this.itemsGoat.goats_six_months_to_first_calving,
+                this.itemsGoat.number_goats,
+                this.itemsGoat.number_sheep,
+                this.itemsGoat.number_stallions
+                )
+
+            let newArray = [] 
+            let array = this.form.producer.production[index_production].production_livestock[index_livestock].livestock_goat_cycle
+            console.log(array)
+
+            if (array.length != 0) {
+                newArray.push(obj)
+                this.form.producer.production[index_production].production_livestock[index_livestock].livestock_goat_cycle = array.concat(newArray)
+                //document.getElementById('btnPens'+index_production+index_livestock).style.display='none'
+            }else{
+                array.push(obj)
+                //document.getElementById('btnPens'+index_production+index_livestock).style.display='none'
+            }
+        },
+        onDataPig(index_production,index_livestock) {
+
+            const objPig = {
+                up_three_months: 0,
+                three_eight_months: 0,
+                males_older_eight_months: 0,
+                females_older_eight_months: 0,
+                number_pigs: 0,
+                number_stallions: 0
+            }
+            
+            class Pig {
+                constructor(
+                    up_three_months, 
+                    three_eight_months, 
+                    males_older_eight_months, 
+                    females_older_eight_months, 
+                    number_pigs,
+                    number_stallions
+                    ) {
+                    this.up_three_months = up_three_months
+                    this.three_eight_months = three_eight_months
+                    this.males_older_eight_months = males_older_eight_months
+                    this.females_older_eight_months = females_older_eight_months
+                    this.number_pigs = number_pigs
+                    this.number_stallions = number_stallions
+                }
+            }
+
+            const obj = new Pig (
+                this.itemsPig.up_three_months,
+                this.itemsPig.three_eight_months,
+                this.itemsPig.males_older_eight_months,
+                this.itemsPig.females_older_eight_months,
+                this.itemsPig.number_pigs,
+                this.itemspig.number_stallions
+                )
+
+            let newArray = [] 
+            let array = this.form.producer.production[index_production].production_livestock[index_livestock].livestock_pig_cycle
+            console.log(array)
+
+            if (array.length != 0) {
+                newArray.push(obj)
+                this.form.producer.production[index_production].production_livestock[index_livestock].livestock_pig_cycle = array.concat(newArray)
+                //document.getElementById('btnPens'+index_production+index_livestock).style.display='none'
+            }else{
+                array.push(obj)
+                //document.getElementById('btnPens'+index_production+index_livestock).style.display='none'
+            }
+        },
+        onDataLlama(index_production,index_livestock) {
+
+            const objLlama = {
+                number_tekes: 0,
+                number_tekes_weaned: 0,
+                number_maltones: 0,
+                number_young_females: 0,
+                number_young_males: 0,
+                number_llamas_mothers: 0,
+                number_capons: 0
+            }
+            
+            class Llama {
+                constructor(
+                    number_tekes, 
+                    number_tekes_weaned, 
+                    number_maltones, 
+                    number_young_females,
+                    number_young_males,
+                    number_llamas_mothers,
+                    number_capons
+                    ) {
+                    this.number_tekes = number_tekes
+                    this.number_tekes_weaned = number_tekes_weaned
+                    this.number_maltones = number_maltones
+                    this.number_young_females = number_young_females
+                    this.number_young_males = number_young_males
+                    this.number_llamas_mothers = number_llamas_mothers
+                    this.number_capons = number_capons
+                }
+            }
+
+            const obj = new Llama (
+                this.itemsLlama.number_tekes,
+                this.itemsLlama.number_tekes_weaned,
+                this.itemsLlama.number_maltones,
+                this.itemsLlama.number_young_females,
+                this.itemsLlama.number_young_males,
+                this.itemsLlama.number_llamas_mothers,
+                this.itemsLlama.number_capons
+                )
+
+            let newArray = [] 
+            let array = this.form.producer.production[index_production].production_livestock[index_livestock].livestock_llama_cycle
+            console.log(array)
+
+            if (array.length != 0) {
+                newArray.push(obj)
+                this.form.producer.production[index_production].production_livestock[index_livestock].livestock_llama_cycle = array.concat(newArray)
+                //document.getElementById('btnPens'+index_production+index_livestock).style.display='none'
+            }else{
+                array.push(obj)
+                //document.getElementById('btnPens'+index_production+index_livestock).style.display='none'
+            }
+        },
+        onDataPoultry(index_production,index_livestock) {
+
+            const objPoultry = {
+                is_intensive_poultry: false,
+                has_hatchery: false,
+                number_incubators: 0,
+                number_hatching_eggs: 0,
+                chicks_one_two_months: 0,
+                chicks_three_five_months: 0,
+                females_older_six_months: 0,
+                number_broiler_chickens: 0,
+                number_breeder_layers: 0,
+                number_breeding_males: 0
+            }
+            
+            class Poultry {
+                constructor(
+                    is_intensive_poultry, 
+                    has_hatchery, 
+                    number_incubators, 
+                    number_hatching_eggs,
+                    chicks_one_two_months,
+                    chicks_three_five_months,
+                    females_older_six_months,
+                    number_broiler_chickens,
+                    number_breeder_layers,
+                    number_breeding_males
+                    ) {
+                    this.is_intensive_poultry = is_intensive_poultry
+                    this.has_hatchery = has_hatchery
+                    this.number_incubators = number_incubators
+                    this.number_hatching_eggs = number_hatching_eggs
+                    this.chicks_one_two_months = chicks_one_two_months
+                    this.chicks_three_five_months = chicks_three_five_months
+                    this.females_older_six_months = females_older_six_months
+                    this.number_broiler_chickens = number_broiler_chickens
+                    this.number_breeder_layers = number_breeder_layers
+                    this.number_breeding_males = number_breeding_males
+                }
+            }
+
+            const obj = new Poultry (
+                this.itemsPoultry.is_intensive_poultry,
+                this.itemsPoultry.has_hatchery,
+                this.itemsPoultry.number_incubators,
+                this.itemsPoultry.number_hatching_eggs,
+                this.itemsPoultry.chicks_one_two_months,
+                this.itemsPoultry.chicks_three_five_months,
+                this.itemsPoultry.females_older_six_months,
+                this.itemsPoultry.number_broiler_chickens,
+                this.itemsPoultry.number_breeder_layers,
+                this.itemsPoultry.number_breeding_males
+                )
+
+            let newArray = [] 
+            let array = this.form.producer.production[index_production].production_livestock[index_livestock].livestock_poultry_cycle
+            console.log(array)
+
+            if (array.length != 0) {
+                newArray.push(obj)
+                this.form.producer.production[index_production].production_livestock[index_livestock].livestock_poultry_cycle = array.concat(newArray)
+                //document.getElementById('btnPens'+index_production+index_livestock).style.display='none'
+            }else{
+                array.push(obj)
+                //document.getElementById('btnPens'+index_production+index_livestock).style.display='none'
+            }
+        },
+        onDataRabbit(index_production,index_livestock) {
+
+            const objRabbit = {
+                orientation: "",
+                number_breeding_males: 0,
+                number_breeding_females: 0,
+                number_rabbit: 0
+            }
+            
+            class Rabbit {
+                constructor(
+                    orientation, 
+                    number_breeding_males, 
+                    number_breeding_females, 
+                    number_rabbit
+                    ) {
+                    this.orientation = orientation
+                    this.number_breeding_males = number_breeding_males
+                    this.number_breeding_females = number_breeding_females
+                    this.number_rabbit = number_rabbit
+                }
+            }
+
+            const obj = new Rabbit (
+                this.itemsRabbit.orientation,
+                this.itemsRabbit.number_breeding_males,
+                this.itemsRabbit.number_breeding_females,
+                this.itemsRabbit.number_rabbit
+                )
+
+            let newArray = [] 
+            let array = this.form.producer.production[index_production].production_livestock[index_livestock].livestock_rabbit_cycle
+            console.log(array)
+
+            if (array.length != 0) {
+                newArray.push(obj)
+                this.form.producer.production[index_production].production_livestock[index_livestock].livestock_rabbit_cycle = array.concat(newArray)
+                //document.getElementById('btnPens'+index_production+index_livestock).style.display='none'
+            }else{
+                array.push(obj)
+                //document.getElementById('btnPens'+index_production+index_livestock).style.display='none'
+            }
+        },
+        onDataBeekeeping(index_production,index_livestock) {
+
+            const objBeekeeping = {
+                renapa: false,
+                kind_bee: "",
+                has_bee_hives: false,
+                type_bee_hives: 0,
+                number_drawers: 0,
+                alsas_drawer: 0,
+                pollination_period: "",
+                pollinated_flower: ""
+            }
+            
+            class Beekeeping {
+                constructor(
+                    renapa, 
+                    kind_bee, 
+                    has_bee_hives, 
+                    type_bee_hives,
+                    number_drawers,
+                    alsas_drawer,
+                    pollination_period,
+                    pollinated_flower
+                    ) {
+                    this.renapa = renapa
+                    this.kind_bee = kind_bee
+                    this.has_bee_hives = has_bee_hives
+                    this.type_bee_hives = type_bee_hives
+                    this.number_drawers = number_drawers
+                    this.alsas_drawer = alsas_drawer
+                    this.pollination_period = pollination_period
+                    this.pollinated_flower = pollinated_flower
+                }
+            }
+
+            const obj = new Beekeeping (
+                this.itemsBeekeeping.renapa,
+                this.itemsBeekeeping.kind_bee,
+                this.itemsBeekeeping.has_bee_hives,
+                this.itemsBeekeeping.type_bee_hives,
+                this.itemsBeekeeping.number_drawers,
+                this.itemsBeekeeping.alsas_drawer,
+                this.itemsBeekeeping.pollination_period,
+                this.itemsBeekeeping.pollinated_flower
+                )
+
+            let newArray = [] 
+            let array = this.form.producer.production[index_production].production_livestock[index_livestock].livestock_beekeeping_cycle
+            console.log(array)
+
+            if (array.length != 0) {
+                newArray.push(obj)
+                this.form.producer.production[index_production].production_livestock[index_livestock].livestock_beekeeping_cycle = array.concat(newArray)
+                //document.getElementById('btnPens'+index_production+index_livestock).style.display='none'
+            }else{
+                array.push(obj)
+                //document.getElementById('btnPens'+index_production+index_livestock).style.display='none'
+            }
+        },
+        onDataAquaculture(index_production,index_livestock) {
+
+            const objAquaculture = {
+                orientation: "",
+                existence: ""
+            }
+            
+            class Aquaculture {
+                constructor(
+                    orientation, 
+                    existence
+                    ) {
+                    this.orientation = orientation
+                    this.existence = existence
+                }
+            }
+
+            const obj = new Aquaculture (
+                this.itemsAquaculture.orientation,
+                this.itemsAquaculture.existence,
+                )
+
+            let newArray = [] 
+            let array = this.form.producer.production[index_production].production_livestock[index_livestock].livestock_aquaculture_cycle
+            console.log(array)
+
+            if (array.length != 0) {
+                newArray.push(obj)
+                this.form.producer.production[index_production].production_livestock[index_livestock].livestock_aquaculture_cycle = array.concat(newArray)
                 //document.getElementById('btnPens'+index_production+index_livestock).style.display='none'
             }else{
                 array.push(obj)
@@ -4568,6 +5122,123 @@ export default {
             array.forEach(element => {
                 if (element || array == 0) {
                     document.getElementById('btnMarketing'+index_production+index_livestock).style.display = "block"
+                }
+            });
+        },
+        deleteBovine(index_production,index_livestock,index_bovine){
+            let array = this.form.producer.production[index_production].production_livestock[index_livestock].livestock_bovine_cycle
+            array.splice(index_bovine,1)
+
+            if (array.length == 0) {
+                document.getElementById('btnBovine'+index_production+index_livestock).style.display = "block"
+            }
+            array.forEach(element => {
+                if (element || array == 0) {
+                    document.getElementById('btnBovine'+index_production+index_livestock).style.display = "block"
+                }
+            });
+        },
+        deleteSheep(index_production,index_livestock,index_sheep){
+            let array = this.form.producer.production[index_production].production_livestock[index_livestock].livestock_sheep_cycle
+            array.splice(index_sheep,1)
+
+            if (array.length == 0) {
+                document.getElementById('btnSheep'+index_production+index_livestock).style.display = "block"
+            }
+            array.forEach(element => {
+                if (element || array == 0) {
+                    document.getElementById('btnSheep'+index_production+index_livestock).style.display = "block"
+                }
+            });
+        },
+        deleteGoat(index_production,index_livestock,index_goat){
+            let array = this.form.producer.production[index_production].production_livestock[index_livestock].livestock_goat_cycle
+            array.splice(index_goat,1)
+
+            if (array.length == 0) {
+                document.getElementById('btnGoat'+index_production+index_livestock).style.display = "block"
+            }
+            array.forEach(element => {
+                if (element || array == 0) {
+                    document.getElementById('btnGoat'+index_production+index_livestock).style.display = "block"
+                }
+            });
+        },
+        deletePig(index_production,index_livestock,index_pig){
+            let array = this.form.producer.production[index_production].production_livestock[index_livestock].livestock_pig_cycle
+            array.splice(index_pig,1)
+
+            if (array.length == 0) {
+                document.getElementById('btnPig'+index_production+index_livestock).style.display = "block"
+            }
+            array.forEach(element => {
+                if (element || array == 0) {
+                    document.getElementById('btnPig'+index_production+index_livestock).style.display = "block"
+                }
+            });
+        },
+        deleteLlama(index_production,index_livestock,index_llama){
+            let array = this.form.producer.production[index_production].production_livestock[index_livestock].livestock_llama_cycle
+            array.splice(index_llama,1)
+
+            if (array.length == 0) {
+                document.getElementById('btnLlama'+index_production+index_livestock).style.display = "block"
+            }
+            array.forEach(element => {
+                if (element || array == 0) {
+                    document.getElementById('btnLlama'+index_production+index_livestock).style.display = "block"
+                }
+            });
+        },
+        deletePoultry(index_production,index_livestock,index_poultry){
+            let array = this.form.producer.production[index_production].production_livestock[index_livestock].livestock_poultry_cycle
+            array.splice(index_poultry,1)
+
+            if (array.length == 0) {
+                document.getElementById('btnPoultry'+index_production+index_livestock).style.display = "block"
+            }
+            array.forEach(element => {
+                if (element || array == 0) {
+                    document.getElementById('btnPoultry'+index_production+index_livestock).style.display = "block"
+                }
+            });
+        },
+        deleteRabbit(index_production,index_livestock,index_rabbit){
+            let array = this.form.producer.production[index_production].production_livestock[index_livestock].livestock_rabbit_cycle
+            array.splice(index_rabbit,1)
+
+            if (array.length == 0) {
+                document.getElementById('btnRabbit'+index_production+index_livestock).style.display = "block"
+            }
+            array.forEach(element => {
+                if (element || array == 0) {
+                    document.getElementById('btnRabbit'+index_production+index_livestock).style.display = "block"
+                }
+            });
+        },
+        deleteBeekeeping(index_production,index_livestock,index_beekeeping){
+            let array = this.form.producer.production[index_production].production_livestock[index_livestock].livestock_beekeeping_cycle
+            array.splice(index_beekeeping,1)
+
+            if (array.length == 0) {
+                document.getElementById('btnBeekeeping'+index_production+index_livestock).style.display = "block"
+            }
+            array.forEach(element => {
+                if (element || array == 0) {
+                    document.getElementById('btnBeekeeping'+index_production+index_livestock).style.display = "block"
+                }
+            });
+        },
+        deleteAquaculture(index_production,index_livestock,index_aquaculture){
+            let array = this.form.producer.production[index_production].production_livestock[index_livestock].livestock_aquaculture_cycle
+            array.splice(index_aquaculture,1)
+
+            if (array.length == 0) {
+                document.getElementById('btnAquaculture'+index_production+index_livestock).style.display = "block"
+            }
+            array.forEach(element => {
+                if (element || array == 0) {
+                    document.getElementById('btnAquaculture'+index_production+index_livestock).style.display = "block"
                 }
             });
         },
