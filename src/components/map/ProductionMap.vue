@@ -226,7 +226,10 @@ export default {
                     label: "Olivo",
                     value: 0,
                 },
-
+                {
+                    label: "Tomate",
+                    value: 0,
+                },
                 ],
             },
             type_grafic3: "pie2d",
@@ -394,13 +397,16 @@ export default {
 
             let selectVid = listAgricultural.filter(element => element.toUpperCase().includes("VID")||element.toUpperCase().includes("UVA")||element.toUpperCase().includes("VIÑAS"))
             let selectOlivo = listAgricultural.filter(element => element.toUpperCase().includes("OLIVO")||element.toUpperCase().includes("ACEITUNA"))
-            
+            let selectTomate = listAgricultural.filter(element => element.toUpperCase().includes("TOMATE"))
+
             let probVid = ((selectVid.length/listAgricultural.length)*100)
             let probOlivo = ((selectOlivo.length/listAgricultural.length)*100)
+            let probTomate = ((selectTomate.length/listAgricultural.length)*100)
 
             //add data source agricultural
             this.dataSource2.data[0].value = probVid
-            this.dataSource2.data[1].value = probOlivo            
+            this.dataSource2.data[1].value = probOlivo
+            this.dataSource2.data[2].value = probTomate
             
             //probability Livestock
             let selectBovino = listLivestock.filter(element => element.toUpperCase().includes("BOVINO"))

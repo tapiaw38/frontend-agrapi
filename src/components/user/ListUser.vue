@@ -10,12 +10,18 @@
                     :key="index"
                     >
                         <b-avatar
-                        size="6rem"
+                        size="4rem"
                         v-if="user.is_admin"
                         variant="secondary"
                         class="m-1" 
                         :src=user.profile.picture
-                        ></b-avatar>
+                        >
+                        </b-avatar>
+                        <b-badge
+                         class="m-1 d-block"
+                         v-if="user.is_admin"
+                         >{{user.first_name}}
+                        </b-badge>
                     </p>
                 </div>
                 
@@ -63,6 +69,10 @@
 
                         </b-list-group-item>
                     </b-list-group>
+
+                    <div v-if="filterPolls.length == 0">
+                        <b-alert show variant="primary">Aún no se registraron encuestadores.</b-alert>
+                    </div>
                 </div>
             </div>
         </div>
@@ -113,6 +123,11 @@ export default {
             .catch(error => {
                 console.log(error)
             })
+        },
+    },
+    computed: {
+        filterPolls: function () {
+            return this.users.filter(items => !items.is_admin);
         },
     },
     created() {

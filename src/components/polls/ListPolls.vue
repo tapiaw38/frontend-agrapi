@@ -74,7 +74,9 @@ export default {
                 month = 12
                 year = d.getUTCFullYear()-1
             }
-
+            if (month < 10){
+                month = "0"+month
+            }
             this.maxDay = year + "-" + month + "-" + day;
             this.minDay = year + "-" + month + "-" + "31";
         },

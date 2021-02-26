@@ -124,6 +124,10 @@
                     <b-icon icon="people" aria-label="Help"></b-icon>  
                     Productores
                   </b-nav-item>
+                  <b-nav-item :to="{ name: 'ProductionMap'}" v-if="loggedIn != null ">
+                  <b-icon icon="map" aria-label="Help"></b-icon>
+                    Mapa productivo
+                  </b-nav-item>
                   <b-nav-item :to="{ name: 'ListPolls' }">
                     <b-icon icon="ui-checks" aria-label="Help"></b-icon>  
                     Encuestas

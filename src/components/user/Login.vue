@@ -4,8 +4,8 @@
             <div id="target-production">
                 <div id="text-target">
                     <img src="/static/img/sec-produ.png" alt="logo" width="300" height="auto" class="m-0">
-                    <p class="h1">Agrapi</p>
-                    <!--<p>BASE AGROPECUARIA TERRITORIAL</p>-->
+                    <p class="h1">Bit</p>
+                    <p>Base Agropecuaria Territorial</p>
                 </div>
             </div>
         </div>

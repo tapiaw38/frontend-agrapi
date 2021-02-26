@@ -400,9 +400,9 @@ export default {
         chart: {
           caption:
             "Encuestas a productores [" +
-            new Date().getUTCFullYear() +
+            (new Date().getUTCFullYear() -1 ) +
             " - " +
-            (new Date().getUTCFullYear() + 1) +
+            (new Date().getUTCFullYear()) +
             "]",
           subCaption:
             "Cantidad de encuestas realizadas en los ultimos tres meses",
@@ -537,7 +537,10 @@ export default {
         month_two = 11;
         month_three = 10;
       }
-
+      
+      if (month < 10){
+        month = "0"+month
+      }
       // months
       this.myMonth = month;
       this.myMonthTwo = month_two;
@@ -546,7 +549,7 @@ export default {
       this.month_one = year + "-" + month + "-" + "31";
       this.month_two = year_two + "-" + month_two + "-" + "31";
       this.month_three = year_three + "-" + month_three + "-" + "31";
-
+ 
       // beginning of the year
       this.beginning_year = d.getUTCFullYear() + "-" + "01" + "-" + "01";
     },
