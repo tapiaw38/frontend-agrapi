@@ -556,19 +556,26 @@ export default {
     addData() {
       this.production.forEach((elem) => {
         if (elem.production_agricultural.length != 0) {
-          this.countAgricultural++;
           elem.production_agricultural.forEach((element) => {
+            // count production agricultural
+            this.countAgricultural++;
+            // count surface agricultural
             this.surfaceAgricultural += element.surface;
           });
         }
         if (elem.production_livestock.length != 0) {
-          this.countLivestock++;
           elem.production_livestock.forEach((element) => {
+            //count production livestock
+            this.countLivestock++;
+            //count surface livestock
             this.surfaceLivestock += element.surface;
           });
         }
         if (elem.production_agroindustrial.length != 0) {
-          this.countAgroindustrial++;
+          elem.production_agroindustrial.forEach( (element) => {
+            //count production agroindustrial
+            this.countAgroindustrial++;
+          })
         }
       });
     },

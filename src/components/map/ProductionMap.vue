@@ -16,10 +16,12 @@
                             <strong v-else>No</strong>
                         </p>
                         <p v-if="producerMarker.production_irrigation">Estado canales <strong>{{producerMarker.production_irrigation.channel_conditions}}</strong></p>
+                        <!-- Production agricultural -->
                         <div v-for="(agricultural,index_agri) in producerMarker.production_agricultural" :key="index_agri">
                             <p>Producción Agricola: <strong class="text-uppercase">{{agricultural.activity_name}}</strong></p>
+                            <p>Variedad: <strong class="text-uppercase">{{agricultural.variety}}</strong></p>
                             <p>Sup.: <strong>{{agricultural.surface}} ha.<sup>2</sup></strong></p>
-                            <p>Edad: <strong>{{agricultural.age}}</strong></p>
+                            <p>Edad: <strong>{{agricultural.age}} años</strong></p>
                             <div v-for="(pests,index_pests) in agricultural.agricultural_pests" :key="index_pests">
                                 <p> 
                                     <strong>
@@ -28,6 +30,7 @@
                                 </p>
                             </div>
                         </div>
+                        <!-- Production livestock -->
                         <div v-for="(livestock,index_live) in producerMarker.production_livestock" :key="index_live">
                             <p>Producción Ganadera: <strong class="text-uppercase">{{livestock.type_activity}}</strong></p>
                             <p>Sup.: <strong>{{livestock.surface}} ha.<sup>2</sup></strong></p>
@@ -42,6 +45,7 @@
                                 </strong>
                             </p>
                         </div>
+                        <!-- Production agroindustrial -->
                         <div v-for="(agroindustrial,index_agro) in producerMarker.production_agroindustrial" :key="index_agro">
                             <p>Agro-industrial: <strong class="text-uppercase">{{agroindustrial.description}}</strong></p>
                             <p>Materia Prima: 
@@ -362,26 +366,26 @@ export default {
 
             filterDistrict.forEach(element => {
                 if (element.production_agricultural.length != 0) {
-                    this.countAgricultural ++
-
                     //list Agricultural
                     element.production_agricultural.forEach(items => {
+                        // count production agricultural
+                        this.countAgricultural ++
                         listAgricultural.push(items.activity_name)
                     });
 
                 }if (element.production_livestock.length != 0) {
-                    this.countLivestock ++
-
                     //list Livestock
-                    element.production_livestock.forEach(items => {
+                    element.production_livestock.forEach(items => {    
+                        // count production livestock
+                        this.countLivestock ++
                         listLivestock.push(items.type_activity)
                     });
                 }
                 if (element.production_agroindustrial.length != 0) {
-                    this.countAgroindustrial ++
-
                     //list Agroindustrial
                     element.production_agroindustrial.forEach(items => {
+                        // count production agroindustrial
+                        this.countAgroindustrial ++
                         listAgroindustrial.push(items.description)
                     });
                 }
